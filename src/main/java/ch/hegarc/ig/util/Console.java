@@ -8,125 +8,125 @@ import java.util.Scanner;
 
 public class Console {
 
-    final private String CMD_IMPORT = "import";
-    final private String CMD_EXPORT = "export";
-    final private String CMD_STATS = "stats";
-    final private String CMD_EXIT = "exit";
+	final private String CMD_IMPORT = "import";
+	final private String CMD_EXPORT = "export";
+	final private String CMD_STATS = "stats";
+	final private String CMD_EXIT = "exit";
 
-    final private Option OPT_FICHIER = new Option("f", "fichier", true, "nom du fichier");
-    final private Option OPT_PROJET = new Option("p", "projet", true, "nom du projet");
+	final private Option OPT_FICHIER = new Option("f", "fichier", true, "nom du fichier");
+	final private Option OPT_PROJET = new Option("p", "projet", true, "nom du projet");
 
-    /**
-     * Démarre la commande
-     */
-    public void runCommand() {
+	/**
+	 * Démarre la commande
+	 */
+	public void runCommand() {
 
-        Scanner command = new Scanner(System.in);
-        System.out.println("Entrer votre commande: ");
+		Scanner command = new Scanner(System.in);
+		System.out.println("Entrer votre commande: ");
 
-        boolean running = true;
-        while (running) {
-            String com = command.nextLine();
-            String[] arguments = com.split(" ");
-            CommandLine cmdLine = parseArguments(arguments);
+		boolean running = true;
+		while (running) {
+			String com = command.nextLine();
+			String[] arguments = com.split(" ");
+			CommandLine cmdLine = parseArguments(arguments);
 
-            switch (cmdLine.getArgs()[0]) {
+			switch (cmdLine.getArgs()[0]) {
 
-                case CMD_IMPORT:
-                    if (cmdLine.hasOption(OPT_FICHIER.getOpt())) {
+				case CMD_IMPORT:
+					if (cmdLine.hasOption(OPT_FICHIER.getOpt())) {
 
-                        String fileName = cmdLine.getOptionValue(OPT_FICHIER.getOpt());
-                        System.out.println("Import du fichier " + fileName);
+						String fileName = cmdLine.getOptionValue(OPT_FICHIER.getOpt());
+						System.out.println("Import du fichier " + fileName);
 
-                        JacksonReader.run (fileName);
+						JacksonReader.run (fileName);
 
-                        // TODO Import du fichier XML ou JSON
+						// TODO Import du fichier XML ou JSON
 
-                    } else {
-                        printAppHelp();
-                    }
-                    break;
+					} else {
+						printAppHelp();
+					}
+					break;
 
-                case CMD_EXPORT:
-                    if (cmdLine.hasOption(OPT_FICHIER.getOpt()) && cmdLine.hasOption(OPT_PROJET.getOpt())) {
+				case CMD_EXPORT:
+					if (cmdLine.hasOption(OPT_FICHIER.getOpt()) && cmdLine.hasOption(OPT_PROJET.getOpt())) {
 
-                        String fileName = cmdLine.getOptionValue(OPT_FICHIER.getOpt());
-                        String projectName = cmdLine.getOptionValue(OPT_PROJET.getOpt());
-                        System.out.println("Export du " + projectName + "dans le fichier " + fileName);
+						String fileName = cmdLine.getOptionValue(OPT_FICHIER.getOpt());
+						String projectName = cmdLine.getOptionValue(OPT_PROJET.getOpt());
+						System.out.println("Export du " + projectName + "dans le fichier " + fileName);
 
 //                        JacksonWriter.run (projectName, fileName);
-                        // TODO Export du fichier JSON. Il faut trouver le projet qui correspond à @projetctName
+						// TODO Export du fichier JSON. Il faut trouver le projet qui correspond à @projetctName
 
-                    } else {
-                        printAppHelp();
-                    }
-                    break;
+					} else {
+						printAppHelp();
+					}
+					break;
 
-                case CMD_STATS:
+				case CMD_STATS:
 
-                    // TODO Calcule des stats des projets
+					// TODO Calcule des stats des projets
 
-                    break;
+					break;
 
-                case CMD_EXIT:
-                    System.out.println("Fermeture!");
-                    running = false;
-                    break;
+				case CMD_EXIT:
+					System.out.println("Fermeture!");
+					running = false;
+					break;
 
-                default:
-                    System.out.println("Commande non reconnue!");
-                    break;
-            }
-        }
-        command.close();
-    }
+				default:
+					System.out.println("Commande non reconnue!");
+					break;
+			}
+		}
+		command.close();
+	}
 
-    /**
-     * Parses des arguments
-     *
-     * @param args application arguments
-     * @return <code>CommandLine</code> which represents a list of application
-     * arguments.
-     */
-    private CommandLine parseArguments(String[] args) {
+	/**
+	 * Parses des arguments
+	 *
+	 * @param args application arguments
+	 * @return <code>CommandLine</code> which represents a list of application
+	 * arguments.
+	 */
+	private CommandLine parseArguments(String[] args) {
 
-        Options options = getAllOptions();
-        CommandLine line = null;
-        CommandLineParser parser = new DefaultParser();
+		Options options = getAllOptions();
+		CommandLine line = null;
+		CommandLineParser parser = new DefaultParser();
 
-        try {
-            line = parser.parse(options, args);
+		try {
+			line = parser.parse(options, args);
 
-        } catch (ParseException ex) {
+		} catch (ParseException ex) {
 
-            System.err.println("Erreur dans la lecture des arguments!");
-            System.err.println(ex.toString());
-            printAppHelp();
-        }
+			System.err.println("Erreur dans la lecture des arguments!");
+			System.err.println(ex.toString());
+			printAppHelp();
+		}
 
-        return line;
-    }
+		return line;
+	}
 
-    /**
-     * Generates application command line options
-     *
-     * @return application <code>Options</code>
-     */
-    private Options getAllOptions() {
+	/**
+	 * Generates application command line options
+	 *
+	 * @return application <code>Options</code>
+	 */
+	private Options getAllOptions() {
 
-        Options options = new Options();
-        options.addOption(OPT_FICHIER).addOption(OPT_PROJET);
-        return options;
-    }
+		Options options = new Options();
+		options.addOption(OPT_FICHIER).addOption(OPT_PROJET);
+		return options;
+	}
 
-    /**
-     * Prints application help
-     */
-    private void printAppHelp() {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(CMD_IMPORT, new Options().addOption(OPT_FICHIER), true);
-        formatter.printHelp(CMD_EXPORT, new Options().addOption(OPT_FICHIER).addOption(OPT_PROJET), true);
-        formatter.printHelp(CMD_STATS, new Options().addOption(OPT_PROJET), true);
-        formatter.printHelp(CMD_EXIT, new Options());
-    }
+	/**
+	 * Prints application help
+	 */
+	private void printAppHelp() {
+		HelpFormatter formatter = new HelpFormatter();
+		formatter.printHelp(CMD_IMPORT, new Options().addOption(OPT_FICHIER), true);
+		formatter.printHelp(CMD_EXPORT, new Options().addOption(OPT_FICHIER).addOption(OPT_PROJET), true);
+		formatter.printHelp(CMD_STATS, new Options().addOption(OPT_PROJET), true);
+		formatter.printHelp(CMD_EXIT, new Options());
+	}
 }

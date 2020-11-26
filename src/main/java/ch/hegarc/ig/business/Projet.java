@@ -1,6 +1,7 @@
 package ch.hegarc.ig.business;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Projet {
@@ -58,5 +59,15 @@ public class Projet {
 		for (Donateur d : this.donateurs)
 			sb.append (d.toString ()).append ("    Montant : ").append (d.getSomme ()).append (" ").append (d.getMonnaie ()).append ("\n");
 		return sb.toString ();
+	}
+
+	public static List<Projet> newPopProjets () {
+		List<Projet> projets = new LinkedList <> ();
+		List<Donateur> donateurs = Donateur.newPopDonateurs ();
+		Projet p1 = new Projet (90, "Haute École de ConGestion", donateurs);
+		donateurs.remove (2); donateurs.get (0).setSomme (11);
+		Projet p2 = new Projet (91, "Voiture sans combustible", donateurs);
+		projets.add (p1); projets.add (p2);
+		return projets;
 	}
 }

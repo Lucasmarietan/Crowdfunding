@@ -1,5 +1,8 @@
 package ch.hegarc.ig.business;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Donateur {
 
 	private long id;
@@ -15,6 +18,14 @@ public class Donateur {
 	private String dateVersement;
 
 	public Donateur() {
+	}
+
+	public Donateur (long id, String prenom, String nom, String monnaie, long somme) {
+		this.id = id;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.monnaie = monnaie;
+		this.somme = somme;
 	}
 
 	/**
@@ -140,5 +151,14 @@ public class Donateur {
 		StringBuilder sb = new StringBuilder ();
 		sb.append ("Nom : ").append (this.nom).append (", ").append (this.prenom).append (" (id : ").append (this.id).append (")\n");
 		return sb.toString ();
+	}
+
+	public static List <Donateur> newPopDonateurs () {
+		List<Donateur> d = new LinkedList <> ();
+		Donateur d1 = new Donateur (96, "Jain", "Meylan", "CHF", 1);
+		Donateur d2 = new Donateur (97, "Quentin", "Boillat", "CHF", 100);
+		Donateur d3 = new Donateur (98, "Stan", "Federer", "CHF", 876543);
+		d.add (d1); d.add (d2); d.add (d3);
+		return d;
 	}
 }
