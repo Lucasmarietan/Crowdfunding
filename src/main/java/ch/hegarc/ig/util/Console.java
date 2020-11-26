@@ -7,6 +7,7 @@ import org.apache.commons.cli.*;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 import static ch.hegarc.ig.business.Projet.newPopProjets;
 
@@ -23,7 +24,7 @@ public class Console {
 	/**
 	 * Démarre la commande
 	 */
-	public void runCommand() {
+	public void runCommand () {
 
 		Scanner command = new Scanner(System.in);
 		System.out.println("Entrer votre commande: ");
@@ -39,13 +40,17 @@ public class Console {
 				case CMD_IMPORT:
 					if (cmdLine.hasOption(OPT_FICHIER.getOpt())) {
 
-						String fileName = cmdLine.getOptionValue(OPT_FICHIER.getOpt());
-						System.out.println("Import du fichier " + fileName);
+						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
 
-						JacksonReader.run (fileName);
-
-						// TODO Import du fichier XML ou JSON
-
+//						Traitement du fichier en .json (c'était compliqué de comprendre l'erreur "\\.")
+						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) {
+							System.out.println ("Import du fichier " + fileName);
+							JacksonReader.run (fileName);
+						}
+						else {
+//							TODO - Prise en charge du XML
+							System.out.println ("XML pas encore pris en charge");
+						}
 					} else {
 						printAppHelp();
 					}
