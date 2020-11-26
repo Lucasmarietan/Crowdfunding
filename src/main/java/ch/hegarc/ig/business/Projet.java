@@ -66,7 +66,7 @@ public class Projet {
 		List<Donateur> donateurs = Donateur.newPopDonateurs ();
 		Projet p1 = new Projet (90, "Haute École de ConGestion", donateurs);
 		donateurs.remove (2); donateurs.get (0).setSomme (11);
-		Projet p2 = new Projet (91, "Voiture sans combustible", donateurs);
+		Projet p2 = new Projet (91, "Voiture", donateurs);
 		projets.add (p1); projets.add (p2);
 		return projets;
 	}

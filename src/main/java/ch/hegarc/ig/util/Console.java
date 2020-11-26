@@ -1,10 +1,14 @@
 package ch.hegarc.ig.util;
 
+import ch.hegarc.ig.business.Projet;
 import ch.hegarc.ig.util.jackson.JacksonReader;
 import ch.hegarc.ig.util.jackson.JacksonWriter;
 import org.apache.commons.cli.*;
 
+import java.util.List;
 import java.util.Scanner;
+
+import static ch.hegarc.ig.business.Projet.newPopProjets;
 
 public class Console {
 
@@ -52,11 +56,23 @@ public class Console {
 
 						String fileName = cmdLine.getOptionValue(OPT_FICHIER.getOpt());
 						String projectName = cmdLine.getOptionValue(OPT_PROJET.getOpt());
-						System.out.println("Export du " + projectName + "dans le fichier " + fileName);
 
-//                        JacksonWriter.run (projectName, fileName);
-						// TODO Export du fichier JSON. Il faut trouver le projet qui correspond à @projetctName
-
+//						Pour tester le bon fonctionnement de JacksonWriter
+//						TODO - Mettre ça au propre ou alors être sûr de comment l'utiliser
+						List <Projet> projets = Projet.newPopProjets (); boolean existe = false; int indice = -1;
+						for (int i = 0; i < projets.size (); i++) {
+							if (projets.get (i).getProjet ().equalsIgnoreCase (projectName)) {
+								existe = true;
+								indice = i;
+							}
+						}
+						if (!existe) {
+							System.out.println ("Le projet " + projectName + " n'existe pas...");
+						}
+						else {
+							JacksonWriter.run (projets.get (indice), fileName);
+							System.out.println("Export du projet " + projectName + " dans le fichier " + fileName);
+						}
 					} else {
 						printAppHelp();
 					}
