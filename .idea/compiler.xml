@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="CrowdSourcingTool" />
+        <module name="crowdfunding" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="crowdfunding" target="1.8" />
       <module name="CrowdSourcingTool" target="1.8" />
     </bytecodeTargetLevel>
   </component>
