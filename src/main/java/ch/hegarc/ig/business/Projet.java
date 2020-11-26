@@ -7,47 +7,56 @@ public class Projet {
 
 //    Test de pouche #1
 
-    private long id;
-    private String name;
-    private List<Donateur> donateurs = new ArrayList<Donateur>();
+	private long id;
+	private String projet;
+	private List<Donateur> donateurs = new ArrayList<Donateur>();
 
-    public Projet() {
-    }
+	public Projet() {
+	}
 
-    /**
-     * @param donateurs
-     * @param name
-     * @param id
-     */
-    public Projet(long id, String name, List<Donateur> donateurs) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.donateurs = donateurs;
-    }
+	/**
+	 * @param donateurs
+	 * @param name
+	 * @param id
+	 */
+	public Projet(long id, String name, List<Donateur> donateurs) {
+		super();
+		this.id = id;
+		this.projet = name;
+		this.donateurs = donateurs;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getProjet () {
+		return projet;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setProjet (String projet) {
+		this.projet = projet;
+	}
 
-    public List<Donateur> getDonateurs() {
-        return donateurs;
-    }
+	public List<Donateur> getDonateurs() {
+		return donateurs;
+	}
 
-    public void setDonateurs(List<Donateur> donateurs) {
-        this.donateurs = donateurs;
-    }
+	public void setDonateurs(List<Donateur> donateurs) {
+		this.donateurs = donateurs;
+	}
 
+	@Override
+	public String toString () {
+		StringBuilder sb = new StringBuilder ();
+		sb.append ("Titre : ").append (this.projet).append (" (id : ").append (this.id).append ("\n");
+		sb.append ("Les donateurs de ce projet : ");
+		for (Donateur d : this.donateurs)
+			sb.append (d.toString ()).append (". Montant : ").append (d.getSomme ());
+		return sb.toString ();
+	}
 }

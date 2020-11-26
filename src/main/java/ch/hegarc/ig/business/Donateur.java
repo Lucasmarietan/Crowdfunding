@@ -2,136 +2,143 @@ package ch.hegarc.ig.business;
 
 public class Donateur {
 
-    private long id;
-    private String prNom;
-    private String nom;
-    private String email;
-    private String langue;
-    private String adresse;
-    private String ville;
-    private String monnaie;
-    private long somme;
-    private String dateDon;
-    private String dateVersement;
+	private long id;
+	private String prenom;
+	private String nom;
+	private String email;
+	private String langue;
+	private String adresse;
+	private String ville;
+	private String monnaie;
+	private long somme;
+	private String dateDon;
+	private String dateVersement;
 
-    public Donateur() {
-    }
+	public Donateur() {
+	}
 
-    /**
-     * @param somme
-     * @param ville
-     * @param monnaie
-     * @param pay
-     * @param langue
-     * @param nom
-     * @param annul
-     * @param dateDon
-     * @param prNom
-     * @param dateVersement
-     * @param adresse
-     * @param id
-     * @param email
-     */
-    public Donateur(long id, String prNom, String nom, String email, String langue, String adresse, String ville, String monnaie, long somme, boolean pay, boolean annul, String dateDon, String dateVersement) {
-        super();
-        this.id = id;
-        this.prNom = prNom;
-        this.nom = nom;
-        this.email = email;
-        this.langue = langue;
-        this.adresse = adresse;
-        this.ville = ville;
-        this.monnaie = monnaie;
-        this.somme = somme;
-        this.dateDon = dateDon;
-        this.dateVersement = dateVersement;
-    }
+	/**
+	 * @param somme
+	 * @param ville
+	 * @param monnaie
+	 * @param pay
+	 * @param langue
+	 * @param nom
+	 * @param annul
+	 * @param dateDon
+	 * @param prenom
+	 * @param dateVersement
+	 * @param adresse
+	 * @param id
+	 * @param email
+	 */
+	public Donateur(long id, String prenom, String nom, String email, String langue, String adresse, String ville, String monnaie, long somme, boolean pay, boolean annul, String dateDon, String dateVersement) {
+		super();
+		this.id = id;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.email = email;
+		this.langue = langue;
+		this.adresse = adresse;
+		this.ville = ville;
+		this.monnaie = monnaie;
+		this.somme = somme;
+		this.dateDon = dateDon;
+		this.dateVersement = dateVersement;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public String getPrNom() {
-        return prNom;
-    }
+	public String getPrenom () {
+		return prenom;
+	}
 
-    public void setPrNom(String prNom) {
-        this.prNom = prNom;
-    }
+	public void setPrenom (String prenom) {
+		this.prenom = prenom;
+	}
 
-    public String getNom() {
-        return nom;
-    }
+	public String getNom() {
+		return nom;
+	}
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getLangue() {
-        return langue;
-    }
+	public String getLangue() {
+		return langue;
+	}
 
-    public void setLangue(String langue) {
-        this.langue = langue;
-    }
+	public void setLangue(String langue) {
+		this.langue = langue;
+	}
 
-    public String getAdresse() {
-        return adresse;
-    }
+	public String getAdresse() {
+		return adresse;
+	}
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
 
-    public String getVille() {
-        return ville;
-    }
+	public String getVille() {
+		return ville;
+	}
 
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
 
-    public String getMonnaie() {
-        return monnaie;
-    }
+	public String getMonnaie() {
+		return monnaie;
+	}
 
-    public void setMonnaie(String monnaie) {
-        this.monnaie = monnaie;
-    }
+	public void setMonnaie(String monnaie) {
+		this.monnaie = monnaie;
+	}
 
-    public long getSomme() {
-        return somme;
-    }
+	public long getSomme() {
+		return somme;
+	}
 
-    public void setSomme(long somme) {
-        this.somme = somme;
-    }
+	public void setSomme(long somme) {
+		this.somme = somme;
+	}
 
-    public String getDateDon() {
-        return dateDon;
-    }
+	public String getDateDon() {
+		return dateDon;
+	}
 
-    public void setDateDon(String dateDon) {
-        this.dateDon = dateDon;
-    }
+	public void setDateDon(String dateDon) {
+		this.dateDon = dateDon;
+	}
 
-    public String getDateVersement() {
-        return dateVersement;
-    }
+	public String getDateVersement() {
+		return dateVersement;
+	}
 
-    public void setDateVersement(String dateVersement) {
-        this.dateVersement = dateVersement;
-    }
+	public void setDateVersement(String dateVersement) {
+		this.dateVersement = dateVersement;
+	}
+
+	@Override
+	public String toString () {
+		StringBuilder sb = new StringBuilder ();
+		sb.append (this.id).append (" ; Nom : ").append (this.nom).append (", ").append (this.prenom).append ("\n");
+		return sb.toString ();
+	}
 }

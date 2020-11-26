@@ -4,15 +4,15 @@ import ch.hegarc.ig.util.Console;
 
 public class CrowdFundingApp {
 
-    private CrowdFundingApp() {
-    }
+	private CrowdFundingApp() {
+	}
 
-    /**
-     * Main method
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Console().runCommand();
-    }
+	/**
+	 * Main method
+	 *
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new Console().runCommand();
+	}
 }

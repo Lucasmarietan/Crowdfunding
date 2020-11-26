@@ -2,7 +2,7 @@
 <dataset>
 	<record>
 		<id>1</id>
-		<name>Tresom</name>
+		<projet>Tresom</projet>
 		<donateurs>
 			<id>1</id>
 			<prenom>Imogene</prenom>
@@ -141,7 +141,7 @@
 	</record>
 	<record>
 		<id>2</id>
-		<name>Bigtax</name>
+		<projet>Bigtax</projet>
 		<donateurs>
 			<id>1</id>
 			<prenom>Tanny</prenom>
@@ -310,7 +310,7 @@
 	</record>
 	<record>
 		<id>3</id>
-		<name>Alpha</name>
+		<projet>Alpha</projet>
 		<donateurs>			<id>1</id>
 			<prenom>Jon</prenom>
 			<nom>Crews</nom>
