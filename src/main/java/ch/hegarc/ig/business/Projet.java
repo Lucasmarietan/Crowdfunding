@@ -53,10 +53,10 @@ public class Projet {
 	@Override
 	public String toString () {
 		StringBuilder sb = new StringBuilder ();
-		sb.append ("Titre : ").append (this.projet).append (" (id : ").append (this.id).append ("\n");
-		sb.append ("Les donateurs de ce projet : ");
+		sb.append ("Nom projet : ").append (this.projet).append (" (id : ").append (this.id).append (")\n");
+		sb.append ("Les donateurs de ce projet : \n");
 		for (Donateur d : this.donateurs)
-			sb.append (d.toString ()).append (". Montant : ").append (d.getSomme ());
+			sb.append (d.toString ()).append ("    Montant : ").append (d.getSomme ()).append (" ").append (d.getMonnaie ()).append ("\n");
 		return sb.toString ();
 	}
 }
