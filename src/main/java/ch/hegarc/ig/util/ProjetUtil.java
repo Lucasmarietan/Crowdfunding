@@ -15,11 +15,28 @@ public class ProjetUtil {
 		this.projets = projets;
 	}
 
+	public Projet contientProjet (String nomProjet) {
+		for (Projet p : this.projets) {
+			if (p.getProjet ().equalsIgnoreCase (nomProjet))
+				return p;
+		}
+		return null;
+	}
+
+	public boolean contient (String nomProjet) {
+		boolean existe = false;
+		for (Projet p : this.projets) {
+			if (p.getProjet ().equalsIgnoreCase (nomProjet))
+				existe = true;
+		}
+		return existe;
+	}
+
 	public List<Projet> toList () {
 		return new LinkedList <> (this.projets);
 	}
 
-	public void addProjet (List<Projet> projets) {
+	public void addProjets (List<Projet> projets) {
 		for (Projet p : projets)
 			this.addProjet (p);
 	}
@@ -44,5 +61,17 @@ public class ProjetUtil {
 
 	public void setProjets (Set <Projet> projets) {
 		this.projets = projets;
+	}
+
+	public int getSize () {
+		return this.projets.size ();
+	}
+
+	@Override
+	public String toString () {
+		StringBuilder sb = new StringBuilder ();
+		for (Projet p : this.projets)
+			sb.append (p.toString ());
+		return sb.toString ();
 	}
 }

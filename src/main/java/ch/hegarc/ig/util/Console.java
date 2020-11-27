@@ -13,7 +13,6 @@ import java.util.StringTokenizer;
 import static ch.hegarc.ig.business.Projet.newPopProjets;
 
 public class Console {
-
 	private ProjetUtil projets;
 
 	final private String CMD_IMPORT = "import";
@@ -28,7 +27,9 @@ public class Console {
 	 * Démarre la commande
 	 */
 	public void runCommand () {
-		projets.addProjet (Projet.newPopProjets ());
+//		Pour stocker les projets à un endroit centralisé
+		this.projets = new ProjetUtil ();
+		this.projets.addProjets (Projet.newPopProjets ());
 
 		Scanner command = new Scanner(System.in);
 		System.out.println("Entrer votre commande: ");
@@ -40,7 +41,6 @@ public class Console {
 			CommandLine cmdLine = parseArguments(arguments);
 
 			switch (cmdLine.getArgs()[0]) {
-
 				case CMD_IMPORT:
 					if (cmdLine.hasOption(OPT_FICHIER.getOpt())) {
 
@@ -48,12 +48,16 @@ public class Console {
 
 //						Traitement du fichier en .json (c'était compliqué de comprendre l'erreur "\\.")
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
-							JacksonReader.run (fileName);
+							this.projets.addProjets (JacksonReader.run (fileName));
 							System.out.println ("Import du fichier " + fileName);
+							System.out.println (this.projets.toString ());
 						}
+//						Traitement du fichier en .XML
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
-							MainUnmarshalling.run (fileName);
+							this.projets.addProjets (MainUnmarshalling.run (fileName));
 							System.out.println ("Import du fichier " + fileName);
+							System.out.println ("-------");
+							System.out.println (this.projets.toString ());
 						}
 						else {
 							System.out.println ("Ce type de fichier n'est pas encore pris en compte");
@@ -66,27 +70,17 @@ public class Console {
 				case CMD_EXPORT:
 					if (cmdLine.hasOption(OPT_FICHIER.getOpt()) && cmdLine.hasOption(OPT_PROJET.getOpt())) {
 
-						String fileName = cmdLine.getOptionValue(OPT_FICHIER.getOpt());
-						String projectName = cmdLine.getOptionValue(OPT_PROJET.getOpt());
+						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
+						String projectName = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
 
 //						Pour tester le bon fonctionnement de JacksonWriter
 //						TODO - Mettre ça au propre ou alors être sûr de comment l'utiliser
-						boolean existe = false; int indice = -1;
-						if (projectName.equalsIgnoreCase ("ALL")) {
+						if (projectName.equalsIgnoreCase ("ALL")) // Exporter tous les projets dans un JSON (pas de test de fichier)
 							JacksonWriter.run (this.projets.toList (), fileName);
-						}
 						else {
-							for (int i = 0 ; i < projets.size () ; i++) {
-								if (projets.get (i).getProjet ().equalsIgnoreCase (projectName)) {
-									existe = true;
-									indice = i;
-								}
-							}
-							if (! existe) {
-								System.out.println ("Le projet " + projectName + " n'existe pas...");
-							} else {
+							if (this.projets.contient (projectName)) {
 								if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
-									JacksonWriter.run (projets.get (indice), fileName);
+									JacksonWriter.run (this.projets.contientProjet (projectName), fileName);
 									System.out.println ("Export du projet " + projectName + " dans le fichier " + fileName);
 								} else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
 //  								TODO - Faut-il vraiment faire ça ?
