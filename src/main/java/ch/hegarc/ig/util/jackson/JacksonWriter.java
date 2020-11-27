@@ -1,6 +1,6 @@
 package ch.hegarc.ig.util.jackson;
 
-//Pour l'instant le JacksonWriter permet d'exporter un projet avec ses donateurs dans un json
+//Pour l'instant le JacksonWriter permet d'exporter un projet (généré avec newPopProjet...) avec ses donateurs dans un json
 
 import ch.hegarc.ig.business.Projet;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,6 +1,8 @@
 package ch.hegarc.ig.util.jackson;
 
-/** Classe capable de lire le fichier donations.json*/
+//  TODO - Faire pour stocker les données de manière persistante et globale au projet
+
+//  Pour l'instant, il sait juste lire le json (et afficher les projets avec ses donateurs)
 
 import ch.hegarc.ig.business.Projet;
 import com.fasterxml.jackson.core.type.TypeReference;

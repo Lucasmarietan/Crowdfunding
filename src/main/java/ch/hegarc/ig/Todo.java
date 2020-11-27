@@ -9,6 +9,8 @@ public class Todo {
 	 *
 	 * J'ai généré le donations.xsd automatiquement, puis l'ai modififié (surtout pour enlever énumération...) mais çA générait 3 classes différentes
 	 * J'ai pensé que c'était trop complexe. Alors j'ai généré le xsd sur https://www.freeformatter.com/xsd-generator.html. Puis j'ai généré le dossier jaxb avec Intellij
+	 * TODO - Faut-il faire un binding personnalisé ???
+	 * Création des packages (un)marshalling
 	 */
 
     /** TODO

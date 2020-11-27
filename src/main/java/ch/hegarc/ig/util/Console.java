@@ -1,6 +1,7 @@
 package ch.hegarc.ig.util;
 
 import ch.hegarc.ig.business.Projet;
+import ch.hegarc.ig.cpo.jaxb.unmarshalling.MainUnmarshalling;
 import ch.hegarc.ig.util.jackson.JacksonReader;
 import ch.hegarc.ig.util.jackson.JacksonWriter;
 import org.apache.commons.cli.*;
@@ -44,12 +45,12 @@ public class Console {
 
 //						Traitement du fichier en .json (c'était compliqué de comprendre l'erreur "\\.")
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
-							System.out.println ("Import du fichier " + fileName);
 							JacksonReader.run (fileName);
+							System.out.println ("Import du fichier " + fileName);
 						}
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
-//							TODO - Prise en charge du XML
-							System.out.println ("XML pas encore pris en charge");
+							MainUnmarshalling.run (fileName);
+							System.out.println ("Import du fichier " + fileName);
 						}
 						else {
 							System.out.println ("Ce type de fichier n'est pas encore pris en compte");
