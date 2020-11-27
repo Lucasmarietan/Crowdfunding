@@ -85,7 +85,7 @@ public class Console {
 								if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
 									JacksonWriter.run (projets.get (indice), fileName);
 									System.out.println ("Export du projet " + projectName + " dans le fichier " + fileName);
-								} else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) ;
+								} else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
 //  								TODO - Faut-il vraiment faire ça ?
 									System.out.println ("Le type de fichier XML n'est pas pris en charge...");
 								} else {
