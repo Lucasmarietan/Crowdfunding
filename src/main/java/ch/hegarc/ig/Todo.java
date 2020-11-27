@@ -10,8 +10,17 @@ public class Todo {
 	 * Pour le marshalling et unmarshalling du XML, je me suis fortement inspiré de la série 3
 	 * J'ai généré le donations.xsd automatiquement, puis l'ai modififié (surtout pour enlever énumération...) mais ça générait 3 classes différentes
 	 * J'ai pensé que c'était trop complexe. Alors j'ai généré le xsd sur https://www.freeformatter.com/xsd-generator.html. Puis j'ai généré le dossier jaxb avec Intellij
-	 * TODO - Faut-il faire un binding personnalisé ???
+	 * TODO - Faut-il faire un binding personnalisé ??? Par exemple pour gérer le problème avec Record.DonateurS
 	 * Création des packages (un)marshalling
+	 *
+	 * Ajout d'un argument pour imprimer les donateurs dans les projets
+	 *
+	 * Classe ProjetUtil pour gérer la "persistance" des données. Avec les méthodes spécifiques pour les trier par exemple.
+	 * Dans la console, on traite la gestion de ce ProjetUtil
+	 *
+	 * Tentative de tri des projets selon l'ordre alphabétique avec un stream (ça fonctionne jusqu'à ce que... on remette le stream dans le HashSet)
+	 *
+	 * Commencé à ajouter la nouvelle commande pour ajouter un donateur à un projet mais ça plante... sûrement dû à mes options...
 	 */
 
     /** TODO

@@ -17,11 +17,16 @@ public class Console {
 
 	final private String CMD_IMPORT = "import";
 	final private String CMD_EXPORT = "export";
+//	Nouvelle commande
+	final private String CMD_ADD_DONATEUR = "don";
 	final private String CMD_STATS = "stats";
 	final private String CMD_EXIT = "exit";
 
 	final private Option OPT_FICHIER = new Option("f", "fichier", true, "nom du fichier");
 	final private Option OPT_PROJET = new Option("p", "projet", true, "nom du projet");
+//	Nouvelle options
+	final private Option OPT_DON_NOM = new Option("n", "donateurNom", true, "nom du donateur");
+	final private Option OPT_DON_PRENOM = new Option("r", "donateurPrenom", true, "prenom du donateur");
 
 	/**
 	 * Démarre la commande
@@ -41,6 +46,26 @@ public class Console {
 			CommandLine cmdLine = parseArguments(arguments);
 
 			switch (cmdLine.getArgs()[0]) {
+//				TODO - A chaque fois que je veux utiliser les options que j'ai ajouté ça merde...
+				case CMD_ADD_DONATEUR:
+/*					if (cmdLine.hasOption(OPT_PROJET.getOpt()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ())) {
+						String projectName = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
+						System.out.println (projectName);
+						String nom = cmdLine.getOptionValue (OPT_DON_NOM.getOpt ());
+						System.out.println (nom);
+					}
+*/					if (cmdLine.hasOption (OPT_PROJET.getOpt ()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ()) && cmdLine.hasOption (OPT_DON_PRENOM.getOpt ())) {
+					String donProjet = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
+					System.out.println ("nom : " + donProjet);
+					String donNom = cmdLine.getOptionValue (OPT_DON_NOM.getOpt ());
+					System.out.println ("nom : " + donNom);
+					String donPrenom = cmdLine.getOptionValue (OPT_DON_PRENOM.getOpt ());
+					System.out.println ("nom : " + donPrenom);
+					} else {
+						printAppHelp ();
+					}
+					break;
+
 				case CMD_IMPORT:
 					if (cmdLine.hasOption(OPT_FICHIER.getOpt())) {
 
@@ -50,7 +75,11 @@ public class Console {
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
 							this.projets.addProjets (JacksonReader.run (fileName));
 							System.out.println ("Import du fichier " + fileName);
-							System.out.println (this.projets.toString ());
+							System.out.println ("--- Apres IMPORT ----");
+							System.out.println (this.projets.toString (false));
+							System.out.println ("---- TRI ----");
+							this.projets.triAlphabetique ();
+							System.out.println (this.projets.toString (false));
 						}
 //						Traitement du fichier en .XML
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
@@ -97,7 +126,7 @@ public class Console {
 
 				case CMD_STATS:
 
-					// TODO Calcule des stats des projets
+					// TODO Calcul des stats des projets
 
 					break;
 
@@ -155,6 +184,7 @@ public class Console {
 		formatter.printHelp(CMD_IMPORT, new Options().addOption(OPT_FICHIER), true);
 		formatter.printHelp(CMD_EXPORT, new Options().addOption(OPT_FICHIER).addOption(OPT_PROJET), true);
 		formatter.printHelp(CMD_STATS, new Options().addOption(OPT_PROJET), true);
+		formatter.printHelp(CMD_ADD_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM), true);
 		formatter.printHelp(CMD_EXIT, new Options());
 	}
 }
