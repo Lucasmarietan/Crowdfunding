@@ -69,18 +69,29 @@ public class Console {
 //						Pour tester le bon fonctionnement de JacksonWriter
 //						TODO - Mettre ça au propre ou alors être sûr de comment l'utiliser
 						List <Projet> projets = Projet.newPopProjets (); boolean existe = false; int indice = -1;
-						for (int i = 0; i < projets.size (); i++) {
-							if (projets.get (i).getProjet ().equalsIgnoreCase (projectName)) {
-								existe = true;
-								indice = i;
-							}
-						}
-						if (!existe) {
-							System.out.println ("Le projet " + projectName + " n'existe pas...");
+						if (projectName.equalsIgnoreCase ("ALL")) {
+							JacksonWriter.run (projets, fileName);
 						}
 						else {
-							JacksonWriter.run (projets.get (indice), fileName);
-							System.out.println("Export du projet " + projectName + " dans le fichier " + fileName);
+							for (int i = 0 ; i < projets.size () ; i++) {
+								if (projets.get (i).getProjet ().equalsIgnoreCase (projectName)) {
+									existe = true;
+									indice = i;
+								}
+							}
+							if (! existe) {
+								System.out.println ("Le projet " + projectName + " n'existe pas...");
+							} else {
+								if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
+									JacksonWriter.run (projets.get (indice), fileName);
+									System.out.println ("Export du projet " + projectName + " dans le fichier " + fileName);
+								} else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) ;
+//  								TODO - Faut-il vraiment faire ça ?
+									System.out.println ("Le type de fichier XML n'est pas pris en charge...");
+								} else {
+									System.out.println ("Votre type de fichier n'est pas pris en charge...");
+								}
+							}
 						}
 					} else {
 						printAppHelp();
@@ -114,21 +125,17 @@ public class Console {
 	 * arguments.
 	 */
 	private CommandLine parseArguments(String[] args) {
-
 		Options options = getAllOptions();
 		CommandLine line = null;
 		CommandLineParser parser = new DefaultParser();
 
 		try {
 			line = parser.parse(options, args);
-
 		} catch (ParseException ex) {
-
 			System.err.println("Erreur dans la lecture des arguments!");
 			System.err.println(ex.toString());
 			printAppHelp();
 		}
-
 		return line;
 	}
 
@@ -138,7 +145,6 @@ public class Console {
 	 * @return application <code>Options</code>
 	 */
 	private Options getAllOptions() {
-
 		Options options = new Options();
 		options.addOption(OPT_FICHIER).addOption(OPT_PROJET);
 		return options;

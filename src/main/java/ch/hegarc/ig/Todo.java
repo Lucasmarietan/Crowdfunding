@@ -7,7 +7,8 @@ public class Todo {
 	 * Choix du Jackson pour import le Json car est le plus simple. Je me suis fortement inspiré de la série 5 pour construire le dossier Jackson
 	 * JacksonWriter peremt d'exporter un projet avec ses donateurs. Faut-il changer de signature pour tout exporter ??
 	 *
-	 * J'ai généré le donations.xsd automatiquement, puis l'ai modififié (surtout pour enlever énumération...) mais çA générait 3 classes différentes
+	 * Pour le marshalling et unmarshalling du XML, je me suis fortement inspiré de la série 3
+	 * J'ai généré le donations.xsd automatiquement, puis l'ai modififié (surtout pour enlever énumération...) mais ça générait 3 classes différentes
 	 * J'ai pensé que c'était trop complexe. Alors j'ai généré le xsd sur https://www.freeformatter.com/xsd-generator.html. Puis j'ai généré le dossier jaxb avec Intellij
 	 * TODO - Faut-il faire un binding personnalisé ???
 	 * Création des packages (un)marshalling

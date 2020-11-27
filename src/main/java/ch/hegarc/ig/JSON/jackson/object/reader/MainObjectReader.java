@@ -1,5 +1,5 @@
 package ch.hegarc.ig.JSON.jackson.object.reader;
-
+// TODO - On garde cette classe ?
 public class MainObjectReader {
 
 

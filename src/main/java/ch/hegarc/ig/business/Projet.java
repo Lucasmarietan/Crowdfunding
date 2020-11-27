@@ -64,7 +64,7 @@ public class Projet {
 	public static List<Projet> newPopProjets () {
 		List<Projet> projets = new LinkedList <> ();
 		List<Donateur> donateurs = Donateur.newPopDonateurs ();
-		Projet p1 = new Projet (90, "Haute École de ConGestion", donateurs);
+		Projet p1 = new Projet (90, "Haute Ecole de ConGestion", donateurs);
 		donateurs.remove (2); donateurs.get (0).setSomme (11);
 		Projet p2 = new Projet (91, "Voiture", donateurs);
 		projets.add (p1); projets.add (p2);
