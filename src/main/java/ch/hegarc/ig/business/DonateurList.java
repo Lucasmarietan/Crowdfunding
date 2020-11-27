@@ -1,5 +1,7 @@
 package ch.hegarc.ig.business;
 
+//	TODO - On garde cette classe ?
+
 import java.util.ArrayList;
 import java.util.List;
 

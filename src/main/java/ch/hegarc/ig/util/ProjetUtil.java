@@ -1,5 +1,6 @@
 package ch.hegarc.ig.util;
 
+import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
 
 import java.util.*;

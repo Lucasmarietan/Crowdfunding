@@ -20,7 +20,11 @@ public class Todo {
 	 *
 	 * Tentative de tri des projets selon l'ordre alphabétique avec un stream (ça fonctionne jusqu'à ce que... on remette le stream dans le HashSet)
 	 *
-	 * Commencé à ajouter la nouvelle commande pour ajouter un donateur à un projet mais ça plante... sûrement dû à mes options...
+	 * Commencer à ajouter la nouvelle commande pour ajouter un donateur à un projet mais ça plante... sûrement dû à mes options...
+	 *
+	 * Ajout de la classe CollectionUtil qui fera les manip et les calculs sur les projets. Il faut encore voir comment on l'appelle
+	 *
+	 * TODO - MAMAMAMAMAMIAAA !!! Avec le jackson, il prend pas les booléens (paye et annule) !!!
 	 */
 
     /** TODO

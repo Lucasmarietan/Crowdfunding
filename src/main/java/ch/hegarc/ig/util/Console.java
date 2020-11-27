@@ -1,5 +1,6 @@
 package ch.hegarc.ig.util;
 
+import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
 import ch.hegarc.ig.cpo.jaxb.unmarshalling.MainUnmarshalling;
 import ch.hegarc.ig.util.jackson.JacksonReader;
@@ -48,13 +49,7 @@ public class Console {
 			switch (cmdLine.getArgs()[0]) {
 //				TODO - A chaque fois que je veux utiliser les options que j'ai ajouté ça merde...
 				case CMD_ADD_DONATEUR:
-/*					if (cmdLine.hasOption(OPT_PROJET.getOpt()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ())) {
-						String projectName = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
-						System.out.println (projectName);
-						String nom = cmdLine.getOptionValue (OPT_DON_NOM.getOpt ());
-						System.out.println (nom);
-					}
-*/					if (cmdLine.hasOption (OPT_PROJET.getOpt ()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ()) && cmdLine.hasOption (OPT_DON_PRENOM.getOpt ())) {
+					if (cmdLine.hasOption (OPT_PROJET.getOpt ()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ()) && cmdLine.hasOption (OPT_DON_PRENOM.getOpt ())) {
 					String donProjet = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
 					System.out.println ("nom : " + donProjet);
 					String donNom = cmdLine.getOptionValue (OPT_DON_NOM.getOpt ());
@@ -75,11 +70,10 @@ public class Console {
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
 							this.projets.addProjets (JacksonReader.run (fileName));
 							System.out.println ("Import du fichier " + fileName);
-							System.out.println ("--- Apres IMPORT ----");
-							System.out.println (this.projets.toString (false));
-							System.out.println ("---- TRI ----");
-							this.projets.triAlphabetique ();
-							System.out.println (this.projets.toString (false));
+//							this.projets.triAlphabetique ();
+//							List<Donateur> donateurs = CollectionUtil.plusGrosDonateur (this.projets.getProjet (1),2);
+							String email = CollectionUtil.tousEmail (this.projets.getProjet (1));
+							System.out.println (email);
 						}
 //						Traitement du fichier en .XML
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
