@@ -2,6 +2,14 @@ package ch.hegarc.ig;
 
 public class Todo {
 
+	/** Notes de développement de Tanguy
+	 *
+	 * Choix du Jackson pour import le Json car est le plus simple. Je me suis fortement inspiré de la série 5 pour construire le dossier Jackson
+	 * JacksonWriter peremt d'exporter un projet avec ses donateurs. Faut-il changer de signature pour tout exporter ??
+	 *
+	 * J'ai généré le donations.xsd automatiquement, puis l'ai modififié (surtout pour enlever énumération...)
+	 */
+
     /** TODO
      *
      *Fonctionnalités précédentes :

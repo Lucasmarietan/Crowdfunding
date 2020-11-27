@@ -43,13 +43,16 @@ public class Console {
 						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
 
 //						Traitement du fichier en .json (c'était compliqué de comprendre l'erreur "\\.")
-						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) {
+						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
 							System.out.println ("Import du fichier " + fileName);
 							JacksonReader.run (fileName);
 						}
-						else {
+						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
 //							TODO - Prise en charge du XML
 							System.out.println ("XML pas encore pris en charge");
+						}
+						else {
+							System.out.println ("Ce type de fichier n'est pas encore pris en compte");
 						}
 					} else {
 						printAppHelp();

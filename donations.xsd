@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO - Vérifier la construction du schéma-->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="dataset" type="datasetType"/>
+  <xs:complexType name="donateursType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="id"/>
+      <xs:element type="xs:string" name="prenom"/>
+      <xs:element type="xs:string" name="nom"/>
+      <xs:element type="xs:string" name="email"/>
+      <xs:element type="xs:string" name="langue"/>
+      <xs:element type="xs:string" name="adresse"/>
+      <xs:element type="xs:string" name="ville"/>
+      <xs:element type="xs:string" name="monnaie"/>
+      <xs:element type="xs:string" name="somme"/>
+      <xs:element name="paye">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="annule">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="dateDon"/>
+      <xs:element type="xs:string" name="dateVersement"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="projetType">
+    <xs:sequence>
+      <xs:element name="id">
+      </xs:element>
+      <xs:element name="projet">
+      </xs:element>
+      <xs:element type="donateursType" name="donateurs" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="datasetType">
+    <xs:sequence>
+      <xs:element type="projetType" name="record" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
