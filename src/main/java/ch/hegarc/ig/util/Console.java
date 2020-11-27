@@ -14,6 +14,8 @@ import static ch.hegarc.ig.business.Projet.newPopProjets;
 
 public class Console {
 
+	private ProjetUtil projets;
+
 	final private String CMD_IMPORT = "import";
 	final private String CMD_EXPORT = "export";
 	final private String CMD_STATS = "stats";
@@ -26,6 +28,7 @@ public class Console {
 	 * Démarre la commande
 	 */
 	public void runCommand () {
+		projets.addProjet (Projet.newPopProjets ());
 
 		Scanner command = new Scanner(System.in);
 		System.out.println("Entrer votre commande: ");
@@ -68,9 +71,9 @@ public class Console {
 
 //						Pour tester le bon fonctionnement de JacksonWriter
 //						TODO - Mettre ça au propre ou alors être sûr de comment l'utiliser
-						List <Projet> projets = Projet.newPopProjets (); boolean existe = false; int indice = -1;
+						boolean existe = false; int indice = -1;
 						if (projectName.equalsIgnoreCase ("ALL")) {
-							JacksonWriter.run (projets, fileName);
+							JacksonWriter.run (this.projets.toList (), fileName);
 						}
 						else {
 							for (int i = 0 ; i < projets.size () ; i++) {

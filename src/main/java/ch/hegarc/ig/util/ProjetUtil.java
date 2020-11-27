@@ -15,6 +15,10 @@ public class ProjetUtil {
 		this.projets = projets;
 	}
 
+	public List<Projet> toList () {
+		return new LinkedList <> (this.projets);
+	}
+
 	public void addProjet (List<Projet> projets) {
 		for (Projet p : projets)
 			this.addProjet (p);

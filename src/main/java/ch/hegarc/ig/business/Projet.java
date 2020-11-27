@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Projet {
 
-//    Test de pouche #1
-
 	private long id;
 	private String projet;
 	private List<Donateur> donateurs = new ArrayList<Donateur>();
