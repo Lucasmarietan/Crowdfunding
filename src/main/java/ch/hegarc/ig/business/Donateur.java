@@ -14,6 +14,8 @@ public class Donateur {
 	private String ville;
 	private String monnaie;
 	private long somme;
+	private boolean paye;
+	private boolean annule;
 	private String dateDon;
 	private String dateVersement;
 
@@ -28,14 +30,20 @@ public class Donateur {
 		this.somme = somme;
 	}
 
+	public Donateur (long id, String prenom, String nom, String monnaie, long somme, boolean paye, boolean annule) {
+		this (id, prenom, nom, monnaie, somme);
+		this.paye = paye;
+		this.annule = annule;
+	}
+
 	/**
 	 * @param somme
 	 * @param ville
 	 * @param monnaie
-	 * @param pay
+	 * @param paye
 	 * @param langue
 	 * @param nom
-	 * @param annul
+	 * @param annule
 	 * @param dateDon
 	 * @param prenom
 	 * @param dateVersement
@@ -43,7 +51,7 @@ public class Donateur {
 	 * @param id
 	 * @param email
 	 */
-	public Donateur(long id, String prenom, String nom, String email, String langue, String adresse, String ville, String monnaie, long somme, boolean pay, boolean annul, String dateDon, String dateVersement) {
+	public Donateur(long id, String prenom, String nom, String email, String langue, String adresse, String ville, String monnaie, long somme, boolean paye, boolean annule, String dateDon, String dateVersement) {
 		super();
 		this.id = id;
 		this.prenom = prenom;
@@ -54,6 +62,8 @@ public class Donateur {
 		this.ville = ville;
 		this.monnaie = monnaie;
 		this.somme = somme;
+		this.paye = paye;
+		this.annule = annule;
 		this.dateDon = dateDon;
 		this.dateVersement = dateVersement;
 	}
@@ -130,6 +140,22 @@ public class Donateur {
 		this.somme = somme;
 	}
 
+	public boolean isPaye () {
+		return paye;
+	}
+
+	public void setPaye (boolean paye) {
+		this.paye = paye;
+	}
+
+	public boolean isAnnule () {
+		return annule;
+	}
+
+	public void setAnnule (boolean annule) {
+		this.annule = annule;
+	}
+
 	public String getDateDon() {
 		return dateDon;
 	}
@@ -155,10 +181,11 @@ public class Donateur {
 
 	public static List <Donateur> newPopDonateurs () {
 		List<Donateur> d = new LinkedList <> ();
-		Donateur d1 = new Donateur (96, "Jain", "Meylan", "CHF", 1);
+		Donateur d0 = new Donateur (95, "Jain", "Meylan", "CHF", 1);
+		Donateur d1 = new Donateur (96, "Jain", "Meylan", "CHF", 11);
 		Donateur d2 = new Donateur (97, "Quentin", "Boillat", "CHF", 100);
 		Donateur d3 = new Donateur (98, "Stan", "Federer", "CHF", 876543);
-		d.add (d1); d.add (d2); d.add (d3);
+		d.add (d0); d.add (d1); d.add (d2); d.add (d3);
 		return d;
 	}
 }

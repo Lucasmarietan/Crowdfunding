@@ -7,6 +7,7 @@ import ch.hegarc.ig.util.jackson.JacksonReader;
 import ch.hegarc.ig.util.jackson.JacksonWriter;
 import org.apache.commons.cli.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -70,10 +71,23 @@ public class Console {
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
 							this.projets.addProjets (JacksonReader.run (fileName));
 							System.out.println ("Import du fichier " + fileName);
+//							System.out.println (this.projets.toString (true));
 //							this.projets.triAlphabetique ();
-//							List<Donateur> donateurs = CollectionUtil.plusGrosDonateur (this.projets.getProjet (1),2);
-							String email = CollectionUtil.tousEmail (this.projets.getProjet (1));
-							System.out.println (email);
+/**							Ici on commence à tester CollectionUtil*/
+//							List<Donateur> donateurs = CollectionUtil.plusGrosDonateur (this.projets.getProjet (1), 2);
+//							String email = CollectionUtil.tousEmail (this.projets.getProjet (1));
+//							System.out.println (email);
+//							System.out.println ("Les donateurs qui n'ont pas paye : ");
+//							List<Donateur> donateurs = CollectionUtil.pasEncorePaye (this.projets.getProjet (1));
+//							for (Donateur d : donateurs)
+//								System.out.println (d.toString ());
+//							System.out.println ("Somme argent déjà payé : " + CollectionUtil.argentDejaPaye (this.projets.getProjet (1)));
+//							System.out.println ("Somme argent encore à payer : " + CollectionUtil.argenrRestantAPaye (this.projets.getProjet (1)));
+//							System.out.println ("Somme totale : " + CollectionUtil.argentTotal (this.projets.getProjet (1)));
+//							System.out.println ("Commission : " + CollectionUtil.commission (this.projets.getProjet (1)));
+//							System.out.println ("Mediane : " + CollectionUtil.medianeDons (this.projets.getProjet (1)));
+//							System.out.println ("Moyenne : " + CollectionUtil.moyenneDons (this.projets.getProjet (1)));
+							System.out.println ("Total pour personnes concernees : " + CollectionUtil.totalDonsDonateurs (this.projets.toList (), "Meylan"));
 						}
 //						Traitement du fichier en .XML
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {

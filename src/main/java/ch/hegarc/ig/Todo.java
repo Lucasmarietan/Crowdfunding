@@ -22,9 +22,9 @@ public class Todo {
 	 *
 	 * Commencer à ajouter la nouvelle commande pour ajouter un donateur à un projet mais ça plante... sûrement dû à mes options...
 	 *
-	 * Ajout de la classe CollectionUtil qui fera les manip et les calculs sur les projets. Il faut encore voir comment on l'appelle
+	 * Ajout de la classe CollectionUtil et ses méthodes pour traiter les projets et les donateurs
 	 *
-	 * TODO - MAMAMAMAMAMIAAA !!! Avec le jackson, il prend pas les booléens (paye et annule) !!!
+	 * Ajout des attributs booleens paye et annulé dans la classe Donateur. Le json les récupère automaatiquement mnt
 	 */
 
     /** TODO

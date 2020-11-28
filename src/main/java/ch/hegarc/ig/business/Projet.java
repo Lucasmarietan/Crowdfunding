@@ -63,9 +63,15 @@ public class Projet {
 	public static List<Projet> newPopProjets () {
 		List<Projet> projets = new LinkedList <> ();
 		List<Donateur> donateurs = Donateur.newPopDonateurs ();
+		List<Donateur> donateurs1 = Donateur.newPopDonateurs ();
+		donateurs1.remove (1);
+//		System.out.println (donateurs1);
+		donateurs.remove (0);
+//		System.out.println (donateurs);
 		Projet p1 = new Projet (90, "Haute Ecole de ConGestion", donateurs);
-		donateurs.remove (2); donateurs.get (0).setSomme (11);
-		Projet p2 = new Projet (91, "Voiture", donateurs);
+//		System.out.println (p1.toString (true));
+		Projet p2 = new Projet (91, "Voiture", donateurs1);
+//		System.out.println (p2.toString (true));
 		projets.add (p1); projets.add (p2);
 		return projets;
 	}
