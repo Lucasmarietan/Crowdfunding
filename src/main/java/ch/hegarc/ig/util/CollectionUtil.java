@@ -12,6 +12,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+//  Cette classe a été créée pour les méthodes qui ne s'appliquent pas à tous les projets
+
 public class CollectionUtil {
 //	Fonctionne ! A voir encore où on l'appelle
 	public static List <Donateur> plusGrosDonateur (Projet projet, int nb) {
@@ -19,10 +21,10 @@ public class CollectionUtil {
 		return projetStream.limit (nb).collect(Collectors.toList());
 	}
 
-//	Fonctionne !
-	public static List<Donateur> pasEncorePaye (Projet projet) {
-		return projet.getDonateurs ().stream ().filter (donateur -> donateur.isPaye () == false && donateur.isAnnule () == false).collect(Collectors.toList());
-	}
+//	Fonctionne ! TODO - Pas d'appel ici, car s'applique sur tous les projets
+//	public static List<Donateur> pasEncorePaye (Projet projet) {
+//		return projet.getDonateurs ().stream ().filter (donateur -> donateur.isPaye () == false && donateur.isAnnule () == false).collect(Collectors.toList());
+//	}
 
 //	Fonctionne !
 	public static long argentDejaPaye (Projet projet) {
@@ -63,7 +65,8 @@ public class CollectionUtil {
 	}
 
 //	Fonctionne ! Dans sa version la plus simple bien sûr... Pas de gestion des erreurs
-//	Ne gère pas un donateur sur plusieurs projet...
+//	TODO - Mettre dans la classe ProjetUtil ? (Car s'applique à tous les projets...)
+//	 Ne gère pas un donateur sur plusieurs projet... (gère que des "noms" séparés par une virgule)
 	public static long totalDonsDonateurs (List<Projet> tousProjets, String donateurs) {
 		double somme;
 		Map <Donateur, Double> donateursMap = new HashMap <> ();
@@ -106,7 +109,7 @@ public class CollectionUtil {
 //		throw new NullPointerException ("Pas encore implémentée...");
 	}
 
-//	Fonctionne ! (Sur TOUS les dons)
+//	Fonctionne ! (Sur TOUS les dons) TODO - Est-ce vraiment ce qu'il faut faire ???
 	public static long commission (Projet projet) {
 		return (long) (CollectionUtil.argentTotal (projet) * 0.05);
 	}

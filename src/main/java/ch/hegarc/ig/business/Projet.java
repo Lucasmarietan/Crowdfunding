@@ -28,8 +28,9 @@ public class Projet {
 		this.donateurs = donateurs;
 	}
 
+//	Fonctionne !
 	public void triDonateurs () {
-		Stream<Donateur> sD = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getNom)).sorted (Comparator.comparing (Donateur::getPrenom));
+		Stream<Donateur> sD = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getNom));
 		this.donateurs = sD.collect(Collectors.toList());
 	}
 
@@ -80,7 +81,8 @@ public class Projet {
 //		System.out.println (p1.toString (true));
 		Projet p2 = new Projet (91, "Voiture", donateurs1);
 //		System.out.println (p2.toString (true));
-		projets.add (p1); projets.add (p2);
+		projets.add (p2);
+		projets.add (p1);
 		return projets;
 	}
 }

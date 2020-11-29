@@ -18,6 +18,16 @@ public class ProjetUtil {
 		this.projets = projets;
 	}
 
+//	Fonctionne ! TODO - On garde bien cette méthode ? (Dans cette classe)
+	public List<Donateur> pasEncorePaye () {
+		List<Donateur> donateurs = new LinkedList <> ();
+		for (Projet p : this.projets) {
+			List<Donateur> donateurstmp = p.getDonateurs ().stream ().filter (donateur -> donateur.isPaye () == false && donateur.isAnnule () == false).collect(Collectors.toList());
+			donateurs.addAll (donateurstmp);
+		}
+		return donateurs;
+	}
+
 //	TODO - Le stream fonctionne mais quand on remet dans this.projets, ça revient à la version originale...
 	public void triAlphabetique () {
 		List<Projet> p = new ArrayList <> (this.projets);

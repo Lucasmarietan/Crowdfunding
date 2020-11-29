@@ -37,7 +37,7 @@ public class Console {
 //		Pour stocker les projets à un endroit centralisé
 		this.projets = new ProjetUtil ();
 		this.projets.addProjets (Projet.newPopProjets ());
-		this.projets.addProjets (JacksonReader.run ("donations.json"));
+		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
 
 		Scanner command = new Scanner(System.in);
 		System.out.println("Entrer votre commande: ");
@@ -134,11 +134,12 @@ public class Console {
 //					System.out.println ("Mediane : " + CollectionUtil.medianeDons (this.projets.getProjet (1)));
 //					System.out.println ("Moyenne : " + CollectionUtil.moyenneDons (this.projets.getProjet (1)));
 //					System.out.println ("Total pour personnes concernees : " + CollectionUtil.totalDonsDonateurs (this.projets.toList (), "Meylan"));
-					this.projets.getProjet (1).triDonateurs ();
-					System.out.println ("!!!!!!!!!!");
-					for (Donateur d : this.projets.getProjet (1).getDonateurs ())
-						System.out.println (d.toString ());
-
+//					this.projets.getProjet (1).triDonateurs ();
+//					for (Donateur d : this.projets.getProjet (1).getDonateurs ())
+//						System.out.println (d.toString ());
+//					List<Donateur> donateurs = this.projets.pasEncorePaye ();
+//					for (Donateur d : donateurs)
+//						System.out.println (d.toString ());
 
 					// TODO Calcul des stats des projets
 
