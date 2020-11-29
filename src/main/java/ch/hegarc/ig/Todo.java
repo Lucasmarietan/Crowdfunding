@@ -19,12 +19,14 @@ public class Todo {
 	 * Dans la console, on traite la gestion de ce ProjetUtil
 	 *
 	 * Tentative de tri des projets selon l'ordre alphabétique avec un stream (ça fonctionne jusqu'à ce que... on remette le stream dans le HashSet)
+	 * Tri des donateurs réussi !
 	 *
 	 * Commencer à ajouter la nouvelle commande pour ajouter un donateur à un projet mais ça plante... sûrement dû à mes options...
 	 *
 	 * Ajout de la classe CollectionUtil et ses méthodes pour traiter les projets et les donateurs
 	 *
 	 * Ajout des attributs booleens paye et annulé dans la classe Donateur. Le json les récupère automaatiquement mnt
+	 *
 	 */
 
     /** TODO

@@ -37,6 +37,7 @@ public class Console {
 //		Pour stocker les projets à un endroit centralisé
 		this.projets = new ProjetUtil ();
 		this.projets.addProjets (Projet.newPopProjets ());
+		this.projets.addProjets (JacksonReader.run ("donations.json"));
 
 		Scanner command = new Scanner(System.in);
 		System.out.println("Entrer votre commande: ");
@@ -73,21 +74,6 @@ public class Console {
 							System.out.println ("Import du fichier " + fileName);
 //							System.out.println (this.projets.toString (true));
 //							this.projets.triAlphabetique ();
-/**							Ici on commence à tester CollectionUtil*/
-//							List<Donateur> donateurs = CollectionUtil.plusGrosDonateur (this.projets.getProjet (1), 2);
-//							String email = CollectionUtil.tousEmail (this.projets.getProjet (1));
-//							System.out.println (email);
-//							System.out.println ("Les donateurs qui n'ont pas paye : ");
-//							List<Donateur> donateurs = CollectionUtil.pasEncorePaye (this.projets.getProjet (1));
-//							for (Donateur d : donateurs)
-//								System.out.println (d.toString ());
-//							System.out.println ("Somme argent déjà payé : " + CollectionUtil.argentDejaPaye (this.projets.getProjet (1)));
-//							System.out.println ("Somme argent encore à payer : " + CollectionUtil.argenrRestantAPaye (this.projets.getProjet (1)));
-//							System.out.println ("Somme totale : " + CollectionUtil.argentTotal (this.projets.getProjet (1)));
-//							System.out.println ("Commission : " + CollectionUtil.commission (this.projets.getProjet (1)));
-//							System.out.println ("Mediane : " + CollectionUtil.medianeDons (this.projets.getProjet (1)));
-//							System.out.println ("Moyenne : " + CollectionUtil.moyenneDons (this.projets.getProjet (1)));
-							System.out.println ("Total pour personnes concernees : " + CollectionUtil.totalDonsDonateurs (this.projets.toList (), "Meylan"));
 						}
 //						Traitement du fichier en .XML
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
@@ -133,6 +119,26 @@ public class Console {
 					break;
 
 				case CMD_STATS:
+/**					Ici on commence à tester CollectionUtil*/
+//					List<Donateur> donateurs = CollectionUtil.plusGrosDonateur (this.projets.getProjet (1), 2);
+//					String email = CollectionUtil.tousEmail (this.projets.getProjet (1));
+//					System.out.println (email);
+//					System.out.println ("Les donateurs qui n'ont pas paye : ");
+//					List<Donateur> donateurs = CollectionUtil.pasEncorePaye (this.projets.getProjet (1));
+//					for (Donateur d : donateurs)
+//						System.out.println (d.toString ());
+//					System.out.println ("Somme argent déjà payé : " + CollectionUtil.argentDejaPaye (this.projets.getProjet (1)));
+//					System.out.println ("Somme argent encore à payer : " + CollectionUtil.argenrRestantAPaye (this.projets.getProjet (1)));
+//					System.out.println ("Somme totale : " + CollectionUtil.argentTotal (this.projets.getProjet (1)));
+//					System.out.println ("Commission : " + CollectionUtil.commission (this.projets.getProjet (1)));
+//					System.out.println ("Mediane : " + CollectionUtil.medianeDons (this.projets.getProjet (1)));
+//					System.out.println ("Moyenne : " + CollectionUtil.moyenneDons (this.projets.getProjet (1)));
+//					System.out.println ("Total pour personnes concernees : " + CollectionUtil.totalDonsDonateurs (this.projets.toList (), "Meylan"));
+					this.projets.getProjet (1).triDonateurs ();
+					System.out.println ("!!!!!!!!!!");
+					for (Donateur d : this.projets.getProjet (1).getDonateurs ())
+						System.out.println (d.toString ());
+
 
 					// TODO Calcul des stats des projets
 

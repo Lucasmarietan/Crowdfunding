@@ -1,8 +1,11 @@
 package ch.hegarc.ig.business;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Projet {
 
@@ -23,6 +26,11 @@ public class Projet {
 		this.id = id;
 		this.projet = name;
 		this.donateurs = donateurs;
+	}
+
+	public void triDonateurs () {
+		Stream<Donateur> sD = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getNom)).sorted (Comparator.comparing (Donateur::getPrenom));
+		this.donateurs = sD.collect(Collectors.toList());
 	}
 
 	public long getId() {

@@ -3,7 +3,7 @@ package ch.hegarc.ig.util;
 //	TODO - Checker comment on appelera ces méthodes dans la console
 
 //  TODO - Méthodes à implémenter encore :
-//   Pour une liste de noms séparée par des virgules et reçu en argument, calculer le total des dons pour ces personnes, quelque soit le projet
+//   Pour une liste de noms séparés par des virgules et reçu en argument, calculer le total des dons pour ces personnes, quelque soit le projet
 
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;

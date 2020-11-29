@@ -26,6 +26,8 @@ public class ProjetUtil {
 			System.out.println (pj.toString (false));
 		Stream <Projet> pS = p.stream ().sorted(Comparator.comparing (Projet::getProjet));
 		p = pS.collect(Collectors.toList());
+		for (Projet pj : p) // Pour trier les donateurs dans le projet
+			pj.triDonateurs ();
 		System.out.println ("--- Liste après Stream ---");
 		for (Projet pj : p)
 			System.out.println (pj.toString (false));
