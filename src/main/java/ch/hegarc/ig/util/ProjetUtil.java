@@ -1,11 +1,16 @@
 package ch.hegarc.ig.util;
 
+// Classe propre.
+// TODO - Gérer l'unicité des projets (par nom) et l'unicité des donateurs (par nom et prénom) dans le projet
+
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+// Cette classe a été créée pour gérer le stockage des projets dans le programme
+// également créée pour les méthodes qui s'appliquent à tous les projets
 
 public class ProjetUtil {
 	private Set<Projet> projets;
@@ -19,32 +24,22 @@ public class ProjetUtil {
 		this.projets = projets;
 	}
 
-//	Fonctionne !c
+//	Fonctionne !
 	public List<Donateur> pasEncorePaye () {
 		List<Donateur> donateurs = new LinkedList <> ();
 		for (Projet p : this.projets) {
-			List<Donateur> donateurstmp = p.getDonateurs ().stream ().filter (donateur -> donateur.isPaye () == false && donateur.isAnnule () == false).collect(Collectors.toList());
+			List<Donateur> donateurstmp = p.getDonateurs ().stream ().filter (donateur -> !(donateur.isPaye () && donateur.isAnnule ())).collect(Collectors.toList());
 			donateurs.addAll (donateurstmp);
 		}
 		return donateurs;
 	}
 
-//	TODO - Les 2 méthodes ci-après peuvent sûrement être combinée
-	public Projet contientProjet (String nomProjet) {
+	public Projet contient (String nomProjet) {
 		for (Projet p : this.projets) {
 			if (p.getProjet ().equalsIgnoreCase (nomProjet))
 				return p;
 		}
-		return null;
-	}
-
-	public boolean contient (String nomProjet) {
-		boolean existe = false;
-		for (Projet p : this.projets) {
-			if (p.getProjet ().equalsIgnoreCase (nomProjet))
-				existe = true;
-		}
-		return existe;
+		return null; // Il faut faire le test dans la console si besoin
 	}
 
 	public List<Projet> toList () {

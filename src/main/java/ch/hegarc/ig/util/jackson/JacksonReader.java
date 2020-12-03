@@ -1,8 +1,6 @@
 package ch.hegarc.ig.util.jackson;
 
-//  TODO - Meilleure méthode ? pour : Faire pour stocker les données de manière persistante et globale au projet
-
-//  Pour l'instant, il sait juste lire le json (et afficher les projets avec ses donateurs)
+// Classe prête et qui fonctionne !
 
 import ch.hegarc.ig.business.Projet;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -21,10 +19,12 @@ public class JacksonReader {
 	public static List<Projet> run (String filename) {
 		List<Projet> projets = null;
 		try {
-//			ObjectMapper - Ignorer les propriétés inconnues
+//			ObjectMapper en ignorant les propriétés inconnues
 			ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			projets = om.readValue(new File(filename), new TypeReference<List<Projet>>(){});
+
+			logger.log (Level.INFO, "Fichier '" + filename + "' importé dans le programme avec succès ! ");
 		} catch (IOException ex) {
 			logger.log(Level.SEVERE, null, ex);
 		}

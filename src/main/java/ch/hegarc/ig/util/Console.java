@@ -2,25 +2,19 @@ package ch.hegarc.ig.util;
 
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
-import ch.hegarc.ig.cpo.jaxb.unmarshalling.MainUnmarshalling;
+import ch.hegarc.ig.cpo.jaxb.MainUnmarshalling;
 import ch.hegarc.ig.util.jackson.JacksonReader;
 import ch.hegarc.ig.util.jackson.JacksonWriter;
 import org.apache.commons.cli.*;
 
-import javax.rmi.PortableRemoteObject;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
-import java.util.StringTokenizer;
-
-import static ch.hegarc.ig.business.Projet.newPopProjets;
 
 public class Console {
 	private ProjetUtil projets;
 
 	final private String CMD_IMPORT = "import";
 	final private String CMD_EXPORT = "export";
-//	Nouvelle commande
+//	Nouvelle commande TODO - Gérer la commande pour ajouter et supprimer un donateur
 	final private String CMD_ADD_DONATEUR = "don";
 	final private String CMD_STATS = "stats";
 	final private String CMD_EXIT = "exit";
@@ -74,14 +68,14 @@ public class Console {
 //						Traitement du fichier en .json (c'était compliqué de comprendre l'erreur "\\.")
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
 							this.projets.addProjets (JacksonReader.run (fileName));
-							System.out.println ("Import du fichier " + fileName);
+//							System.out.println ("Import du fichier " + fileName);
 						}
 //						Traitement du fichier en .XML
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
 							this.projets.addProjets (MainUnmarshalling.run (fileName));
-							System.out.println ("Import du fichier " + fileName);
-							System.out.println ("-------");
-							System.out.println (this.projets.toString ());
+//							System.out.println ("Import du fichier " + fileName);
+//							System.out.println ("-------");
+//							System.out.println (this.projets.toString ());
 						}
 						else {
 							System.out.println ("Ce type de fichier n'est pas encore pris en compte");
@@ -91,32 +85,27 @@ public class Console {
 					}
 					break;
 
-				case CMD_EXPORT:
+				case CMD_EXPORT: // Fonctionne parfaitement !
 					if (cmdLine.hasOption(OPT_FICHIER.getOpt()) && cmdLine.hasOption(OPT_PROJET.getOpt())) {
 
 						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
 						String projectName = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
 
-//						Pour tester le bon fonctionnement de JacksonWriter
-//						TODO - Mettre ça au propre ou alors être sûr de comment l'utiliser
 						if (projectName.equalsIgnoreCase ("ALL")) // Exporter tous les projets dans un JSON (pas de test de fichier)
 							JacksonWriter.run (this.projets.toList (), fileName);
 						else {
-							if (this.projets.contient (projectName)) {
-								if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
-									JacksonWriter.run (this.projets.contientProjet (projectName), fileName);
-									System.out.println ("Export du projet " + projectName + " dans le fichier " + fileName);
-								}
-								else {
+							Projet exportProjet = this.projets.contient (projectName); // Recherche du projet dans le programme
+							if (exportProjet != null) {
+								if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
+									JacksonWriter.run (exportProjet, fileName);
+								else
 									System.out.println ("Votre type de fichier n'est pas pris en charge...");
-								}
 							}
 							else
 								System.out.println ("Le projet désiré n'existe pas...");
 						}
-					} else {
+					} else
 						printAppHelp();
-					}
 					break;
 
 				case CMD_STATS:
@@ -129,7 +118,7 @@ public class Console {
 //					for (Donateur d : donateurs)
 //						System.out.println (d.toString ());
 //					System.out.println ("Somme argent déjà payé : " + CollectionUtil.argentDejaPaye (this.projets.getProjet (1)));
-//					System.out.println ("Somme argent encore à payer : " + CollectionUtil.argenrRestantAPaye (this.projets.getProjet (1)));
+//					System.out.println ("Somme argent encore à payer : " + CollectionUtil.argentRestantAPaye (this.projets.getProjet (1)));
 //					System.out.println ("Somme totale : " + CollectionUtil.argentTotal (this.projets.getProjet (1)));
 //					System.out.println ("Commission : " + CollectionUtil.commission (this.projets.getProjet (1)));
 //					System.out.println ("Mediane : " + CollectionUtil.medianeDons (this.projets.getProjet (1)));
@@ -143,10 +132,6 @@ public class Console {
 //						System.out.println (d.toString ());
 
 //					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
-					System.out.println ("Après tir abc : enfin trié abc ?");
-					for (Projet pj : this.projets.toList ())
-						System.out.println (pj.toString (true));
-
 					// TODO Calcul des stats des projets
 
 					break;

@@ -10,32 +10,28 @@ import ch.hegarc.ig.business.Projet;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 //  Cette classe a été créée pour les méthodes qui ne s'appliquent pas à tous les projets
 
 public class CollectionUtil {
 //	Fonctionne ! A voir encore où on l'appelle
-	public static List <Donateur> plusGrosDonateur (Projet projet, int nb) {
-		Stream <Donateur> projetStream = projet.getDonateurs ().stream ().sorted(Comparator.comparing (Donateur::getSomme).reversed ());
-		return projetStream.limit (nb).collect(Collectors.toList());
+	public static List <Donateur> plusGrosDonateur (Projet projet, int nb) { // Libre à l'utilisateur de choisir un autre nombre que 5
+		return projet.getDonateurs ().stream ().sorted(Comparator.comparing (Donateur::getSomme).reversed ()).limit (nb).collect(Collectors.toList());
 	}
 
 //	Fonctionne !
 	public static long argentDejaPaye (Projet projet) {
-		Stream<Donateur> donateurStream = projet.getDonateurs ().stream ().filter (donateur -> donateur.isPaye ());
-		return donateurStream.mapToLong (donateur -> donateur.getSomme ()).sum ();
+		return projet.getDonateurs ().stream ().filter (Donateur::isPaye).mapToLong (Donateur::getSomme).sum ();
 	}
 
 //	Fonctionne !
-	public static long argenrRestantAPaye (Projet projet) {
-		Stream<Donateur> donateurStream = projet.getDonateurs ().stream ().filter (donateur -> donateur.isPaye () == false);
-		return donateurStream.mapToLong (donateur -> donateur.getSomme ()).sum ();
+	public static long argentRestantAPaye (Projet projet) {
+		return projet.getDonateurs ().stream ().filter (Donateur::isPaye).mapToLong (Donateur::getSomme).sum ();
 	}
 
 //	Fonctionne !
 	public static long argentTotal (Projet projet) {
-		return argentDejaPaye (projet) + argenrRestantAPaye (projet);
+		return projet.getDonateurs ().stream ().mapToLong (Donateur::getSomme).sum ();
 	}
 
 //	Fonctionne ! A voir encore où on l'appelle
@@ -43,20 +39,20 @@ public class CollectionUtil {
 		StringBuilder sb = new StringBuilder ();
 		List<Donateur> donateurs = projet.getDonateurs ();
 		for (Donateur d : donateurs) {
-			if (d.getEmail () != null)
+			if (d.getEmail () != null) // Pour obtenir une liste sans éléments vide
 				sb.append (d.getEmail ()).append (";");
 		}
 		return sb.toString ();
 	}
 
-//	Fonctionne ! (Sur TOUS les dons)
+//	Fonctionne ! (Sur TOUS les dons du projet)
 	public static long medianeDons (Projet projet) { // Pas peu fier de moi sur celle là (:
 		return projet.getDonateurs ().stream ().sorted(Comparator.comparing (Donateur::getSomme).reversed ()).skip(projet.getDonateurs ().size () / 2).limit (1).collect(Collectors.toList()).get (0).getSomme ();
 	}
 
-//	Fonctionne ! (Sur TOUS les dons)
+//	Fonctionne ! (Sur TOUS les dons du projet)
 	public static long moyenneDons (Projet projet) {
-		return (long) projet.getDonateurs ().stream ().mapToLong (donateur -> donateur.getSomme ()).average ().orElse (-1);
+		return (long) projet.getDonateurs ().stream ().mapToLong (Donateur::getSomme).average ().orElse (-100);
 	}
 
 //	Fonctionne ! Dans sa version la plus simple bien sûr... Pas de gestion des erreurs
@@ -104,7 +100,7 @@ public class CollectionUtil {
 //		throw new NullPointerException ("Pas encore implémentée...");
 	}
 
-//	Fonctionne ! (Sur TOUS les dons) TODO - Est-ce vraiment ce qu'il faut faire ???
+//	Fonctionne ! (Sur TOUS les dons du projet)
 	public static long commission (Projet projet) {
 		return (long) (CollectionUtil.argentTotal (projet) * 0.05);
 	}

@@ -1,5 +1,9 @@
 package ch.hegarc.ig.business;
 
+// TODO - Ajouter un donateur à un projet. Ici ?
+
+// TODO - Supprimer un donateur d'un projet. Ici ?
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -7,14 +11,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+// Classe implémentée par Comparable pour permettre aux projets d'être toujours classés par ordre alphabétique
 public class Projet implements Comparable<Projet> {
-
 	private long id;
 	private String projet;
 	private List<Donateur> donateurs = new ArrayList<Donateur>();
 
 	public Projet () {
-
 	}
 
 	/**

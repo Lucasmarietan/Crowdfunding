@@ -1,5 +1,7 @@
 package ch.hegarc.ig.business;
 
+// Classe prête et qui fonctionne !
+
 import java.util.LinkedList;
 import java.util.List;
 

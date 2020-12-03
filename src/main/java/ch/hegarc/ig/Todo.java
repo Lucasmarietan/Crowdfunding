@@ -4,13 +4,16 @@ public class Todo {
 
 	/** Notes de développement de Tanguy
 	 *
+	 * TODO Gestion d'un projet avec des espaces dans le nom
+	 *      Gestion de l'unicité des projets via le nom (créer méthode equals ?)
+	 *      Gestion de l'unicité des donateurs par projets via le nom et le prénom (créer méthode equals ?)
+	 *
 	 * Choix du Jackson pour import le Json car est le plus simple. Je me suis fortement inspiré de la série 5 pour construire le dossier Jackson
 	 * JacksonWriter peremt d'exporter un projet avec ses donateurs. Faut-il changer de signature pour tout exporter ??
 	 *
 	 * Pour le marshalling et unmarshalling du XML, je me suis fortement inspiré de la série 3
 	 * J'ai généré le donations.xsd automatiquement, puis l'ai modififié (surtout pour enlever énumération...) mais ça générait 3 classes différentes
 	 * J'ai pensé que c'était trop complexe. Alors j'ai généré le xsd sur https://www.freeformatter.com/xsd-generator.html. Puis j'ai généré le dossier jaxb avec Intellij
-	 * TODO - Faut-il faire un binding personnalisé ??? Par exemple pour gérer le problème avec Record.DonateurS
 	 * Création des packages (un)marshalling
 	 *
 	 * Ajout d'un argument pour imprimer les donateurs dans les projets
@@ -36,7 +39,7 @@ public class Todo {
 	 * Lecture/Ecriture JSON/XML
 	 *      La première étape que vous devez développer concernant la lecture et l’écriture de document JSON et XML.
 	 *       >>> En ajoutant les classes et méthodes nécessaires, faites en sorte de pouvoir lire les fichiers donations.json et donations.xml qui se trouve à la racine du projet. Dans un premier temps, vous n’êtes pas obligé d’utiliser le système de console mis en place même si cela devra être le cas à terme.
-	 * TODO    On sait lire le fichier XML mais pas le mettre dans ProjetUtil. A faire grace au JAXB et personnal binding
+	 *     On sait lire le fichier XML mais pas le mettre dans ProjetUtil. A faire grace au JAXB et personnal binding
 	 *
 	 *       >>> Dans un second temps, ajouter les classes et méthodes permettant l’écriture d’un fichier JSON avec les classes métiers proposés.
 	 * TODO     Problème permanent mdrr : Structurer votre application et vos fichiers afin d’avoir une bonne lisibilité et maintenabilité.
@@ -45,7 +48,7 @@ public class Todo {
 	 * Au  travers de méthodes et de classes de votre choix, implémenter les fonctionnalités suivantesau projet Crowdfunding :
 	 *      Pouvoir fusionner les données provenant de différents fichiers (XML ou JSON). Chaque lecture (import) de fichier doit fusionner avec les données existantes, si bien qu'il n'y a toujours qu'une seule liste dans l'application.
 	 *      Cette  liste  ne  doit  pas  comporter  de  doublons,  si  par  exemple  des  données  identiques  sont dans plusieurs fichiers importés.
-	 * TODO Si même nom de projet, alors on fusionne les dons. Si donateur existe déjà dans le projet, alors ?
+	 * TODO Si même nom de projet, alors on fusionne la liste des dons. Si donateur existe déjà dans le projet, alors ?
 	 *
 	 **      Si  cela  n’est  pas  déjà  fait,  l'import  doit  pouvoir  se  faire  via  la  console  avec  la  commande adéquate. (import -f [nom du fichier])
 	 *
@@ -71,7 +74,7 @@ public class Todo {
 	 *
 	 **       Donner les médianes et moyennes des dons pour unprojetdonné en argument
 	 *
-	 * TODO  Pour une liste de noms séparés par des virgules et reçu en argument, calculer le total des donspour ces personnes, quelque soit le projet
+	 * TODO  Pour une liste de noms séparés par des virgules et reçu en argument, calculer le total des dons pour ces personnes, quelque soit le projet
 	 *
 	 *        Calculer la commission de l’entreprise pour un projet donné (5%)
 	 *
