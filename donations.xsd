@@ -1,5 +1,4 @@
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <!-- TODO - Checker si c'est vraiment ce qu'on veut. J'ai modifié les types -->
   <!-- Généré avec https://www.freeformatter.com/xsd-generator.html -->
   <xs:element name="dataset">
     <xs:complexType>
