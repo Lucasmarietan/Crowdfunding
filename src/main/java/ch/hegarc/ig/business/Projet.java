@@ -28,11 +28,10 @@ public class Projet implements Comparable<Projet> {
 		this.donateurs = donateurs;
 	}
 
-//	TODO - c'est vraiment ce qu'il faut faire pour utiliser un TreeSet ??
-//	    Pasq mnt ça trie tout seul tout le temps haha
+//	Les projets seront "Toujours" classés par ordre alphabétique
 	@Override
 	public int compareTo(Projet p) {
-		return (int) (this.getId () - p.getId ());
+		return this.getProjet ().compareTo (p.getProjet ());
 	}
 
 //	Fonctionne !

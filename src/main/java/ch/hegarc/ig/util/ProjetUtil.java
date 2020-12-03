@@ -28,31 +28,6 @@ public class ProjetUtil {
 		return donateurs;
 	}
 
-//	TODO - Dans Projet existe déjà un compareTo mais sur l'ID. Peut-on ajouter un compareTo ici sur le nom de projet?
-	public void triAlphabetique () {
-//		Collections.sort(this.projets, new Comparable<Projet>() {
-//			@Override
-//			public int compareTo (Projet o) {
-//				return 0; // this.getProjet ().compareTo (p.getProjet ());
-//			}
-//		});
-/*		List<Projet> p = new ArrayList <> (this.projets);
-		System.out.println ("--- Liste avec projets ---");
-		for (Projet pj : p)
-			System.out.println (pj.toString (false));
-		Stream <Projet> pS = p.stream ().sorted(Comparator.comparing (Projet::getProjet));
-		p = pS.collect(Collectors.toList());
-		for (Projet pj : p) // Pour trier les donateurs dans le projet
-			pj.triDonateurs ();
-		System.out.println ("--- Liste après Stream ---");
-		for (Projet pj : p)
-			System.out.println (pj.toString (false));
-		this.projets = new HashSet <> (p);
-		System.out.println ("--- HashSet avec nouvelle liste ---");
-		for (Projet pj : this.projets)
-			System.out.println (pj.toString (false));
-*/	}
-
 //	TODO - Les 2 méthodes ci-après peuvent sûrement être combinée
 	public Projet contientProjet (String nomProjet) {
 		for (Projet p : this.projets) {

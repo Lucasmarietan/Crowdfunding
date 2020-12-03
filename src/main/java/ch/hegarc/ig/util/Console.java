@@ -144,10 +144,6 @@ public class Console {
 //						System.out.println (d.toString ());
 
 					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
-					System.out.println ("Après nouveau projet : déjà trié ID? ");
-					for (Projet pj : this.projets.toList ())
-						System.out.println (pj.toString (false));
-					this.projets.triAlphabetique ();
 					System.out.println ("Après tir abc : enfin trié abc ?");
 					for (Projet pj : this.projets.toList ())
 						System.out.println (pj.toString (false));

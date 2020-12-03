@@ -18,7 +18,9 @@ public class Todo {
 	 * Classe ProjetUtil pour gérer la "persistance" des données. Avec les méthodes spécifiques pour les trier par exemple.
 	 * Dans la console, on traite la gestion de ce ProjetUtil
 	 *
-	 * Tentative de tri des projets selon l'ordre alphabétique avec un stream (ça fonctionne jusqu'à ce que... on remette le stream dans le HashSet)
+	 * Tentative de tri des projets selon l'ordre alphabétique avec un stream mais fonctionnait pas car un HashSet ne gère pas ceci.
+	 * Avec un TreeSet, en ajoutant Comparable à la classe Projet ainsi que l'implémentation de CompareTo, le problème a été reglé.
+	 * Donc pas de méthode triAlphabetique dans ProjetUtil
 	 * Tri des donateurs réussi !
 	 *
 	 * Commencer à ajouter la nouvelle commande pour ajouter un donateur à un projet mais ça plante... sûrement dû à mes options...
