@@ -51,12 +51,12 @@ public class ProjetUtil {
 	}
 
 	public void addProjets (List<Projet> projets) {
-		for (Projet p : projets) {
+		for (Projet p : projets)
 			this.addProjet (p);
-		}
 	}
 
 	public void addProjet (Projet projet) {
+		projet.triDonateursNomPrenom ();
 		this.projets.add (projet);
 	}
 

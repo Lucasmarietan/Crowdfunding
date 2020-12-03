@@ -31,41 +31,25 @@ public class Todo {
 	 *
 	 */
 
-    /** TODO
-     *
-     *Fonctionnalités précédentes :
-     * - Lecture des données issues des fichiers JSON et XML
-     * - Écriture des données dans un fichier JSON
-     *
-     *  Je suis parti sur l'utilisation de Jackson pour JSON car c'est le dernier chapitre que nous avons fait, et il me semble que c'est le plus simple d'utilisation.
-     *  Je prends mes sources du corrigé de la série JSON avec Jackson
-     *
-     * Nouvelles fonctionnalités:
-     * Au travers de méthodes et de classes de votre choix, implémenter les fonctionnalités suivantes au
-     * projet Crowdfunding:
-     * • Pouvoir fusionner les données provenant de différents fichiers (XML ou JSON). Chaque lecture
-     * (import) de fichier doit fusionner avec les données existantes, si bien qu'il n'y a toujours qu'une
-     * seule liste dans l'application.
-     * Cette liste ne doit pas comporter de doublons, si par exemple des données identiques sont
-     * dans plusieurs fichiers importés.
-     * • Si cela n’est pas déjà fait, l'import doit pouvoir se faire via la console avec la commande
-     * adéquate. (import -f [nom du fichier])
-     * • L'écriture (ou export) doit produire un seul fichier JSON avec la commande adéquate (export -
-     * f [nom du fichier] -p [nom du projet]). Si le nom d'un projet est mentionné, l'export ne contient
-     * que les données du projet en question. Si l'utilisateur spécifie le projet "All", tous les projets
-     * sont exportés (dans le même fichier).
-     * • Pouvoir trier la liste des dons d'abords selon le nom du projet, puis au sein de chaque projet,
-     * selon le nom et le prénom du donateur du donateur.
-     * • Pouvoir ajouter un donateur sur un projet (en fournissant le nom du projet, le nom et prénom
-     * du donateur et la somme du don). Une nouvelle commande (Console.class) doit être ajoutée
-     * pour cette étape.
-     * • Pouvoir supprimer un donateur d'une liste (selon le nom du projet, le nom et prénom du
-     * donateur). Une nouvelle commande (Console.class) doit être ajoutée pour cette étape.
-     *
-     *
-     *
-     *
-     */
-
-
+	/**
+	 **** Semaine 1 : *****
+	 * Lecture/Ecriture JSON/XML
+	 *      La première étape que vous devez développer concernant la lecture et l’écriture de document JSON et XML.
+	 *       >>> En ajoutant les classes et méthodes nécessaires, faites en sorte de pouvoir lire les fichiers donations.json et donations.xml qui se trouve à la racine du projet. Dans un premier temps, vous n’êtes pas obligé d’utiliser le système de console mis en place même si cela devra être le cas à terme.
+	 * TODO    On sait lire le fichier XML mais pas le mettre dans ProjetUtil. A faire grace au JAXB et personnal binding
+	 *
+	 *       >>> Dans un second temps, ajouter les classes et méthodes permettant l’écriture d’un fichier JSON avec les classes métiers proposés.
+	 * TODO     Problème permanent mdrr : Structurer votre application et vos fichiers afin d’avoir une bonne lisibilité et maintenabilité.
+	 *
+	 **** Semaine 2 : *****
+	 * Au  travers de méthodes et de classes de votre choix, implémenter les fonctionnalités suivantesau projet Crowdfunding :
+	 *      Pouvoir fusionner les données provenant de différents fichiers (XML ou JSON). Chaque lecture (import) de fichier doit fusionner avec les données existantes, si bien qu'il n'y a toujours qu'une seule liste dans l'application.
+	 *      Cette  liste  ne  doit  pas  comporter  de  doublons,  si  par  exemple  des  données  identiques  sont dans plusieurs fichiers importés.
+	 *
+	 *      Si  cela  n’est  pas  déjà  fait,  l'import  doit  pouvoir  se  faire  via  la  console  avec  la  commande adéquate. (import -f [nom du fichier])
+	 *
+	 *      L'écriture (ou export) doit produire un seul fichier JSON avec la commande adéquate (export -f [nom du fichier] -p [nom du projet]). Si le nom d'un projet est mentionné, l'export ne contient que les données du projet en question. Si l'utilisateur spécifie le projet "All", tous les projets sont exportés (dans le même fichier).
+	 *
+	 *      Pouvoir trier la liste des dons d'abords selon le nom du projet, puis au sein de chaque projet, selon le nom et le prénom du donateur du donateur.
+	 */
 }

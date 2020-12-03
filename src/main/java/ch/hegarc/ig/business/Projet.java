@@ -26,6 +26,7 @@ public class Projet implements Comparable<Projet> {
 		this.id = id;
 		this.projet = name;
 		this.donateurs = donateurs;
+		this.triDonateursNomPrenom ();
 	}
 
 //	Les projets seront "Toujours" classés par ordre alphabétique
@@ -35,8 +36,8 @@ public class Projet implements Comparable<Projet> {
 	}
 
 //	Fonctionne !
-	public void triDonateurs () {
-		Stream<Donateur> sD = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getNom));
+	public void triDonateursNomPrenom () {
+		Stream<Donateur> sD = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getNom).thenComparing (Donateur::getPrenom));
 		this.donateurs = sD.collect(Collectors.toList());
 	}
 
@@ -68,9 +69,13 @@ public class Projet implements Comparable<Projet> {
 		StringBuilder sb = new StringBuilder ();
 		sb.append ("Nom projet : ").append (this.projet).append (" (id : ").append (this.id).append (")\n");
 		if (avecDonateurs) {
-			sb.append ("Les donateurs de ce projet : \n");
-			for (Donateur d : this.donateurs)
-				sb.append (d.toString ()).append ("    Montant : ").append (d.getSomme ()).append (" ").append (d.getMonnaie ()).append ("\n");
+			if (this.donateurs.isEmpty ())
+				System.out.println ("Pas de donateurs pour ce projet");
+			else {
+				sb.append ("Les donateurs de ce projet : \n");
+				for (Donateur d : this.donateurs)
+					sb.append (d.toString ()).append ("    Montant : ").append (d.getSomme ()).append (" ").append (d.getMonnaie ()).append ("\n");
+			}
 		}
 		return sb.toString ();
 	}

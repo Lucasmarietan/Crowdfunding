@@ -143,10 +143,10 @@ public class Console {
 //					for (Donateur d : donateurs)
 //						System.out.println (d.toString ());
 
-					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
+//					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
 					System.out.println ("Après tir abc : enfin trié abc ?");
 					for (Projet pj : this.projets.toList ())
-						System.out.println (pj.toString (false));
+						System.out.println (pj.toString (true));
 
 					// TODO Calcul des stats des projets
 
