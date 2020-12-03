@@ -7,6 +7,7 @@ import ch.hegarc.ig.util.jackson.JacksonReader;
 import ch.hegarc.ig.util.jackson.JacksonWriter;
 import org.apache.commons.cli.*;
 
+import javax.rmi.PortableRemoteObject;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -37,7 +38,10 @@ public class Console {
 //		Pour stocker les projets à un endroit centralisé
 		this.projets = new ProjetUtil ();
 		this.projets.addProjets (Projet.newPopProjets ());
+		System.out.println ("Set initial");
 		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
+		for (Projet pj : this.projets.toList ())
+			System.out.println (pj.toString (false));
 
 		Scanner command = new Scanner(System.in);
 		System.out.println("Entrer votre commande: ");
@@ -72,8 +76,6 @@ public class Console {
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
 							this.projets.addProjets (JacksonReader.run (fileName));
 							System.out.println ("Import du fichier " + fileName);
-//							System.out.println (this.projets.toString (true));
-//							this.projets.triAlphabetique ();
 						}
 //						Traitement du fichier en .XML
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
@@ -140,6 +142,15 @@ public class Console {
 //					List<Donateur> donateurs = this.projets.pasEncorePaye ();
 //					for (Donateur d : donateurs)
 //						System.out.println (d.toString ());
+
+					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
+					System.out.println ("Après nouveau projet : déjà trié ID? ");
+					for (Projet pj : this.projets.toList ())
+						System.out.println (pj.toString (false));
+					this.projets.triAlphabetique ();
+					System.out.println ("Après tir abc : enfin trié abc ?");
+					for (Projet pj : this.projets.toList ())
+						System.out.println (pj.toString (false));
 
 					// TODO Calcul des stats des projets
 

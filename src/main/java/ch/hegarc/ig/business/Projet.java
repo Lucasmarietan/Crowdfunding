@@ -32,7 +32,7 @@ public class Projet implements Comparable<Projet> {
 //	    Pasq mnt ça trie tout seul tout le temps haha
 	@Override
 	public int compareTo(Projet p) {
-		return this.getProjet ().compareTo (p.getProjet ());
+		return (int) (this.getId () - p.getId ());
 	}
 
 //	Fonctionne !
@@ -84,10 +84,10 @@ public class Projet implements Comparable<Projet> {
 		donateurs.remove (0);
 		Projet p1 = new Projet (90, "Haute Ecole de ConGestion", donateurs);
 		Projet p2 = new Projet (91, "Voiture", donateurs1);
-		Projet p3 = new Projet (92, "Aaaaaa", null);
+//		Projet p3 = new Projet (92, "Aaaaaa", null);
 		projets.add (p2);
 		projets.add (p1);
-		projets.add (p3);
+//		projets.add (p3);
 		return projets;
 	}
 }
