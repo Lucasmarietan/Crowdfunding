@@ -45,11 +45,36 @@ public class Todo {
 	 * Au  travers de méthodes et de classes de votre choix, implémenter les fonctionnalités suivantesau projet Crowdfunding :
 	 *      Pouvoir fusionner les données provenant de différents fichiers (XML ou JSON). Chaque lecture (import) de fichier doit fusionner avec les données existantes, si bien qu'il n'y a toujours qu'une seule liste dans l'application.
 	 *      Cette  liste  ne  doit  pas  comporter  de  doublons,  si  par  exemple  des  données  identiques  sont dans plusieurs fichiers importés.
+	 * TODO Si même nom de projet, alors on fusionne les dons. Si donateur existe déjà dans le projet, alors ?
 	 *
-	 *      Si  cela  n’est  pas  déjà  fait,  l'import  doit  pouvoir  se  faire  via  la  console  avec  la  commande adéquate. (import -f [nom du fichier])
+	 **      Si  cela  n’est  pas  déjà  fait,  l'import  doit  pouvoir  se  faire  via  la  console  avec  la  commande adéquate. (import -f [nom du fichier])
 	 *
-	 *      L'écriture (ou export) doit produire un seul fichier JSON avec la commande adéquate (export -f [nom du fichier] -p [nom du projet]). Si le nom d'un projet est mentionné, l'export ne contient que les données du projet en question. Si l'utilisateur spécifie le projet "All", tous les projets sont exportés (dans le même fichier).
+	 **      L'écriture (ou export) doit produire un seul fichier JSON avec la commande adéquate (export -f [nom du fichier] -p [nom du projet]). Si le nom d'un projet est mentionné, l'export ne contient que les données du projet en question. Si l'utilisateur spécifie le projet "All", tous les projets sont exportés (dans le même fichier).
 	 *
-	 *      Pouvoir trier la liste des dons d'abords selon le nom du projet, puis au sein de chaque projet, selon le nom et le prénom du donateur du donateur.
+	 **      Pouvoir trier la liste des dons d'abords selon le nom du projet, puis au sein de chaque projet, selon le nom et le prénom du donateur du donateur. PAR DEFAUT !
+	 *
+	 * TODO  Pouvoir ajouter un donateur sur un projet (en fournissant le nom du projet, le nom et prénom du donateur et la somme du don). Une nouvelle commande (Console.class) doit être ajoutée pour cette étape
+	 *       Gérer l'appel dans la Console
+	 *
+	 * TODO  Pouvoir  supprimer  un  donateur  d'une  liste  (selon  le  nom  du  projet,  le  nom  et  prénom  du donateur). Une nouvelle commande (Console.class) doit être ajoutée pour cette étape.
+	 *       Gérer l'appel dans la Console
+	 *
+	 ***** Semaine 2 : *****
+	 * Au  travers  de  méthodes  et  de  classes  de  votre  choix,  implémenter  les  fonctionnalités  suivantes au projet Crowdfunding:
+	 **      Lister les 5 plus gros donateurs d'un projet donnée en argument(Nom, Prénom, Montant)
+	 *
+	 **       Lister les donateurs n'ayant pas encore payé leur don (non annulé)(Nom, Prénom, Montant)
+	 *
+	 **       La somme d'argent déjà payé, la somme restant à payer et la somme totale des dons pour un projet donné en argument.
+	 *
+	 **       Donner la liste de tous les mails des donateurs d’un projet(en argument), séparés par un «;»
+	 *
+	 **       Donner les médianes et moyennes des dons pour unprojetdonné en argument
+	 *
+	 * TODO  Pour une liste de noms séparés par des virgules et reçu en argument, calculer le total des donspour ces personnes, quelque soit le projet
+	 *
+	 *        Calculer la commission de l’entreprise pour un projet donné (5%)
+	 *
+	 *
 	 */
 }

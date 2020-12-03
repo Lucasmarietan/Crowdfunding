@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 public class ProjetUtil {
 	private Set<Projet> projets;
+	// Choix du Set car il ne pouvait pas y avoir de doublons, même si finalement cela concernait surtout le nom du projet pour y fusionner les donateurs...
 
 	public ProjetUtil () {
 		this.projets = new TreeSet <> ();
@@ -18,7 +19,7 @@ public class ProjetUtil {
 		this.projets = projets;
 	}
 
-//	Fonctionne ! TODO - On garde bien cette méthode ? (Dans cette classe)
+//	Fonctionne !c
 	public List<Donateur> pasEncorePaye () {
 		List<Donateur> donateurs = new LinkedList <> ();
 		for (Projet p : this.projets) {

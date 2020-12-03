@@ -21,11 +21,6 @@ public class CollectionUtil {
 		return projetStream.limit (nb).collect(Collectors.toList());
 	}
 
-//	Fonctionne ! TODO - Pas d'appel ici, car s'applique sur tous les projets
-//	public static List<Donateur> pasEncorePaye (Projet projet) {
-//		return projet.getDonateurs ().stream ().filter (donateur -> donateur.isPaye () == false && donateur.isAnnule () == false).collect(Collectors.toList());
-//	}
-
 //	Fonctionne !
 	public static long argentDejaPaye (Projet projet) {
 		Stream<Donateur> donateurStream = projet.getDonateurs ().stream ().filter (donateur -> donateur.isPaye ());

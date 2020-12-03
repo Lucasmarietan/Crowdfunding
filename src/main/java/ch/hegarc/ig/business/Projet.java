@@ -13,7 +13,8 @@ public class Projet implements Comparable<Projet> {
 	private String projet;
 	private List<Donateur> donateurs = new ArrayList<Donateur>();
 
-	public Projet() {
+	public Projet () {
+
 	}
 
 	/**
@@ -88,10 +89,8 @@ public class Projet implements Comparable<Projet> {
 		donateurs.remove (0);
 		Projet p1 = new Projet (90, "Haute Ecole de ConGestion", donateurs);
 		Projet p2 = new Projet (91, "Voiture", donateurs1);
-//		Projet p3 = new Projet (92, "Aaaaaa", null);
 		projets.add (p2);
 		projets.add (p1);
-//		projets.add (p3);
 		return projets;
 	}
 }

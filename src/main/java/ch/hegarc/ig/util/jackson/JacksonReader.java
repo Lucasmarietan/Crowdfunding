@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class JacksonReader {
 	private static final Logger logger = Logger.getLogger(JacksonReader.class.getName());
 
-	public static List<Projet> run(String filename) {
+	public static List<Projet> run (String filename) {
 		List<Projet> projets = null;
 		try {
 //			ObjectMapper - Ignorer les propriétés inconnues

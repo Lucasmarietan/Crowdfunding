@@ -121,7 +121,7 @@ public class Console {
 					break;
 
 				case CMD_STATS:
-/**					Ici on commence à tester CollectionUtil*/
+/**					Ici on commence à tester CollectionUtil */
 //					List<Donateur> donateurs = CollectionUtil.plusGrosDonateur (this.projets.getProjet (1), 2);
 //					String email = CollectionUtil.tousEmail (this.projets.getProjet (1));
 //					System.out.println (email);
