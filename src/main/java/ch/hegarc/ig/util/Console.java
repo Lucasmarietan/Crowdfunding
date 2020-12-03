@@ -27,7 +27,7 @@ public class Console {
 
 	final private Option OPT_FICHIER = new Option("f", "fichier", true, "nom du fichier");
 	final private Option OPT_PROJET = new Option("p", "projet", true, "nom du projet");
-//	Nouvelle options
+//	Nouvelles options
 	final private Option OPT_DON_NOM = new Option("n", "donateurNom", true, "nom du donateur");
 	final private Option OPT_DON_PRENOM = new Option("r", "donateurPrenom", true, "prenom du donateur");
 
@@ -38,21 +38,20 @@ public class Console {
 //		Pour stocker les projets à un endroit centralisé
 		this.projets = new ProjetUtil ();
 		this.projets.addProjets (Projet.newPopProjets ());
-		System.out.println ("Set initial");
 		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
 		for (Projet pj : this.projets.toList ())
 			System.out.println (pj.toString (false));
 
 		Scanner command = new Scanner(System.in);
-		System.out.println("Entrer votre commande: ");
 
 		boolean running = true;
 		while (running) {
+			System.out.println("Entrer votre commande: ");
 			String com = command.nextLine();
 			String[] arguments = com.split(" ");
 			CommandLine cmdLine = parseArguments(arguments);
 
-			switch (cmdLine.getArgs()[0]) {
+			switch (cmdLine.getArgs()[0].toLowerCase ()) {
 //				TODO - A chaque fois que je veux utiliser les options que j'ai ajouté ça merde...
 				case CMD_ADD_DONATEUR:
 					if (cmdLine.hasOption (OPT_PROJET.getOpt ()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ()) && cmdLine.hasOption (OPT_DON_PRENOM.getOpt ())) {
@@ -107,13 +106,13 @@ public class Console {
 								if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
 									JacksonWriter.run (this.projets.contientProjet (projectName), fileName);
 									System.out.println ("Export du projet " + projectName + " dans le fichier " + fileName);
-								} else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
-//  								TODO - Faut-il vraiment faire ça ?
-									System.out.println ("Le type de fichier XML n'est pas pris en charge...");
-								} else {
+								}
+								else {
 									System.out.println ("Votre type de fichier n'est pas pris en charge...");
 								}
 							}
+							else
+								System.out.println ("Le projet désiré n'existe pas...");
 						}
 					} else {
 						printAppHelp();

@@ -1,6 +1,8 @@
 
 package ch.hegarc.ig.cpo.jaxb;
 
+import ch.hegarc.ig.business.Donateur;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * <p>Classe Java pour anonymous complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schï¿½ma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType>
@@ -77,7 +79,7 @@ public class Dataset {
 
     /**
      * Gets the value of the record property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
@@ -108,7 +110,7 @@ public class Dataset {
     /**
      * <p>Classe Java pour anonymous complex type.
      * 
-     * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+     * <p>Le fragment de schï¿½ma suivant indique le contenu attendu figurant dans cette classe.
      * 
      * <pre>
      * &lt;complexType>
@@ -159,10 +161,10 @@ public class Dataset {
         protected int id;
         @XmlElement(required = true)
         protected String projet;
-        protected List<Dataset.Record.Donateurs> donateurs;
+        protected List<Donateur> donateurs;
 
         /**
-         * Obtient la valeur de la propriété id.
+         * Obtient la valeur de la propriï¿½tï¿½ id.
          * 
          */
         public int getId() {
@@ -170,7 +172,7 @@ public class Dataset {
         }
 
         /**
-         * Définit la valeur de la propriété id.
+         * Dï¿½finit la valeur de la propriï¿½tï¿½ id.
          * 
          */
         public void setId(int value) {
@@ -178,7 +180,7 @@ public class Dataset {
         }
 
         /**
-         * Obtient la valeur de la propriété projet.
+         * Obtient la valeur de la propriï¿½tï¿½ projet.
          * 
          * @return
          *     possible object is
@@ -190,7 +192,7 @@ public class Dataset {
         }
 
         /**
-         * Définit la valeur de la propriété projet.
+         * Dï¿½finit la valeur de la propriï¿½tï¿½ projet.
          * 
          * @param value
          *     allowed object is
@@ -223,9 +225,9 @@ public class Dataset {
          * 
          * 
          */
-        public List<Dataset.Record.Donateurs> getDonateurs() {
+        public List<Donateur> getDonateurs() {
             if (donateurs == null) {
-                donateurs = new ArrayList<Dataset.Record.Donateurs>();
+                donateurs = new ArrayList<Donateur>();
             }
             return this.donateurs;
         }
@@ -234,7 +236,7 @@ public class Dataset {
         /**
          * <p>Classe Java pour anonymous complex type.
          * 
-         * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+         * <p>Le fragment de schï¿½ma suivant indique le contenu attendu figurant dans cette classe.
          * 
          * <pre>
          * &lt;complexType>
@@ -307,7 +309,7 @@ public class Dataset {
             protected XMLGregorianCalendar dateVersement;
 
             /**
-             * Obtient la valeur de la propriété id.
+             * Obtient la valeur de la propriï¿½tï¿½ id.
              * 
              */
             public int getId() {
@@ -315,7 +317,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété id.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ id.
              * 
              */
             public void setId(int value) {
@@ -323,7 +325,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété prenom.
+             * Obtient la valeur de la propriï¿½tï¿½ prenom.
              * 
              * @return
              *     possible object is
@@ -335,7 +337,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété prenom.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ prenom.
              * 
              * @param value
              *     allowed object is
@@ -347,7 +349,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété nom.
+             * Obtient la valeur de la propriï¿½tï¿½ nom.
              * 
              * @return
              *     possible object is
@@ -359,7 +361,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété nom.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ nom.
              * 
              * @param value
              *     allowed object is
@@ -371,7 +373,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété email.
+             * Obtient la valeur de la propriï¿½tï¿½ email.
              * 
              * @return
              *     possible object is
@@ -383,7 +385,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété email.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ email.
              * 
              * @param value
              *     allowed object is
@@ -395,7 +397,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété langue.
+             * Obtient la valeur de la propriï¿½tï¿½ langue.
              * 
              * @return
              *     possible object is
@@ -407,7 +409,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété langue.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ langue.
              * 
              * @param value
              *     allowed object is
@@ -419,7 +421,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété adresse.
+             * Obtient la valeur de la propriï¿½tï¿½ adresse.
              * 
              * @return
              *     possible object is
@@ -431,7 +433,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété adresse.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ adresse.
              * 
              * @param value
              *     allowed object is
@@ -443,7 +445,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété ville.
+             * Obtient la valeur de la propriï¿½tï¿½ ville.
              * 
              * @return
              *     possible object is
@@ -455,7 +457,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété ville.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ ville.
              * 
              * @param value
              *     allowed object is
@@ -467,7 +469,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété monnaie.
+             * Obtient la valeur de la propriï¿½tï¿½ monnaie.
              * 
              * @return
              *     possible object is
@@ -479,7 +481,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété monnaie.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ monnaie.
              * 
              * @param value
              *     allowed object is
@@ -491,7 +493,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété somme.
+             * Obtient la valeur de la propriï¿½tï¿½ somme.
              * 
              * @return
              *     possible object is
@@ -503,7 +505,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété somme.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ somme.
              * 
              * @param value
              *     allowed object is
@@ -515,7 +517,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété paye.
+             * Obtient la valeur de la propriï¿½tï¿½ paye.
              * 
              */
             public boolean isPaye() {
@@ -523,7 +525,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété paye.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ paye.
              * 
              */
             public void setPaye(boolean value) {
@@ -531,7 +533,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété annule.
+             * Obtient la valeur de la propriï¿½tï¿½ annule.
              * 
              */
             public boolean isAnnule() {
@@ -539,7 +541,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété annule.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ annule.
              * 
              */
             public void setAnnule(boolean value) {
@@ -547,7 +549,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété dateDon.
+             * Obtient la valeur de la propriï¿½tï¿½ dateDon.
              * 
              * @return
              *     possible object is
@@ -559,7 +561,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété dateDon.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ dateDon.
              * 
              * @param value
              *     allowed object is
@@ -571,7 +573,7 @@ public class Dataset {
             }
 
             /**
-             * Obtient la valeur de la propriété dateVersement.
+             * Obtient la valeur de la propriï¿½tï¿½ dateVersement.
              * 
              * @return
              *     possible object is
@@ -583,7 +585,7 @@ public class Dataset {
             }
 
             /**
-             * Définit la valeur de la propriété dateVersement.
+             * Dï¿½finit la valeur de la propriï¿½tï¿½ dateVersement.
              * 
              * @param value
              *     allowed object is

@@ -15,6 +15,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +29,7 @@ public class MainUnmarshalling {
 	}
 
 	public static List<Projet> run (String fileName) {
-		List<Projet> projetList = null;
+		List<Projet> projetList = new LinkedList <> ();
 		try {
 			JAXBContext jc = JAXBContext.newInstance("ch.hegarc.ig.cpo.jaxb");
 
@@ -41,14 +43,17 @@ public class MainUnmarshalling {
 
 //			Pour récupérer les projets dans le XML
 			for (Dataset.Record rec : projets.getRecord ()) {
-//				Projet projet = new Projet (rec.getId (), rec.getProjet ().toString (), rec.getDonateurs ());
-//				projetList.add (projet);
-				System.out.println ("Nom du projet : " + rec.getProjet () + " (id : " + rec.getId () + "). Les donateurs : ");
-				for (Dataset.Record.Donateurs d : rec.getDonateurs ()) {
-					StringBuilder sb = new StringBuilder ();
-					sb.append ("    Nom : ").append (d.getNom ()).append (", ").append (d.getPrenom ()).append (". Somme : ").append (d.getSomme ()).append (" ").append (d.getMonnaie ());
-					System.out.println (sb.toString ());
-				}
+				List<Donateur> donateurList = new ArrayList <> ();
+//				for Dataset.Record.Donateurs d : rec.getDonateurs ()) {
+//					donateurList.add (d);
+				Projet projet = new Projet (rec.getId (), rec.getProjet ().toString (), rec.getDonateurs ());
+				projetList.add (projet);
+//				System.out.println ("Nom du projet : " + rec.getProjet () + " (id : " + rec.getId () + "). Les donateurs : ");
+//				for (Dataset.Record.Donateurs d : rec.getDonateurs ()) {
+//					StringBuilder sb = new StringBuilder ();
+//					sb.append ("    Nom : ").append (d.getNom ()).append (", ").append (d.getPrenom ()).append (". Somme : ").append (d.getSomme ()).append (" ").append (d.getMonnaie ());
+//					System.out.println (sb.toString ());
+//				}
 			}
 
 //			for (Dataset.Record rec : projets.getRecord ()) {
