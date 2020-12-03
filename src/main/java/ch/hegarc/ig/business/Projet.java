@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Projet {
+public class Projet implements Comparable<Projet> {
 
 	private long id;
 	private String projet;
@@ -26,6 +26,13 @@ public class Projet {
 		this.id = id;
 		this.projet = name;
 		this.donateurs = donateurs;
+	}
+
+//	TODO - c'est vraiment ce qu'il faut faire pour utiliser un TreeSet ??
+//	    Pasq mnt ça trie tout seul tout le temps haha
+	@Override
+	public int compareTo(Projet p) {
+		return this.getProjet ().compareTo (p.getProjet ());
 	}
 
 //	Fonctionne !
@@ -74,15 +81,13 @@ public class Projet {
 		List<Donateur> donateurs = Donateur.newPopDonateurs ();
 		List<Donateur> donateurs1 = Donateur.newPopDonateurs ();
 		donateurs1.remove (1);
-//		System.out.println (donateurs1);
 		donateurs.remove (0);
-//		System.out.println (donateurs);
 		Projet p1 = new Projet (90, "Haute Ecole de ConGestion", donateurs);
-//		System.out.println (p1.toString (true));
 		Projet p2 = new Projet (91, "Voiture", donateurs1);
-//		System.out.println (p2.toString (true));
+		Projet p3 = new Projet (92, "Aaaaaa", null);
 		projets.add (p2);
 		projets.add (p1);
+		projets.add (p3);
 		return projets;
 	}
 }
