@@ -181,6 +181,10 @@ public class Donateur {
 		return sb.toString ();
 	}
 
+	public boolean equals (Donateur donateur) {
+		return this.nom.equalsIgnoreCase (donateur.getNom ()) && this.prenom.equalsIgnoreCase (donateur.getPrenom ());
+	}
+
 	public static List <Donateur> newPopDonateurs () {
 		List<Donateur> d = new LinkedList <> ();
 		Donateur d0 = new Donateur (95, "Jain", "Meylan", "CHF", 1);

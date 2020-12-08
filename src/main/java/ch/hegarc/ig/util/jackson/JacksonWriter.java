@@ -3,6 +3,7 @@ package ch.hegarc.ig.util.jackson;
 // Classe prête et qui fonctionne !
 
 import ch.hegarc.ig.business.Projet;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -20,14 +21,10 @@ public class JacksonWriter {
 		try {
 			ObjectMapper om = new ObjectMapper ();
 
-//			Ignorer les champs vide - TODO Copier de la série 5. On garde ?
-//			om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-
 //			Ecriture avec pretty print
 			om.writerWithDefaultPrettyPrinter ().writeValue (new File (fileName), projets);
 
 			logger.log (Level.INFO, "Fichier '" + fileName + "' crée avec succès !");
-
 		} catch (IOException ex) {
 			logger.log (Level.SEVERE, null, ex);
 		}

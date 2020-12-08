@@ -2,6 +2,7 @@ package ch.hegarc.ig.util;
 
 // Classe propre.
 // TODO - Gérer l'unicité des projets (par nom) et l'unicité des donateurs (par nom et prénom) dans le projet
+//        Faire une méthode equals ???
 
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
@@ -36,10 +37,10 @@ public class ProjetUtil {
 
 	public Projet contient (String nomProjet) {
 		for (Projet p : this.projets) {
-			if (p.getProjet ().equalsIgnoreCase (nomProjet))
+			if (p.equals (nomProjet))
 				return p;
 		}
-		return null; // Il faut faire le test dans la console si besoin
+		return null;
 	}
 
 	public List<Projet> toList () {
@@ -51,9 +52,15 @@ public class ProjetUtil {
 			this.addProjet (p);
 	}
 
-	public void addProjet (Projet projet) {
-		projet.triDonateursNomPrenom ();
-		this.projets.add (projet);
+	public boolean addProjet (Projet projet) {
+		Projet p = contient (projet.getProjet ());
+		if (p == null) { // Pour gérer l'unicité
+			projet.triDonateursNomPrenom ();
+			this.projets.add (projet);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public Projet getProjet (long id) {

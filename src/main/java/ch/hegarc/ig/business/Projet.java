@@ -1,13 +1,15 @@
 package ch.hegarc.ig.business;
 
-// TODO - Ajouter un donateur à un projet. Ici ?
+// TODO - Ajouter un donateur à un projet. Implémenté
 
-// TODO - Supprimer un donateur d'un projet. Ici ?
+// TODO - Supprimer un donateur d'un projet. Implémenté
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import sun.print.DialogOnTop;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,11 +27,11 @@ public class Projet implements Comparable<Projet> {
 	 * @param name
 	 * @param id
 	 */
-	public Projet(long id, String name, List<Donateur> donateurs) {
+	public Projet (long id, String name, List<Donateur> donateurs) {
 		super();
 		this.id = id;
 		this.projet = name;
-		this.donateurs = donateurs;
+		setDonateurs (donateurs);
 		this.triDonateursNomPrenom ();
 	}
 
@@ -41,8 +43,43 @@ public class Projet implements Comparable<Projet> {
 
 //	Fonctionne !
 	public void triDonateursNomPrenom () {
-		Stream<Donateur> sD = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getNom).thenComparing (Donateur::getPrenom));
-		this.donateurs = sD.collect(Collectors.toList());
+		this.donateurs = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getNom).thenComparing (Donateur::getPrenom)).collect(Collectors.toList());
+	}
+
+//	Fonctionne !
+	public void triDonateursID () {
+		this.donateurs = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getId)).collect(Collectors.toList());
+	}
+
+//	Fonctionne !
+	public boolean addDonateur (Donateur donateur) {
+		System.out.println ("1");
+		boolean present = false;
+		System.out.println ("2");
+		for (Donateur d : this.donateurs) {
+			System.out.println ("3");
+			if (d.equals (donateur)) {
+				System.out.println ("4");
+				present = true;
+			}
+		}
+		if (!present) {
+			System.out.println ("5");
+			this.donateurs.add (donateur);
+		}
+		triDonateursNomPrenom ();
+		return !present;
+	}
+
+//	Fonctionne !
+	public void addDonateurs (List<Donateur> donateurs) {
+		for (Donateur d : donateurs)
+			addDonateur (d);
+	}
+
+//	Fonctionne !
+	public void removeDonateur (Donateur donateur) {
+		this.donateurs = this.donateurs.stream ().filter (donateur1 -> !(donateur1.getPrenom ().equalsIgnoreCase (donateur.getPrenom ()) && donateur1.getNom ().equalsIgnoreCase (donateur.getNom ()))).collect(Collectors.toList());
 	}
 
 	public long getId() {
@@ -65,7 +102,14 @@ public class Projet implements Comparable<Projet> {
 		return donateurs;
 	}
 
+//	TODO - Pour l'unicité des donateurs dans un projet ; A CHECKER !
 	public void setDonateurs(List<Donateur> donateurs) {
+		for (int i = 0; i < donateurs.size (); i++) {
+			for (int j = i + 1; j < donateurs.size (); j++) {
+				if (donateurs.get (i).equals (donateurs.get (j)))
+					donateurs.remove (j);
+			}
+		}
 		this.donateurs = donateurs;
 	}
 
@@ -82,6 +126,14 @@ public class Projet implements Comparable<Projet> {
 			}
 		}
 		return sb.toString ();
+	}
+
+	public boolean equals (Projet projet) {
+		return this.projet.equalsIgnoreCase (projet.getProjet ());
+	}
+
+	public boolean equals (String projetName) {
+		return this.projet.equalsIgnoreCase (projetName);
 	}
 
 	public static List<Projet> newPopProjets () {

@@ -7,6 +7,8 @@ import ch.hegarc.ig.util.jackson.JacksonReader;
 import ch.hegarc.ig.util.jackson.JacksonWriter;
 import org.apache.commons.cli.*;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Console {
@@ -55,9 +57,8 @@ public class Console {
 					System.out.println ("nom : " + donNom);
 					String donPrenom = cmdLine.getOptionValue (OPT_DON_PRENOM.getOpt ());
 					System.out.println ("nom : " + donPrenom);
-					} else {
+					} else
 						printAppHelp ();
-					}
 					break;
 
 				case CMD_IMPORT:
@@ -66,23 +67,15 @@ public class Console {
 						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
 
 //						Traitement du fichier en .json (c'était compliqué de comprendre l'erreur "\\.")
-						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) { // On teste si le nom du fichier se termine par .json
+						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
 							this.projets.addProjets (JacksonReader.run (fileName));
-//							System.out.println ("Import du fichier " + fileName);
-						}
 //						Traitement du fichier en .XML
-						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML")) {
+						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML"))
 							this.projets.addProjets (MainUnmarshalling.run (fileName));
-//							System.out.println ("Import du fichier " + fileName);
-//							System.out.println ("-------");
-//							System.out.println (this.projets.toString ());
-						}
-						else {
+						else
 							System.out.println ("Ce type de fichier n'est pas encore pris en compte");
-						}
-					} else {
+					} else
 						printAppHelp();
-					}
 					break;
 
 				case CMD_EXPORT: // Fonctionne parfaitement !
@@ -130,8 +123,8 @@ public class Console {
 //					List<Donateur> donateurs = this.projets.pasEncorePaye ();
 //					for (Donateur d : donateurs)
 //						System.out.println (d.toString ());
-
 //					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
+
 					// TODO Calcul des stats des projets
 
 					break;
