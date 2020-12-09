@@ -1,17 +1,11 @@
 package ch.hegarc.ig.business;
 
-// TODO - Ajouter un donateur à un projet. Implémenté
+// TODO - Ajouter un donateur à un projet. Implémenté mais il faut l'appeler grâce au nom du projet
 
 // TODO - Supprimer un donateur d'un projet. Implémenté
 
-import sun.print.DialogOnTop;
-
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 // Classe implémentée par Comparable pour permettre aux projets d'être toujours classés par ordre alphabétique
 public class Projet implements Comparable<Projet> {
@@ -53,20 +47,13 @@ public class Projet implements Comparable<Projet> {
 
 //	Fonctionne !
 	public boolean addDonateur (Donateur donateur) {
-		System.out.println ("1");
 		boolean present = false;
-		System.out.println ("2");
 		for (Donateur d : this.donateurs) {
-			System.out.println ("3");
-			if (d.equals (donateur)) {
-				System.out.println ("4");
+			if (d.equals (donateur))
 				present = true;
-			}
 		}
-		if (!present) {
-			System.out.println ("5");
+		if (!present)
 			this.donateurs.add (donateur);
-		}
 		triDonateursNomPrenom ();
 		return !present;
 	}

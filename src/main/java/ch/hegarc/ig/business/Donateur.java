@@ -24,6 +24,18 @@ public class Donateur {
 	public Donateur() {
 	}
 
+	public Donateur (String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+
+	public Donateur (String nom, String prenom, long somme) {
+		this.prenom = prenom;
+		this.nom = nom;
+		this.somme = somme;
+		this.monnaie = "CHF";
+	}
+
 	public Donateur (long id, String prenom, String nom, String monnaie, long somme) {
 		this.id = id;
 		this.prenom = prenom;

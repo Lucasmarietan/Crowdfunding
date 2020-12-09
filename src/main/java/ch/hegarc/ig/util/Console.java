@@ -87,7 +87,7 @@ public class Console {
 						if (projectName.equalsIgnoreCase ("ALL")) // Exporter tous les projets dans un JSON (pas de test de fichier)
 							JacksonWriter.run (this.projets.toList (), fileName);
 						else {
-							Projet exportProjet = this.projets.contient (projectName); // Recherche du projet dans le programme
+							Projet exportProjet = this.projets.getProjet (projectName); // Recherche du projet dans le programme
 							if (exportProjet != null) {
 								if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
 									JacksonWriter.run (exportProjet, fileName);
@@ -125,6 +125,7 @@ public class Console {
 //						System.out.println (d.toString ());
 //					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
 
+					System.out.println ("Total pour personnes concernees : " + this.projets.totalDonsDonateurs ("Mannin,Meylan"));
 					// TODO Calcul des stats des projets
 
 					break;

@@ -5,8 +5,7 @@ public class Todo {
 	/** Notes de développement de Tanguy
 	 *
 	 * TODO Gestion d'un projet avec des espaces dans le nom
-	 *      Gestion de l'unicité des projets via le nom (créer méthode equals ?)
-	 *      Gestion de l'unicité des donateurs par projets via le nom et le prénom (créer méthode equals ?)
+	 *      Ajout de fonctionnalité Logger sur les autres classe ??
 	 *
 	 * Choix du Jackson pour import le Json car est le plus simple. Je me suis fortement inspiré de la série 5 pour construire le dossier Jackson
 	 * JacksonWriter peremt d'exporter un projet avec ses donateurs. Faut-il changer de signature pour tout exporter ??
@@ -48,7 +47,7 @@ public class Todo {
 	 * Au  travers de méthodes et de classes de votre choix, implémenter les fonctionnalités suivantesau projet Crowdfunding :
 	 *      Pouvoir fusionner les données provenant de différents fichiers (XML ou JSON). Chaque lecture (import) de fichier doit fusionner avec les données existantes, si bien qu'il n'y a toujours qu'une seule liste dans l'application.
 	 *      Cette  liste  ne  doit  pas  comporter  de  doublons,  si  par  exemple  des  données  identiques  sont dans plusieurs fichiers importés.
-	 * TODO Si même nom de projet, alors on fusionne la liste des dons. Si donateur existe déjà dans le projet, alors ?
+	 * Si même nom de projet, alors on fusionne la liste des dons. Si donateur existe déjà dans le projet, alors ?
 	 *
 	 **      Si  cela  n’est  pas  déjà  fait,  l'import  doit  pouvoir  se  faire  via  la  console  avec  la  commande adéquate. (import -f [nom du fichier])
 	 *
@@ -56,11 +55,11 @@ public class Todo {
 	 *
 	 **      Pouvoir trier la liste des dons d'abords selon le nom du projet, puis au sein de chaque projet, selon le nom et le prénom du donateur du donateur. PAR DEFAUT !
 	 *
-	 * TODO  Pouvoir ajouter un donateur sur un projet (en fournissant le nom du projet, le nom et prénom du donateur et la somme du don). Une nouvelle commande (Console.class) doit être ajoutée pour cette étape
-	 *       Gérer l'appel dans la Console
+	 * Pouvoir ajouter un donateur sur un projet (en fournissant le nom du projet, le nom et prénom du donateur et la somme du don). Une nouvelle commande (Console.class) doit être ajoutée pour cette étape
+	 * TODO  Gérer l'appel dans la Console de ProjetUtil.class : addDonateur (String projetName, String nom, String prenom, long somme)
 	 *
-	 * TODO  Pouvoir  supprimer  un  donateur  d'une  liste  (selon  le  nom  du  projet,  le  nom  et  prénom  du donateur). Une nouvelle commande (Console.class) doit être ajoutée pour cette étape.
-	 *       Gérer l'appel dans la Console
+	 * Pouvoir  supprimer  un  donateur  d'une  liste  (selon  le  nom  du  projet,  le  nom  et  prénom  du donateur). Une nouvelle commande (Console.class) doit être ajoutée pour cette étape.
+	 * TODO  Gérer l'appel dans la Console ProjetUtil.class : removeDonateur (String projetName, String nom, String prenom)
 	 *
 	 ***** Semaine 2 : *****
 	 * Au  travers  de  méthodes  et  de  classes  de  votre  choix,  implémenter  les  fonctionnalités  suivantes au projet Crowdfunding:

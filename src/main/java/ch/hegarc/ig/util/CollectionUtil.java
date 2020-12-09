@@ -55,8 +55,8 @@ public class CollectionUtil {
 		return (long) projet.getDonateurs ().stream ().mapToLong (Donateur::getSomme).average ().orElse (-100);
 	}
 
-//	Fonctionne ! Dans sa version la plus simple bien sûr... Pas de gestion des erreurs
-//	TODO - Mettre dans la classe ProjetUtil ? (Car s'applique à tous les projets...)
+/*//	Fonctionne ! Dans sa version la plus simple bien sûr... Pas de gestion des erreurs
+//	- Mettre dans la classe ProjetUtil ? (Car s'applique à tous les projets...)
 //	 Ne gère pas un donateur sur plusieurs projet... (gère que des "noms" séparés par une virgule)
 	public static long totalDonsDonateurs (List<Projet> tousProjets, String donateurs) {
 		double somme;
@@ -96,9 +96,9 @@ public class CollectionUtil {
 			somme = somme + entry.getValue ();
 		}
 		return (long) somme;
-//		TODO - Implementer cette fonction !
+//		 - Implementer cette fonction !
 //		throw new NullPointerException ("Pas encore implémentée...");
-	}
+	} */
 
 //	Fonctionne ! (Sur TOUS les dons du projet)
 	public static long commission (Projet projet) {
