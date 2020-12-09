@@ -73,7 +73,7 @@ public class Todo {
 	 *
 	 **       Donner les médianes et moyennes des dons pour unprojetdonné en argument
 	 *
-	 * TODO  Pour une liste de noms séparés par des virgules et reçu en argument, calculer le total des dons pour ces personnes, quelque soit le projet
+	 *  Pour une liste de noms séparés par des virgules et reçu en argument, calculer le total des dons pour ces personnes, quelque soit le projet
 	 *
 	 *        Calculer la commission de l’entreprise pour un projet donné (5%)
 	 *

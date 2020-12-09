@@ -1,9 +1,5 @@
 package ch.hegarc.ig.business;
 
-// TODO - Ajouter un donateur à un projet. Implémenté mais il faut l'appeler grâce au nom du projet
-
-// TODO - Supprimer un donateur d'un projet. Implémenté
-
 import java.util.*;
 import java.util.stream.Collectors;
 

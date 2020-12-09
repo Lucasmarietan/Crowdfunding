@@ -614,21 +614,6 @@
 				"annule": true,
 				"dateDon": "11.12.2019",
 				"dateVersement": ""
-			},
-			{
-				"id": 1,
-				"prenom": "Ben",
-				"nom": "Mannin",
-				"email": "bmannin0@xing.com",
-				"langue": "FR",
-				"adresse": "857 Arkansas Lane",
-				"ville": "Dubravica",
-				"monnaie": "CHF",
-				"somme": 5988,
-				"paye": true,
-				"annule": true,
-				"dateDon": "22.04.2020",
-				"dateVersement": "04.10.2020"
 			}
 		]
 	}

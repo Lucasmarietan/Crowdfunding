@@ -1,8 +1,6 @@
 package ch.hegarc.ig.util;
 
 // Classe propre.
-// TODO - Gérer l'unicité des projets (par nom) et l'unicité des donateurs (par nom et prénom) dans le projet
-//        Faire une méthode equals ???
 
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;

@@ -116,7 +116,6 @@ public class Console {
 //					System.out.println ("Commission : " + CollectionUtil.commission (this.projets.getProjet (1)));
 //					System.out.println ("Mediane : " + CollectionUtil.medianeDons (this.projets.getProjet (1)));
 //					System.out.println ("Moyenne : " + CollectionUtil.moyenneDons (this.projets.getProjet (1)));
-//					System.out.println ("Total pour personnes concernees : " + CollectionUtil.totalDonsDonateurs (this.projets.toList (), "Meylan"));
 //					this.projets.getProjet (1).triDonateurs ();
 //					for (Donateur d : this.projets.getProjet (1).getDonateurs ())
 //						System.out.println (d.toString ());
@@ -124,8 +123,8 @@ public class Console {
 //					for (Donateur d : donateurs)
 //						System.out.println (d.toString ());
 //					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
+//					System.out.println ("Total pour personnes concernees : " + this.projets.totalDonsDonateurs ("Mannin,Meylan"));
 
-					System.out.println ("Total pour personnes concernees : " + this.projets.totalDonsDonateurs ("Mannin,Meylan"));
 					// TODO Calcul des stats des projets
 
 					break;

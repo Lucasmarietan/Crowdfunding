@@ -2,9 +2,6 @@ package ch.hegarc.ig.util;
 
 //	TODO - Checker comment on appelera ces méthodes dans la console
 
-//  TODO - Méthodes à implémenter encore :
-//   Pour une liste de noms séparés par des virgules et reçu en argument, calculer le total des dons pour ces personnes, quelque soit le projet
-
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
 
@@ -54,51 +51,6 @@ public class CollectionUtil {
 	public static long moyenneDons (Projet projet) {
 		return (long) projet.getDonateurs ().stream ().mapToLong (Donateur::getSomme).average ().orElse (-100);
 	}
-
-/*//	Fonctionne ! Dans sa version la plus simple bien sûr... Pas de gestion des erreurs
-//	- Mettre dans la classe ProjetUtil ? (Car s'applique à tous les projets...)
-//	 Ne gère pas un donateur sur plusieurs projet... (gère que des "noms" séparés par une virgule)
-	public static long totalDonsDonateurs (List<Projet> tousProjets, String donateurs) {
-		double somme;
-		Map <Donateur, Double> donateursMap = new HashMap <> ();
-		List<String> dona = Arrays.asList (donateurs.split (","));
-		for (String s : dona) {
-			for (Projet p : tousProjets) {
-				for (Donateur d : p.getDonateurs ()) {
-					if (s.equalsIgnoreCase (d.getNom ())) {
-						System.out.println ("A");
-						if (!donateursMap.isEmpty ()) {
-							for (Map.Entry<Donateur, Double> entry : donateursMap.entrySet()) {
-								System.out.println ("B");
-								if (s.equalsIgnoreCase (entry.getKey ().getNom ())) {
-									System.out.println ("C");
-									somme = donateursMap.get (d); // TODO - Pouvoir récupérer la valeur déjà dans la Map pour ensuite y ajouter la valeur du don actuel....
-									System.out.println ("somme presente : " + somme);
-									System.out.println ("DON : " + d.getSomme ());
-									donateursMap.put (d, somme + d.getSomme ());
-								} else {
-									System.out.println ("D");
-									donateursMap.put (d, (double) d.getSomme ());
-								}
-							}
-						}
-						else {
-							System.out.println ("Empty");
-							System.out.println ("Don : " + d.getSomme ());
-							donateursMap.put (d, (double) d.getSomme ());
-						}
-					}
-				}
-			}
-		}
-		somme = 0;
-		for (Map.Entry<Donateur, Double> entry : donateursMap.entrySet()) {
-			somme = somme + entry.getValue ();
-		}
-		return (long) somme;
-//		 - Implementer cette fonction !
-//		throw new NullPointerException ("Pas encore implémentée...");
-	} */
 
 //	Fonctionne ! (Sur TOUS les dons du projet)
 	public static long commission (Projet projet) {
