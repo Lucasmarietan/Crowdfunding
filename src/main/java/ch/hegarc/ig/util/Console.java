@@ -16,16 +16,18 @@ public class Console {
 
 	final private String CMD_IMPORT = "import";
 	final private String CMD_EXPORT = "export";
-//	Nouvelle commande TODO - Gérer la commande pour ajouter et supprimer un donateur
-	final private String CMD_ADD_DONATEUR = "don";
-	final private String CMD_STATS = "stats";
 	final private String CMD_EXIT = "exit";
+	final private String CMD_STATS = "stats";
+	//	Nouvelle commande
+	final private String CMD_ADD_DONATEUR = "don";
+	final private String CMD_REMOVE_DONATEUR = "del"; // TODO - Définir un meilleur mot-clé
 
 	final private Option OPT_FICHIER = new Option("f", "fichier", true, "nom du fichier");
 	final private Option OPT_PROJET = new Option("p", "projet", true, "nom du projet");
 //	Nouvelles options
 	final private Option OPT_DON_NOM = new Option("n", "donateurNom", true, "nom du donateur");
 	final private Option OPT_DON_PRENOM = new Option("r", "donateurPrenom", true, "prenom du donateur");
+	final private Option OPT_DON_SOMME = new Option("s", "sommeDon", true, "Somme du don");
 
 	/**
 	 * Démarre la commande
@@ -33,10 +35,10 @@ public class Console {
 	public void runCommand () {
 //		Pour stocker les projets à un endroit centralisé
 		this.projets = new ProjetUtil ();
-		this.projets.addProjets (Projet.newPopProjets ());
+		this.projets.addProjets (Projet.newPopProjets ()); // Peuplement automatique en dur
 		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
-		for (Projet pj : this.projets.toList ())
-			System.out.println (pj.toString (false));
+//		for (Projet pj : this.projets.toList ())
+//			System.out.println (pj.toString (false));
 
 		Scanner command = new Scanner(System.in);
 
@@ -48,16 +50,17 @@ public class Console {
 			CommandLine cmdLine = parseArguments(arguments);
 
 			switch (cmdLine.getArgs()[0].toLowerCase ()) {
-//				TODO - A chaque fois que je veux utiliser les options que j'ai ajouté ça merde...
 				case CMD_ADD_DONATEUR:
-					if (cmdLine.hasOption (OPT_PROJET.getOpt ()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ()) && cmdLine.hasOption (OPT_DON_PRENOM.getOpt ())) {
-					String donProjet = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
-					System.out.println ("nom : " + donProjet);
-					String donNom = cmdLine.getOptionValue (OPT_DON_NOM.getOpt ());
-					System.out.println ("nom : " + donNom);
-					String donPrenom = cmdLine.getOptionValue (OPT_DON_PRENOM.getOpt ());
-					System.out.println ("nom : " + donPrenom);
-					} else
+					if (cmdLine.hasOption (OPT_PROJET.getOpt ()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ()) && cmdLine.hasOption (OPT_DON_PRENOM.getOpt ()) && cmdLine.hasOption (OPT_DON_SOMME.getOpt ()))
+						this.projets.addDonateur (cmdLine.getOptionValue (OPT_PROJET.getOpt ()), cmdLine.getOptionValue (OPT_DON_NOM.getOpt ()), cmdLine.getOptionValue (OPT_DON_PRENOM.getOpt ()), Long.parseLong (cmdLine.getOptionValue (OPT_DON_SOMME.getOpt ())));
+					else
+						printAppHelp ();
+					break;
+
+				case CMD_REMOVE_DONATEUR:
+					if (cmdLine.hasOption (OPT_PROJET.getOpt ()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ()) && cmdLine.hasOption (OPT_DON_PRENOM.getOpt ()))
+						this.projets.removeDonateur (cmdLine.getOptionValue (OPT_PROJET.getOpt ()), cmdLine.getOptionValue (OPT_DON_NOM.getOpt ()), cmdLine.getOptionValue (OPT_DON_PRENOM.getOpt ()));
+					else
 						printAppHelp ();
 					break;
 
@@ -102,7 +105,7 @@ public class Console {
 					break;
 
 				case CMD_STATS:
-/**					Ici on commence à tester CollectionUtil */
+/*					Ici on commence à tester CollectionUtil */
 //					List<Donateur> donateurs = CollectionUtil.plusGrosDonateur (this.projets.getProjet (1), 2);
 //					String email = CollectionUtil.tousEmail (this.projets.getProjet (1));
 //					System.out.println (email);
@@ -171,7 +174,7 @@ public class Console {
 	 */
 	private Options getAllOptions() {
 		Options options = new Options();
-		options.addOption(OPT_FICHIER).addOption(OPT_PROJET);
+		options.addOption(OPT_FICHIER).addOption(OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM).addOption (OPT_DON_SOMME);
 		return options;
 	}
 
@@ -183,7 +186,8 @@ public class Console {
 		formatter.printHelp(CMD_IMPORT, new Options().addOption(OPT_FICHIER), true);
 		formatter.printHelp(CMD_EXPORT, new Options().addOption(OPT_FICHIER).addOption(OPT_PROJET), true);
 		formatter.printHelp(CMD_STATS, new Options().addOption(OPT_PROJET), true);
-		formatter.printHelp(CMD_ADD_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM), true);
+		formatter.printHelp(CMD_ADD_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM).addOption (OPT_DON_SOMME), true);
+		formatter.printHelp(CMD_REMOVE_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM), true);
 		formatter.printHelp(CMD_EXIT, new Options());
 	}
 }
