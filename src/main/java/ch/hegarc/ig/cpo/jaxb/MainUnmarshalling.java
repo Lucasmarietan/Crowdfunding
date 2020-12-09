@@ -2,16 +2,13 @@ package ch.hegarc.ig.cpo.jaxb;
 
 // Classe prête et qui fonctionne !
 
-import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;

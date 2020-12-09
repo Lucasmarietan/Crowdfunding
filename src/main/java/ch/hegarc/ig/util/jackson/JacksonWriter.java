@@ -3,12 +3,10 @@ package ch.hegarc.ig.util.jackson;
 // Classe prête et qui fonctionne !
 
 import ch.hegarc.ig.business.Projet;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

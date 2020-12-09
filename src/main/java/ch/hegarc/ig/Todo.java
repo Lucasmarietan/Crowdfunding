@@ -4,8 +4,7 @@ public class Todo {
 
 	/** Notes de développement de Tanguy
 	 *
-	 * TODO Gestion d'un projet avec des espaces dans le nom
-	 *      Ajout de fonctionnalité Logger sur les autres classe ??
+	 * TODO Ajout de fonctionnalité Logger sur les autres classe ??
 	 *
 	 * Choix du Jackson pour import le Json car est le plus simple. Je me suis fortement inspiré de la série 5 pour construire le dossier Jackson
 	 * JacksonWriter peremt d'exporter un projet avec ses donateurs. Faut-il changer de signature pour tout exporter ??

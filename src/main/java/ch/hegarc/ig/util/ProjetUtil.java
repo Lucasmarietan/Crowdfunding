@@ -4,11 +4,9 @@ package ch.hegarc.ig.util;
 
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
-import sun.print.DialogOnTop;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 // Cette classe a été créée pour gérer le stockage des projets dans le programme
 // également créée pour les méthodes qui s'appliquent à tous les projets

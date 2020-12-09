@@ -4,14 +4,16 @@ package ch.hegarc.ig.util;
 
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
+import ch.hegarc.ig.util.jackson.JacksonWriter;
 
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 //  Cette classe a été créée pour les méthodes qui ne s'appliquent pas à tous les projets
 
 public class CollectionUtil {
-//	Fonctionne ! A voir encore où on l'appelle
+//	Fonctionne !
 	public static List <Donateur> plusGrosDonateur (Projet projet, int nb) { // Libre à l'utilisateur de choisir un autre nombre que 5
 		return projet.getDonateurs ().stream ().sorted(Comparator.comparing (Donateur::getSomme).reversed ()).limit (nb).collect(Collectors.toList());
 	}
