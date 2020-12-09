@@ -4,8 +4,6 @@ public class Todo {
 
 	/** Notes de développement de Tanguy
 	 *
-	 * TODO Ajout de fonctionnalité Logger sur les autres classe ??
-	 *
 	 * Choix du Jackson pour import le Json car est le plus simple. Je me suis fortement inspiré de la série 5 pour construire le dossier Jackson
 	 * JacksonWriter peremt d'exporter un projet avec ses donateurs. Faut-il changer de signature pour tout exporter ??
 	 *
@@ -55,10 +53,10 @@ public class Todo {
 	 **      Pouvoir trier la liste des dons d'abords selon le nom du projet, puis au sein de chaque projet, selon le nom et le prénom du donateur du donateur. PAR DEFAUT !
 	 *
 	 * Pouvoir ajouter un donateur sur un projet (en fournissant le nom du projet, le nom et prénom du donateur et la somme du don). Une nouvelle commande (Console.class) doit être ajoutée pour cette étape
-	 * TODO  Gérer l'appel dans la Console de ProjetUtil.class : addDonateur (String projetName, String nom, String prenom, long somme)
+	 * Gérer l'appel dans la Console de ProjetUtil.class : addDonateur (String projetName, String nom, String prenom, long somme)
 	 *
 	 * Pouvoir  supprimer  un  donateur  d'une  liste  (selon  le  nom  du  projet,  le  nom  et  prénom  du donateur). Une nouvelle commande (Console.class) doit être ajoutée pour cette étape.
-	 * TODO  Gérer l'appel dans la Console ProjetUtil.class : removeDonateur (String projetName, String nom, String prenom)
+	 * Gérer l'appel dans la Console ProjetUtil.class : removeDonateur (String projetName, String nom, String prenom)
 	 *
 	 ***** Semaine 2 : *****
 	 * Au  travers  de  méthodes  et  de  classes  de  votre  choix,  implémenter  les  fonctionnalités  suivantes au projet Crowdfunding:
