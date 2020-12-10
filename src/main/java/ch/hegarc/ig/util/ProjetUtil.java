@@ -1,7 +1,5 @@
 package ch.hegarc.ig.util;
 
-// Classe propre.
-
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
 
@@ -9,11 +7,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 // Cette classe a été créée pour gérer le stockage des projets dans le programme
-// également créée pour les méthodes qui s'appliquent à tous les projets
+// Également créée pour les méthodes qui s'appliquent à tous les projets
 
 public class ProjetUtil {
 	private Set<Projet> projets;
 	// Choix du Set car il ne pouvait pas y avoir de doublons, même si finalement cela concernait surtout le nom du projet pour y fusionner les donateurs...
+
+	/**
+	 * Constructeurs
+	 */
 
 	public ProjetUtil () {
 		this.projets = new TreeSet <> ();
@@ -23,7 +25,6 @@ public class ProjetUtil {
 		this.projets = projets;
 	}
 
-//	Fonctionne ! (Pas d'espaces dans donateurs. Gère les dons sur plusieurs projets d'un même donateur. Gère que les noms, pas les prénoms...)
 	public double totalDonsDonateurs (String donateurs) {
 		double somme;
 		List<Donateur> allDonateurs = allDonateurs ();
@@ -44,7 +45,6 @@ public class ProjetUtil {
 		return donateursMap.values ().stream ().reduce ((double) 0, Double::sum);
 	}
 
-//	Fonctionne !
 	public boolean addDonateur (String projetName, String nom, String prenom, long somme) {
 		Projet p = getProjet (projetName);
 		if (p != null)
@@ -52,14 +52,12 @@ public class ProjetUtil {
 		return false;
 	}
 
-//	Fonctionne !
 	public void removeDonateur (String projetName, String nom, String prenom) {
 		Projet p = getProjet (projetName);
 		if (p != null)
 			p.removeDonateur (new Donateur (nom, prenom));
 	}
 
-//	Fonctionne !
 	public List<Donateur> pasEncorePaye () {
 		List<Donateur> donateurs = new LinkedList <> ();
 		for (Projet p : this.projets) {

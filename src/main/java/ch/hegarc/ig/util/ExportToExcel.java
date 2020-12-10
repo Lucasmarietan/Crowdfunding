@@ -6,28 +6,72 @@ import org.apache.poi.xssf.usermodel.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ExportToExcel {
 	private static final Logger logger = Logger.getLogger (ExportToExcel.class.getName ());
 
-//	public static void run () {
-//
-//	}
-
-	public static void run (Projet projet) {
+	public static void run (List<Projet> projets, String fileName) {
 		XSSFWorkbook wb = miseEnPage ();
-//		XSSFWorkbook wb = new XSSFWorkbook ();
-//		XSSFSheet sheet = wb.createSheet ("Stats_" + projet.getProjet ()); // Nom de la feuille
-//		XSSFRow row = sheet.createRow (rowNb);
-//		XSSFCell cell = row.createCell (columnNb);
-//		cell.setCellValue ("Prénom");
-//		cell.setCellFormula ("AVERAGEA(A2:C2)");
-		try (OutputStream fileOut = new FileOutputStream ("file.xlsx")) {
+		XSSFSheet sheet = wb.getSheetAt (0);
+		wb.setSheetName(wb.getSheetIndex(sheet), "Projets");
+		for (int i = 0; i < projets.size (); i++)
+			wb = addProjet (wb, projets.get (i), i + 1);
+//          On appelle cette fonction pour chaque projet. Après un projet, on décale d'une colonne vers la droite
+
+		try (OutputStream fileOut = new FileOutputStream (fileName)) {
 			wb.write (fileOut);
+			logger.log (Level.INFO, "Fichier '" + fileName + "' crée avec succès !");
 		} catch (IOException e) {
 			e.printStackTrace ();
 		}
+	}
+
+	public static void run (Projet projet, String fileName) {
+		XSSFWorkbook wb = miseEnPage ();
+		XSSFSheet sheet = wb.getSheetAt (0);
+		wb.setSheetName(wb.getSheetIndex(sheet), projet.getProjet ());
+
+		wb = addProjet (wb, projet, 1);
+
+		try (OutputStream fileOut = new FileOutputStream (fileName)) {
+			wb.write (fileOut);
+			logger.log (Level.INFO, "Fichier '" + fileName + "' crée avec succès !");
+		} catch (IOException e) {
+			e.printStackTrace ();
+		}
+	}
+
+	private static XSSFWorkbook addProjet (XSSFWorkbook wb, Projet projet, int numColonne) {
+		XSSFSheet sheet = wb.getSheetAt (0);
+		XSSFRow row = sheet.getRow (0);
+		XSSFCell cell = row.createCell (numColonne);
+		cell.setCellValue (projet.getProjet ());
+		row = sheet.getRow (1);
+		cell = row.createCell (numColonne);
+		cell.setCellValue (CollectionUtil.argentDejaPaye (projet));
+		row = sheet.getRow (2);
+		cell = row.createCell (numColonne);
+		cell.setCellValue (CollectionUtil.argentRestantAPaye (projet));
+		row = sheet.getRow (3);
+		cell = row.createCell (numColonne);
+		cell.setCellValue (CollectionUtil.argentTotal (projet));
+//		Pour mettre la cellule en gras (Ligne TOTAL)
+		XSSFCellStyle styleBold = wb.createCellStyle(); XSSFFont font = wb.createFont(); font.setBold (true); styleBold.setFont (font);
+		cell.setCellStyle (styleBold);
+
+		row = sheet.getRow (5);
+		cell = row.createCell (numColonne);
+		cell.setCellValue (CollectionUtil.nombreDonsPasAnnule (projet));
+		row = sheet.getRow (6);
+		cell = row.createCell (numColonne);
+		cell.setCellValue (CollectionUtil.moyenneDons (projet));
+
+		sheet.autoSizeColumn (numColonne);
+
+		return wb;
 	}
 
 	private static XSSFWorkbook miseEnPage () {
@@ -49,13 +93,9 @@ public class ExportToExcel {
 		XSSFRow row4 = sheet.createRow (3);
 		XSSFCell cell4 = row4.createCell (0);
 		cell4.setCellValue ("Total");
-		XSSFCellStyle styleBold = wb.createCellStyle();
-		XSSFFont font = wb.createFont();
-		font.setBold (true);
-		styleBold.setFont (font);
-		row4.setRowStyle (styleBold);
-
-		XSSFRow row5 = sheet.createRow (4);
+//		Pour mettre la cellule en gras (Ligne TOTAL)
+		XSSFCellStyle styleBold = wb.createCellStyle(); XSSFFont font = wb.createFont(); font.setBold (true); styleBold.setFont (font);
+		cell4.setCellStyle (styleBold);
 
 		XSSFRow row6 = sheet.createRow (5);
 		XSSFCell cell6 = row6.createCell (0);
@@ -63,7 +103,9 @@ public class ExportToExcel {
 
 		XSSFRow row7 = sheet.createRow (6);
 		XSSFCell cell7 = row7.createCell (0);
-		cell7.setCellValue ("Nombre de dons (non-annulés)");
+		cell7.setCellValue ("Moyenne des dons");
+
+		sheet.autoSizeColumn (0);
 
 		return wb;
 	}

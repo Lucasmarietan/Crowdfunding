@@ -27,40 +27,35 @@ public class Projet implements Comparable<Projet> {
 
 //	Les projets seront "Toujours" classés par ordre alphabétique
 	@Override
-	public int compareTo(Projet p) {
+	public int compareTo (Projet p) {
 		return this.getProjet ().compareTo (p.getProjet ());
 	}
 
-//	Fonctionne !
 	public void triDonateursNomPrenom () {
 		this.donateurs = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getNom).thenComparing (Donateur::getPrenom)).collect(Collectors.toList());
 	}
 
-//	Fonctionne !
 	public void triDonateursID () {
 		this.donateurs = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getId)).collect(Collectors.toList());
 	}
 
-//	Fonctionne !
+	public void addDonateurs (List<Donateur> donateurs) {
+	for (Donateur d : donateurs)
+		addDonateur (d);
+}
+
 	public boolean addDonateur (Donateur donateur) {
 		boolean present = false;
 		for (Donateur d : this.donateurs) {
 			if (d.equals (donateur))
 				present = true;
 		}
-		if (!present)
+		if (!present) // Si le donateur n'existe pas
 			this.donateurs.add (donateur);
 		triDonateursNomPrenom ();
 		return !present;
 	}
 
-//	Fonctionne !
-	public void addDonateurs (List<Donateur> donateurs) {
-		for (Donateur d : donateurs)
-			addDonateur (d);
-	}
-
-//	Fonctionne !
 	public void removeDonateur (Donateur donateur) {
 		this.donateurs = this.donateurs.stream ().filter (donateur1 -> !(donateur1.getPrenom ().equalsIgnoreCase (donateur.getPrenom ()) && donateur1.getNom ().equalsIgnoreCase (donateur.getNom ()))).collect(Collectors.toList());
 	}

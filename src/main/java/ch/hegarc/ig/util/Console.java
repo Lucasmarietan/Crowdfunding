@@ -128,7 +128,7 @@ public class Console {
 //					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
 //					System.out.println ("Total pour personnes concernees : " + this.projets.totalDonsDonateurs ("Mannin,Meylan"));
 
-					ExportToExcel.run (this.projets.getProjet (1));
+					ExportToExcel.run (this.projets.toList (), "stats.xlsx");
 
 					break;
 
