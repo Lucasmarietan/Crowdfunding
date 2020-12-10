@@ -18,7 +18,7 @@ public class Console {
 	final private String CMD_EXPORT = "export";
 	final private String CMD_EXIT = "exit";
 	final private String CMD_STATS = "stats";
-	//	Nouvelle commande
+//	Nouvelle commande
 	final private String CMD_ADD_DONATEUR = "don";
 	final private String CMD_REMOVE_DONATEUR = "del"; // TODO - Définir un meilleur mot-clé
 
@@ -33,12 +33,9 @@ public class Console {
 	 * Démarre la commande
 	 */
 	public void runCommand () {
-//		Pour stocker les projets à un endroit centralisé
-		this.projets = new ProjetUtil ();
+		this.projets = new ProjetUtil (); // Pour stocker les projets à un endroit centralisé
 		this.projets.addProjets (Projet.newPopProjets ()); // Peuplement automatique en dur
 		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
-//		for (Projet pj : this.projets.toList ())
-//			System.out.println (pj.toString (false));
 
 		Scanner command = new Scanner(System.in);
 
@@ -81,14 +78,18 @@ public class Console {
 						printAppHelp();
 					break;
 
-				case CMD_EXPORT: // Fonctionne parfaitement !
+				case CMD_EXPORT:
 					if (cmdLine.hasOption(OPT_FICHIER.getOpt()) && cmdLine.hasOption(OPT_PROJET.getOpt())) {
 
 						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
 						String projectName = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
 
-						if (projectName.equalsIgnoreCase ("ALL")) // Exporter tous les projets dans un JSON (pas de test de fichier)
-							JacksonWriter.run (this.projets.toList (), fileName);
+						if (projectName.equalsIgnoreCase ("ALL")) { // Exporter tous les projets dans un JSON
+							if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
+								JacksonWriter.run (this.projets.toList (), fileName);
+							else
+								System.out.println ("Votre type de fichier n'est pas pris en charge...");
+						}
 						else {
 							Projet exportProjet = this.projets.getProjet (projectName); // Recherche du projet dans le programme
 							if (exportProjet != null) {
@@ -105,6 +106,28 @@ public class Console {
 					break;
 
 				case CMD_STATS:
+					if (cmdLine.hasOption(OPT_FICHIER.getOpt()) || (cmdLine.hasOption (OPT_FICHIER.getOpt ()) && cmdLine.hasOption (OPT_PROJET.getOpt ()))) { // Soit il y a fichier ET projet, soit il y a Que fichier
+						if (cmdLine.getOptionValue (OPT_FICHIER.getOpt ()).split ("\\.")[1].equalsIgnoreCase ("XLSX")) { // On teste si le nom du fichier se termine par .xlsx
+							if (!cmdLine.hasOption (OPT_PROJET.getOpt ())) // Si pas d'argument projet, on sort TOUS les projets
+								ExportToExcel.run (this.projets.toList (), cmdLine.getOptionValue (OPT_FICHIER.getOpt ()));
+							else {
+								Projet excelProjet = this.projets.getProjet (cmdLine.getOptionValue (OPT_PROJET.getOpt ())); // Recherche du projet dans le programme
+								if (excelProjet != null)
+									ExportToExcel.run (excelProjet, cmdLine.getOptionValue (OPT_FICHIER.getOpt ()));
+								else
+									System.out.println ("Le projet désiré n'existe pas...");
+							}
+						}
+						else
+							System.out.println ("Votre type de fichier n'est pas pris en charge...");
+					}
+					else if (cmdLine.hasOption (OPT_FICHIER.getOpt ()) && cmdLine.hasOption (OPT_PROJET.getOpt ())) {
+
+					}
+					else {
+						printAppHelp ();
+					}
+					break;
 /*					Ici on commence à tester CollectionUtil */
 //					List<Donateur> donateurs = CollectionUtil.plusGrosDonateur (this.projets.getProjet (1), 2);
 //					String email = CollectionUtil.tousEmail (this.projets.getProjet (1));
@@ -128,17 +151,13 @@ public class Console {
 //					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
 //					System.out.println ("Total pour personnes concernees : " + this.projets.totalDonsDonateurs ("Mannin,Meylan"));
 
-					ExportToExcel.run (this.projets.toList (), "stats.xlsx");
-
-					break;
-
 				case CMD_EXIT:
-					System.out.println("Fermeture!");
+					System.out.println("Fermeture !");
 					running = false;
 					break;
 
 				default:
-					System.out.println("Commande non reconnue!");
+					System.out.println("Commande non reconnue !");
 					break;
 			}
 		}
@@ -185,7 +204,7 @@ public class Console {
 		HelpFormatter formatter = new HelpFormatter();
 		formatter.printHelp(CMD_IMPORT, new Options().addOption(OPT_FICHIER), true);
 		formatter.printHelp(CMD_EXPORT, new Options().addOption(OPT_FICHIER).addOption(OPT_PROJET), true);
-		formatter.printHelp(CMD_STATS, new Options().addOption(OPT_PROJET), true);
+		formatter.printHelp(CMD_STATS, new Options().addOption(OPT_PROJET).addOption (OPT_FICHIER), true);
 		formatter.printHelp(CMD_ADD_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM).addOption (OPT_DON_SOMME), true);
 		formatter.printHelp(CMD_REMOVE_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM), true);
 		formatter.printHelp(CMD_EXIT, new Options());

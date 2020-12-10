@@ -1,7 +1,5 @@
 package ch.hegarc.ig.util.jackson;
 
-// Classe prête et qui fonctionne !
-
 import ch.hegarc.ig.business.Projet;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;

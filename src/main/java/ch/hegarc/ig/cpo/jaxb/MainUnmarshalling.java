@@ -1,7 +1,5 @@
 package ch.hegarc.ig.cpo.jaxb;
 
-// Classe prête et qui fonctionne !
-
 import ch.hegarc.ig.business.Projet;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
