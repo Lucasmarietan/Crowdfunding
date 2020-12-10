@@ -18,10 +18,10 @@ public class MainUnmarshalling {
 	public static List<Projet> run (String fileName) {
 		List<Projet> projetList = new LinkedList <> ();
 		try {
-			JAXBContext jc = JAXBContext.newInstance("ch.hegarc.ig.cpo.jaxb");
-			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			XMLStreamReader in = XMLInputFactory.newInstance().createXMLStreamReader(new FileInputStream (fileName));
-			JAXBElement <Dataset> o = (JAXBElement<Dataset>) unmarshaller.unmarshal(in, Dataset.class);
+			JAXBContext jc = JAXBContext.newInstance ("ch.hegarc.ig.cpo.jaxb");
+			Unmarshaller unmarshaller = jc.createUnmarshaller ();
+			XMLStreamReader in = XMLInputFactory.newInstance ().createXMLStreamReader (new FileInputStream (fileName));
+			JAXBElement <Dataset> o = unmarshaller.unmarshal (in, Dataset.class);
 			Dataset projets = o.getValue();
 
 //			Pour récupérer les projets du XML et les garder dans le programme

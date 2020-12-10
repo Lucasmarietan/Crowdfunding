@@ -12,12 +12,13 @@ import java.util.logging.Logger;
 public class JacksonWriter {
 	private static final Logger logger = Logger.getLogger (JacksonWriter.class.getName ());
 
-//	Pour exporter tous les projets dans un json
+	/**
+	 * @param projets Pour exporter tous les projets
+	 * @param fileName Dans un .json
+	 */
 	public static void run (List<Projet> projets, String fileName) {
 		try {
 			ObjectMapper om = new ObjectMapper ();
-
-//			Ecriture avec pretty print
 			om.writerWithDefaultPrettyPrinter ().writeValue (new File (fileName), projets);
 
 			logger.log (Level.INFO, "Fichier '" + fileName + "' crée avec succès !");
@@ -26,15 +27,13 @@ public class JacksonWriter {
 		}
 	}
 
-//	Pour exporter un seul projet dans un JSON
+	/**
+	 * @param projet Pour exporter un seul projet
+	 * @param fileName Dans un .json
+	 */
 	public static void run (Projet projet, String fileName) {
 		try {
 			ObjectMapper om = new ObjectMapper ();
-
-//			Ignorer les champs vide - TODO Copier de la série 5. On garde ?
-//			om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-
-//			Ecriture avec pretty print
 			om.writerWithDefaultPrettyPrinter ().writeValue (new File (fileName), projet);
 
 			logger.log (Level.INFO, "Fichier '" + fileName + "' créé avec succès ! ");

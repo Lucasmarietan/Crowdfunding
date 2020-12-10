@@ -4,10 +4,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 // Classe implémentée par Comparable pour permettre aux projets d'être toujours classés par ordre alphabétique
-public class Projet implements Comparable<Projet> {
+public class Projet implements Comparable <Projet> {
 	private long id;
 	private String projet;
 	private List<Donateur> donateurs = new ArrayList<Donateur>();
+
+	/*********************
+	 * Les constructeurs *
+	 *********************/
 
 	public Projet () {
 	}
@@ -22,14 +26,17 @@ public class Projet implements Comparable<Projet> {
 		this.id = id;
 		this.projet = name;
 		setDonateurs (donateurs);
-		this.triDonateursNomPrenom ();
+		this.triDonateursNomPrenom (); // Tri systématique des donateurs
 	}
 
-//	Les projets seront "Toujours" classés par ordre alphabétique
-	@Override
+	@Override // Les projets seront "Toujours" classés par ordre alphabétique
 	public int compareTo (Projet p) {
 		return this.getProjet ().compareTo (p.getProjet ());
 	}
+
+	/*************************
+	 * Fonctions spécifiques *
+	 *************************/
 
 	public void triDonateursNomPrenom () {
 		this.donateurs = this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getNom).thenComparing (Donateur::getPrenom)).collect(Collectors.toList());
@@ -46,19 +53,23 @@ public class Projet implements Comparable<Projet> {
 
 	public boolean addDonateur (Donateur donateur) {
 		boolean present = false;
-		for (Donateur d : this.donateurs) {
+		for (Donateur d : this.donateurs) { // On parcourt la liste pour savoir si le donateur existe déjà
 			if (d.equals (donateur))
 				present = true;
 		}
 		if (!present) // Si le donateur n'existe pas
 			this.donateurs.add (donateur);
-		triDonateursNomPrenom ();
+		triDonateursNomPrenom (); // Tri systématique des donateurs
 		return !present;
 	}
 
 	public void removeDonateur (Donateur donateur) {
 		this.donateurs = this.donateurs.stream ().filter (donateur1 -> !(donateur1.getPrenom ().equalsIgnoreCase (donateur.getPrenom ()) && donateur1.getNom ().equalsIgnoreCase (donateur.getNom ()))).collect(Collectors.toList());
 	}
+
+	/**************************
+	 * Les getters et Setters *
+	 **************************/
 
 	public long getId() {
 		return id;
@@ -80,7 +91,9 @@ public class Projet implements Comparable<Projet> {
 		return donateurs;
 	}
 
-//	TODO - Pour l'unicité des donateurs dans un projet ; A CHECKER !
+	/**
+	 * @param donateurs Vérifie dans la liste si un donateur est à double
+	 */
 	public void setDonateurs(List<Donateur> donateurs) {
 		for (int i = 0; i < donateurs.size (); i++) {
 			for (int j = i + 1; j < donateurs.size (); j++) {
@@ -90,6 +103,10 @@ public class Projet implements Comparable<Projet> {
 		}
 		this.donateurs = donateurs;
 	}
+
+	/**********
+	 * Autres *
+	 **********/
 
 	public String toString (boolean avecDonateurs) {
 		StringBuilder sb = new StringBuilder ();
@@ -106,14 +123,10 @@ public class Projet implements Comparable<Projet> {
 		return sb.toString ();
 	}
 
-	public boolean equals (Projet projet) {
-		return this.projet.equalsIgnoreCase (projet.getProjet ());
-	}
-
-	public boolean equals (String projetName) {
-		return this.projet.equalsIgnoreCase (projetName);
-	}
-
+	/**
+	 * Pour peupler en dur le programme avec des projets
+	 * @return
+	 */
 	public static List<Projet> newPopProjets () {
 		List<Projet> projets = new LinkedList <> ();
 		List<Donateur> donateurs = Donateur.newPopDonateurs ();

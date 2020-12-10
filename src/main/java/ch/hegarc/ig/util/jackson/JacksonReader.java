@@ -17,9 +17,7 @@ public class JacksonReader {
 	public static List<Projet> run (String filename) {
 		List<Projet> projets = null;
 		try {
-//			ObjectMapper en ignorant les propriétés inconnues
 			ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
 			projets = om.readValue(new File(filename), new TypeReference<List<Projet>>(){});
 
 			logger.log (Level.INFO, "Fichier '" + filename + "' importé dans le programme avec succès ! ");

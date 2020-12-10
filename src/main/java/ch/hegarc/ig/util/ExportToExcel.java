@@ -13,6 +13,10 @@ import java.util.logging.Logger;
 public class ExportToExcel {
 	private static final Logger logger = Logger.getLogger (ExportToExcel.class.getName ());
 
+	/**
+	 * @param projets Pour exporter les stats de tous les projets
+	 * @param fileName Dans un .xlsx
+	 */
 	public static void run (List<Projet> projets, String fileName) {
 		XSSFWorkbook wb = miseEnPage ();
 		XSSFSheet sheet = wb.getSheetAt (0);
@@ -29,6 +33,10 @@ public class ExportToExcel {
 		}
 	}
 
+	/**
+	 * @param projet Pour exporter les stats d'un seul projet
+	 * @param fileName Dans un fichier .xslx
+	 */
 	public static void run (Projet projet, String fileName) {
 		XSSFWorkbook wb = miseEnPage ();
 		XSSFSheet sheet = wb.getSheetAt (0);
@@ -44,6 +52,12 @@ public class ExportToExcel {
 		}
 	}
 
+	/**
+	 * @param wb Pour travailler sur un fichier dans toute la classe
+	 * @param projet
+	 * @param numColonne Pour décaler de colonne à chaque projet
+	 * @return Pour travailler sur un seul fichier dans toute la classe
+	 */
 	private static XSSFWorkbook addProjet (XSSFWorkbook wb, Projet projet, int numColonne) {
 		XSSFSheet sheet = wb.getSheetAt (0);
 		XSSFRow row = sheet.getRow (0);
@@ -69,11 +83,14 @@ public class ExportToExcel {
 		cell = row.createCell (numColonne);
 		cell.setCellValue (CollectionUtil.moyenneDons (projet));
 
-		sheet.autoSizeColumn (numColonne);
+		sheet.autoSizeColumn (numColonne); // Pour ajuster la largeur de la colonne au contenu
 
 		return wb;
 	}
 
+	/**
+	 * @return Un fichier avec le intitulé déjà fait
+	 */
 	private static XSSFWorkbook miseEnPage () {
 		XSSFWorkbook wb = new XSSFWorkbook ();
 		XSSFSheet sheet = wb.createSheet ();

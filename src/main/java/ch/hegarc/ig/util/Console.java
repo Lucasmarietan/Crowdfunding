@@ -7,8 +7,6 @@ import ch.hegarc.ig.util.jackson.JacksonReader;
 import ch.hegarc.ig.util.jackson.JacksonWriter;
 import org.apache.commons.cli.*;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Console {
@@ -20,7 +18,7 @@ public class Console {
 	final private String CMD_STATS = "stats";
 //	Nouvelle commande
 	final private String CMD_ADD_DONATEUR = "don";
-	final private String CMD_REMOVE_DONATEUR = "del"; // TODO - Définir un meilleur mot-clé
+	final private String CMD_REMOVE_DONATEUR = "del";
 
 	final private Option OPT_FICHIER = new Option("f", "fichier", true, "nom du fichier");
 	final private Option OPT_PROJET = new Option("p", "projet", true, "nom du projet");
@@ -41,7 +39,7 @@ public class Console {
 
 		boolean running = true;
 		while (running) {
-			System.out.println("Entrer votre commande: ");
+			System.out.println("Entrez votre commande: ");
 			String com = command.nextLine();
 			String[] arguments = com.split(" ");
 			CommandLine cmdLine = parseArguments(arguments);
@@ -63,9 +61,7 @@ public class Console {
 
 				case CMD_IMPORT:
 					if (cmdLine.hasOption(OPT_FICHIER.getOpt())) {
-
 						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
-
 //						Traitement du fichier en .json (c'était compliqué de comprendre l'erreur "\\.")
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
 							this.projets.addProjets (JacksonReader.run (fileName));
@@ -74,13 +70,13 @@ public class Console {
 							this.projets.addProjets (MainUnmarshalling.run (fileName));
 						else
 							System.out.println ("Ce type de fichier n'est pas encore pris en compte");
-					} else
+					}
+					else
 						printAppHelp();
 					break;
 
 				case CMD_EXPORT:
 					if (cmdLine.hasOption(OPT_FICHIER.getOpt()) && cmdLine.hasOption(OPT_PROJET.getOpt())) {
-
 						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
 						String projectName = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
 
@@ -121,35 +117,9 @@ public class Console {
 						else
 							System.out.println ("Votre type de fichier n'est pas pris en charge...");
 					}
-					else if (cmdLine.hasOption (OPT_FICHIER.getOpt ()) && cmdLine.hasOption (OPT_PROJET.getOpt ())) {
-
-					}
-					else {
+					else
 						printAppHelp ();
-					}
 					break;
-/*					Ici on commence à tester CollectionUtil */
-//					List<Donateur> donateurs = CollectionUtil.plusGrosDonateur (this.projets.getProjet (1), 2);
-//					String email = CollectionUtil.tousEmail (this.projets.getProjet (1));
-//					System.out.println (email);
-//					System.out.println ("Les donateurs qui n'ont pas paye : ");
-//					List<Donateur> donateurs = CollectionUtil.pasEncorePaye (this.projets.getProjet (1));
-//					for (Donateur d : donateurs)
-//						System.out.println (d.toString ());
-//					System.out.println ("Somme argent déjà payé : " + CollectionUtil.argentDejaPaye (this.projets.getProjet (1)));
-//					System.out.println ("Somme argent encore à payer : " + CollectionUtil.argentRestantAPaye (this.projets.getProjet (1)));
-//					System.out.println ("Somme totale : " + CollectionUtil.argentTotal (this.projets.getProjet (1)));
-//					System.out.println ("Commission : " + CollectionUtil.commission (this.projets.getProjet (1)));
-//					System.out.println ("Mediane : " + CollectionUtil.medianeDons (this.projets.getProjet (1)));
-//					System.out.println ("Moyenne : " + CollectionUtil.moyenneDons (this.projets.getProjet (1)));
-//					this.projets.getProjet (1).triDonateurs ();
-//					for (Donateur d : this.projets.getProjet (1).getDonateurs ())
-//						System.out.println (d.toString ());
-//					List<Donateur> donateurs = this.projets.pasEncorePaye ();
-//					for (Donateur d : donateurs)
-//						System.out.println (d.toString ());
-//					this.projets.addProjet (new Projet (80, "Aaaaaa", null));
-//					System.out.println ("Total pour personnes concernees : " + this.projets.totalDonsDonateurs ("Mannin,Meylan"));
 
 				case CMD_EXIT:
 					System.out.println("Fermeture !");
@@ -171,17 +141,17 @@ public class Console {
 	 * @return <code>CommandLine</code> which represents a list of application
 	 * arguments.
 	 */
-	private CommandLine parseArguments(String[] args) {
-		Options options = getAllOptions();
+	private CommandLine parseArguments (String[] args) {
+		Options options = getAllOptions ();
 		CommandLine line = null;
-		CommandLineParser parser = new DefaultParser();
+		CommandLineParser parser = new DefaultParser ();
 
 		try {
-			line = parser.parse(options, args);
+			line = parser.parse (options, args);
 		} catch (ParseException ex) {
-			System.err.println("Erreur dans la lecture des arguments!");
-			System.err.println(ex.toString());
-			printAppHelp();
+			System.err.println ("Erreur dans la lecture des arguments !");
+			System.err.println (ex.toString());
+			printAppHelp ();
 		}
 		return line;
 	}
@@ -191,9 +161,9 @@ public class Console {
 	 *
 	 * @return application <code>Options</code>
 	 */
-	private Options getAllOptions() {
-		Options options = new Options();
-		options.addOption(OPT_FICHIER).addOption(OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM).addOption (OPT_DON_SOMME);
+	private Options getAllOptions () {
+		Options options = new Options ();
+		options.addOption (OPT_FICHIER).addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM).addOption (OPT_DON_SOMME);
 		return options;
 	}
 
@@ -202,11 +172,11 @@ public class Console {
 	 */
 	private void printAppHelp() {
 		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp(CMD_IMPORT, new Options().addOption(OPT_FICHIER), true);
-		formatter.printHelp(CMD_EXPORT, new Options().addOption(OPT_FICHIER).addOption(OPT_PROJET), true);
-		formatter.printHelp(CMD_STATS, new Options().addOption(OPT_PROJET).addOption (OPT_FICHIER), true);
-		formatter.printHelp(CMD_ADD_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM).addOption (OPT_DON_SOMME), true);
-		formatter.printHelp(CMD_REMOVE_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM), true);
-		formatter.printHelp(CMD_EXIT, new Options());
+		formatter.printHelp (CMD_IMPORT, new Options ().addOption (OPT_FICHIER), true);
+		formatter.printHelp (CMD_EXPORT, new Options ().addOption (OPT_FICHIER).addOption (OPT_PROJET), true);
+		formatter.printHelp (CMD_STATS, new Options ().addOption (OPT_PROJET).addOption (OPT_FICHIER), true);
+		formatter.printHelp (CMD_ADD_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM).addOption (OPT_DON_SOMME), true);
+		formatter.printHelp (CMD_REMOVE_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM), true);
+		formatter.printHelp (CMD_EXIT, new Options ());
 	}
 }

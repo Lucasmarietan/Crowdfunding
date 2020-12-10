@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Donateur {
-
 	private long id;
 	private String prenom;
 	private String nom;
@@ -19,25 +18,27 @@ public class Donateur {
 	private String dateDon;
 	private String dateVersement;
 
+	/*********************
+	 * Les constructeurs *
+	 *********************/
+
 	public Donateur() {
 	}
 
-	public Donateur (String nom, String prenom) {
+	public Donateur (String prenom, String nom) {
 		this.nom = nom;
 		this.prenom = prenom;
 	}
 
-	public Donateur (String nom, String prenom, long somme) {
-		this.prenom = prenom;
-		this.nom = nom;
+	public Donateur (String prenom, String nom, long somme) {
+		this (prenom, nom);
 		this.somme = somme;
 		this.monnaie = "CHF";
 	}
 
 	public Donateur (long id, String prenom, String nom, String monnaie, long somme) {
+		this (prenom, nom);
 		this.id = id;
-		this.prenom = prenom;
-		this.nom = nom;
 		this.monnaie = monnaie;
 		this.somme = somme;
 	}
@@ -48,37 +49,19 @@ public class Donateur {
 		this.annule = annule;
 	}
 
-	/**
-	 * @param somme
-	 * @param ville
-	 * @param monnaie
-	 * @param paye
-	 * @param langue
-	 * @param nom
-	 * @param annule
-	 * @param dateDon
-	 * @param prenom
-	 * @param dateVersement
-	 * @param adresse
-	 * @param id
-	 * @param email
-	 */
 	public Donateur(long id, String prenom, String nom, String email, String langue, String adresse, String ville, String monnaie, long somme, boolean paye, boolean annule, String dateDon, String dateVersement) {
-		super();
-		this.id = id;
-		this.prenom = prenom;
-		this.nom = nom;
+		this (id, prenom, nom, monnaie, somme, paye, annule);
 		this.email = email;
 		this.langue = langue;
 		this.adresse = adresse;
 		this.ville = ville;
-		this.monnaie = monnaie;
-		this.somme = somme;
-		this.paye = paye;
-		this.annule = annule;
 		this.dateDon = dateDon;
 		this.dateVersement = dateVersement;
 	}
+
+	/*******************************
+	 * Les getteres et les setters *
+	 *******************************/
 
 	public long getId() {
 		return id;
@@ -183,6 +166,10 @@ public class Donateur {
 	public void setDateVersement(String dateVersement) {
 		this.dateVersement = dateVersement;
 	}
+
+	/**********
+	 * Autres *
+	 **********/
 
 	@Override
 	public String toString () {
