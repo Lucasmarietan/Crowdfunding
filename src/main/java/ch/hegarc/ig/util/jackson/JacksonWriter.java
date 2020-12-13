@@ -13,10 +13,10 @@ public class JacksonWriter {
 	private static final Logger logger = Logger.getLogger (JacksonWriter.class.getName ());
 
 	/**
-	 * @param projets Pour exporter tous les projets
+	 * @param projets  Pour exporter tous les projets
 	 * @param fileName Dans un .json
 	 */
-	public static void run (List<Projet> projets, String fileName) {
+	public static void run (List <Projet> projets, String fileName) {
 		try {
 			ObjectMapper om = new ObjectMapper ();
 			om.writerWithDefaultPrettyPrinter ().writeValue (new File (fileName), projets);
@@ -28,7 +28,7 @@ public class JacksonWriter {
 	}
 
 	/**
-	 * @param projet Pour exporter un seul projet
+	 * @param projet   Pour exporter un seul projet
 	 * @param fileName Dans un .json
 	 */
 	public static void run (Projet projet, String fileName) {

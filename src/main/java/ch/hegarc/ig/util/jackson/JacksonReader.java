@@ -12,17 +12,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JacksonReader {
-	private static final Logger logger = Logger.getLogger(JacksonReader.class.getName());
+	private static final Logger logger = Logger.getLogger (JacksonReader.class.getName ());
 
-	public static List<Projet> run (String filename) {
-		List<Projet> projets = null;
+	public static List <Projet> run (String filename) {
+		List <Projet> projets = null;
 		try {
-			ObjectMapper om = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			projets = om.readValue(new File(filename), new TypeReference<List<Projet>>(){});
+			ObjectMapper om = new ObjectMapper ().configure (DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			projets = om.readValue (new File (filename), new TypeReference <List <Projet>> () {
+			});
 
 			logger.log (Level.INFO, "Fichier '" + filename + "' importé dans le programme avec succès ! ");
 		} catch (IOException ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.log (Level.SEVERE, null, ex);
 		}
 		return projets;
 	}

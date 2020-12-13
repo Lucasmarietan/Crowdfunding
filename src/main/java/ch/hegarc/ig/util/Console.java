@@ -1,6 +1,5 @@
 package ch.hegarc.ig.util;
 
-import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
 import ch.hegarc.ig.cpo.jaxb.MainUnmarshalling;
 import ch.hegarc.ig.util.jackson.JacksonReader;
@@ -10,22 +9,20 @@ import org.apache.commons.cli.*;
 import java.util.Scanner;
 
 public class Console {
-	private ProjetUtil projets;
-
 	final private String CMD_IMPORT = "import";
 	final private String CMD_EXPORT = "export";
 	final private String CMD_EXIT = "exit";
 	final private String CMD_STATS = "stats";
-//	Nouvelle commande
+	//	Nouvelle commande
 	final private String CMD_ADD_DONATEUR = "don";
 	final private String CMD_REMOVE_DONATEUR = "del";
-
-	final private Option OPT_FICHIER = new Option("f", "fichier", true, "nom du fichier");
-	final private Option OPT_PROJET = new Option("p", "projet", true, "nom du projet");
-//	Nouvelles options
-	final private Option OPT_DON_NOM = new Option("n", "donateurNom", true, "nom du donateur");
-	final private Option OPT_DON_PRENOM = new Option("r", "donateurPrenom", true, "prenom du donateur");
-	final private Option OPT_DON_SOMME = new Option("s", "sommeDon", true, "Somme du don");
+	final private Option OPT_FICHIER = new Option ("f", "fichier", true, "nom du fichier");
+	final private Option OPT_PROJET = new Option ("p", "projet", true, "nom du projet");
+	//	Nouvelles options
+	final private Option OPT_DON_NOM = new Option ("n", "donateurNom", true, "nom du donateur");
+	final private Option OPT_DON_PRENOM = new Option ("r", "donateurPrenom", true, "prenom du donateur");
+	final private Option OPT_DON_SOMME = new Option ("s", "sommeDon", true, "Somme du don");
+	private ProjetUtil projets;
 
 	/**
 	 * Démarre la commande
@@ -35,16 +32,16 @@ public class Console {
 		this.projets.addProjets (Projet.newPopProjets ()); // Peuplement automatique en dur
 		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
 
-		Scanner command = new Scanner(System.in);
+		Scanner command = new Scanner (System.in);
 
 		boolean running = true;
 		while (running) {
-			System.out.println("Entrez votre commande: ");
-			String com = command.nextLine();
-			String[] arguments = com.split(" ");
-			CommandLine cmdLine = parseArguments(arguments);
+			System.out.println ("Entrez votre commande: ");
+			String com = command.nextLine ();
+			String[] arguments = com.split (" ");
+			CommandLine cmdLine = parseArguments (arguments);
 
-			switch (cmdLine.getArgs()[0].toLowerCase ()) {
+			switch (cmdLine.getArgs ()[0].toLowerCase ()) {
 				case CMD_ADD_DONATEUR:
 					if (cmdLine.hasOption (OPT_PROJET.getOpt ()) && cmdLine.hasOption (OPT_DON_NOM.getOpt ()) && cmdLine.hasOption (OPT_DON_PRENOM.getOpt ()) && cmdLine.hasOption (OPT_DON_SOMME.getOpt ()))
 						this.projets.addDonateur (cmdLine.getOptionValue (OPT_PROJET.getOpt ()), cmdLine.getOptionValue (OPT_DON_NOM.getOpt ()), cmdLine.getOptionValue (OPT_DON_PRENOM.getOpt ()), Long.parseLong (cmdLine.getOptionValue (OPT_DON_SOMME.getOpt ())));
@@ -60,7 +57,7 @@ public class Console {
 					break;
 
 				case CMD_IMPORT:
-					if (cmdLine.hasOption(OPT_FICHIER.getOpt())) {
+					if (cmdLine.hasOption (OPT_FICHIER.getOpt ())) {
 						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
 //						Traitement du fichier en .json (c'était compliqué de comprendre l'erreur "\\.")
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
@@ -70,13 +67,12 @@ public class Console {
 							this.projets.addProjets (MainUnmarshalling.run (fileName));
 						else
 							System.out.println ("Ce type de fichier n'est pas encore pris en compte");
-					}
-					else
-						printAppHelp();
+					} else
+						printAppHelp ();
 					break;
 
 				case CMD_EXPORT:
-					if (cmdLine.hasOption(OPT_FICHIER.getOpt()) && cmdLine.hasOption(OPT_PROJET.getOpt())) {
+					if (cmdLine.hasOption (OPT_FICHIER.getOpt ()) && cmdLine.hasOption (OPT_PROJET.getOpt ())) {
 						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
 						String projectName = cmdLine.getOptionValue (OPT_PROJET.getOpt ());
 
@@ -85,26 +81,24 @@ public class Console {
 								JacksonWriter.run (this.projets.toList (), fileName);
 							else
 								System.out.println ("Votre type de fichier n'est pas pris en charge...");
-						}
-						else {
+						} else {
 							Projet exportProjet = this.projets.getProjet (projectName); // Recherche du projet dans le programme
 							if (exportProjet != null) {
 								if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
 									JacksonWriter.run (exportProjet, fileName);
 								else
 									System.out.println ("Votre type de fichier n'est pas pris en charge...");
-							}
-							else
+							} else
 								System.out.println ("Le projet désiré n'existe pas...");
 						}
 					} else
-						printAppHelp();
+						printAppHelp ();
 					break;
 
 				case CMD_STATS:
-					if (cmdLine.hasOption(OPT_FICHIER.getOpt()) || (cmdLine.hasOption (OPT_FICHIER.getOpt ()) && cmdLine.hasOption (OPT_PROJET.getOpt ()))) { // Soit il y a fichier ET projet, soit il y a Que fichier
+					if (cmdLine.hasOption (OPT_FICHIER.getOpt ()) || (cmdLine.hasOption (OPT_FICHIER.getOpt ()) && cmdLine.hasOption (OPT_PROJET.getOpt ()))) { // Soit il y a fichier ET projet, soit il y a Que fichier
 						if (cmdLine.getOptionValue (OPT_FICHIER.getOpt ()).split ("\\.")[1].equalsIgnoreCase ("XLSX")) { // On teste si le nom du fichier se termine par .xlsx
-							if (!cmdLine.hasOption (OPT_PROJET.getOpt ())) // Si pas d'argument projet, on sort TOUS les projets
+							if (! cmdLine.hasOption (OPT_PROJET.getOpt ())) // Si pas d'argument projet, on sort TOUS les projets
 								ExportToExcel.run (this.projets.toList (), cmdLine.getOptionValue (OPT_FICHIER.getOpt ()));
 							else {
 								Projet excelProjet = this.projets.getProjet (cmdLine.getOptionValue (OPT_PROJET.getOpt ())); // Recherche du projet dans le programme
@@ -113,25 +107,23 @@ public class Console {
 								else
 									System.out.println ("Le projet désiré n'existe pas...");
 							}
-						}
-						else
+						} else
 							System.out.println ("Votre type de fichier n'est pas pris en charge...");
-					}
-					else
+					} else
 						printAppHelp ();
 					break;
 
 				case CMD_EXIT:
-					System.out.println("Fermeture !");
+					System.out.println ("Fermeture !");
 					running = false;
 					break;
 
 				default:
-					System.out.println("Commande non reconnue !");
+					System.out.println ("Commande non reconnue !");
 					break;
 			}
 		}
-		command.close();
+		command.close ();
 	}
 
 	/**
@@ -150,7 +142,7 @@ public class Console {
 			line = parser.parse (options, args);
 		} catch (ParseException ex) {
 			System.err.println ("Erreur dans la lecture des arguments !");
-			System.err.println (ex.toString());
+			System.err.println (ex.toString ());
 			printAppHelp ();
 		}
 		return line;
@@ -170,8 +162,8 @@ public class Console {
 	/**
 	 * Prints application help
 	 */
-	private void printAppHelp() {
-		HelpFormatter formatter = new HelpFormatter();
+	private void printAppHelp () {
+		HelpFormatter formatter = new HelpFormatter ();
 		formatter.printHelp (CMD_IMPORT, new Options ().addOption (OPT_FICHIER), true);
 		formatter.printHelp (CMD_EXPORT, new Options ().addOption (OPT_FICHIER).addOption (OPT_PROJET), true);
 		formatter.printHelp (CMD_STATS, new Options ().addOption (OPT_PROJET).addOption (OPT_FICHIER), true);

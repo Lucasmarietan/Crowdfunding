@@ -311,7 +311,8 @@
 	<record>
 		<id>3</id>
 		<projet>Alpha</projet>
-		<donateurs>			<id>1</id>
+		<donateurs>
+			<id>1</id>
 			<prenom>Jon</prenom>
 			<nom>Crews</nom>
 			<email>jcrews0@sitemeter.com</email>

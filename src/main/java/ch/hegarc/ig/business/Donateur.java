@@ -22,7 +22,7 @@ public class Donateur {
 	 * Les constructeurs *
 	 *********************/
 
-	public Donateur() {
+	public Donateur () {
 	}
 
 	public Donateur (String prenom, String nom) {
@@ -49,7 +49,7 @@ public class Donateur {
 		this.annule = annule;
 	}
 
-	public Donateur(long id, String prenom, String nom, String email, String langue, String adresse, String ville, String monnaie, long somme, boolean paye, boolean annule, String dateDon, String dateVersement) {
+	public Donateur (long id, String prenom, String nom, String email, String langue, String adresse, String ville, String monnaie, long somme, boolean paye, boolean annule, String dateDon, String dateVersement) {
 		this (id, prenom, nom, monnaie, somme, paye, annule);
 		this.email = email;
 		this.langue = langue;
@@ -59,15 +59,28 @@ public class Donateur {
 		this.dateVersement = dateVersement;
 	}
 
+	public static List <Donateur> newPopDonateurs () {
+		List <Donateur> d = new LinkedList <> ();
+		Donateur d0 = new Donateur (95, "Jain", "Meylan", "CHF", 1);
+		Donateur d1 = new Donateur (96, "Jain", "Meylan", "CHF", 11);
+		Donateur d2 = new Donateur (97, "Quentin", "Boillat", "CHF", 100);
+		Donateur d3 = new Donateur (98, "Stan", "Federer", "CHF", 876543);
+		d.add (d0);
+		d.add (d1);
+		d.add (d2);
+		d.add (d3);
+		return d;
+	}
+
 	/*******************************
 	 * Les getteres et les setters *
 	 *******************************/
 
-	public long getId() {
+	public long getId () {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId (long id) {
 		this.id = id;
 	}
 
@@ -79,59 +92,59 @@ public class Donateur {
 		this.prenom = prenom;
 	}
 
-	public String getNom() {
+	public String getNom () {
 		return nom;
 	}
 
-	public void setNom(String nom) {
+	public void setNom (String nom) {
 		this.nom = nom;
 	}
 
-	public String getEmail() {
+	public String getEmail () {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail (String email) {
 		this.email = email;
 	}
 
-	public String getLangue() {
+	public String getLangue () {
 		return langue;
 	}
 
-	public void setLangue(String langue) {
+	public void setLangue (String langue) {
 		this.langue = langue;
 	}
 
-	public String getAdresse() {
+	public String getAdresse () {
 		return adresse;
 	}
 
-	public void setAdresse(String adresse) {
+	public void setAdresse (String adresse) {
 		this.adresse = adresse;
 	}
 
-	public String getVille() {
+	public String getVille () {
 		return ville;
 	}
 
-	public void setVille(String ville) {
+	public void setVille (String ville) {
 		this.ville = ville;
 	}
 
-	public String getMonnaie() {
+	public String getMonnaie () {
 		return monnaie;
 	}
 
-	public void setMonnaie(String monnaie) {
+	public void setMonnaie (String monnaie) {
 		this.monnaie = monnaie;
 	}
 
-	public long getSomme() {
+	public long getSomme () {
 		return somme;
 	}
 
-	public void setSomme(long somme) {
+	public void setSomme (long somme) {
 		this.somme = somme;
 	}
 
@@ -151,19 +164,19 @@ public class Donateur {
 		this.annule = annule;
 	}
 
-	public String getDateDon() {
+	public String getDateDon () {
 		return dateDon;
 	}
 
-	public void setDateDon(String dateDon) {
+	public void setDateDon (String dateDon) {
 		this.dateDon = dateDon;
 	}
 
-	public String getDateVersement() {
+	public String getDateVersement () {
 		return dateVersement;
 	}
 
-	public void setDateVersement(String dateVersement) {
+	public void setDateVersement (String dateVersement) {
 		this.dateVersement = dateVersement;
 	}
 
@@ -180,15 +193,5 @@ public class Donateur {
 
 	public boolean equals (Donateur donateur) {
 		return this.nom.equalsIgnoreCase (donateur.getNom ()) && this.prenom.equalsIgnoreCase (donateur.getPrenom ());
-	}
-
-	public static List <Donateur> newPopDonateurs () {
-		List<Donateur> d = new LinkedList <> ();
-		Donateur d0 = new Donateur (95, "Jain", "Meylan", "CHF", 1);
-		Donateur d1 = new Donateur (96, "Jain", "Meylan", "CHF", 11);
-		Donateur d2 = new Donateur (97, "Quentin", "Boillat", "CHF", 100);
-		Donateur d3 = new Donateur (98, "Stan", "Federer", "CHF", 876543);
-		d.add (d0); d.add (d1); d.add (d2); d.add (d3);
-		return d;
 	}
 }

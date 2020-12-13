@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 // Également créée pour les méthodes qui s'appliquent à TOUS les projets
 
 public class ProjetUtil {
-	private Set<Projet> projets;
+	private Set <Projet> projets;
 	// Choix du Set car il ne pouvait pas y avoir de doublons, même si finalement cela concernait surtout le nom du projet pour y fusionner les donateurs...
 
 	/*****************
@@ -35,9 +35,9 @@ public class ProjetUtil {
 	 */
 	public double totalDonsDonateurs (String donateurs) {
 		double somme;
-		List<Donateur> allDonateurs = allDonateurs (); // Stockage de tous les donateurs de tous les projets (facilite l'implémentation ci-dessous)
+		List <Donateur> allDonateurs = allDonateurs (); // Stockage de tous les donateurs de tous les projets (facilite l'implémentation ci-dessous)
 		Map <Donateur, Double> donateursMap = new HashMap <> (); // Choix du Map pour faire une somme des dons des donateurs dans Double
-		List<String> dona = Arrays.asList (donateurs.split (","));
+		String[] dona = donateurs.split (",");
 
 		for (String s : dona) { // Parcourt tous les donateurs désirés
 			for (Donateur d : allDonateurs) {
@@ -45,8 +45,7 @@ public class ProjetUtil {
 					if (donateursMap.containsKey (d)) { // Si le donateur a déjà été trouvé dans cette méthode
 						somme = donateursMap.get (d); // On récupère la somme déjà engagée par le donateur dans ses autres dons
 						donateursMap.replace (d, somme + d.getSomme ()); // On y ajoute la somme du don en cours
-					}
-					else
+					} else
 						donateursMap.put (d, (double) d.getSomme ()); // Si pas déjà présent, on ajoute le donateur ainsi que la somme du don en cours
 				}
 			}
@@ -70,12 +69,12 @@ public class ProjetUtil {
 	/**
 	 * @return Les donateurs parmi TOUS les projets qui n'ont pas encore payé et qui n'ont pas annulé
 	 */
-	public List<Donateur> pasEncorePaye () {
+	public List <Donateur> pasEncorePaye () {
 //		On récupère tous les donateurs puis on les filtre
 		return allDonateurs ().stream ().filter (donateur -> (! donateur.isPaye () && ! donateur.isAnnule ())).collect (Collectors.toList ());
 	}
 
-	public void addProjets (List<Projet> projets) {
+	public void addProjets (List <Projet> projets) {
 		for (Projet p : projets)
 			this.addProjet (p);
 	}
@@ -86,8 +85,7 @@ public class ProjetUtil {
 			projet.triDonateursNomPrenom (); // Tri systématique des donateurs
 			this.projets.add (projet);
 			return true;
-		}
-		else { // Si le projet existe déjà, on fusionne les nouveaux et anciens donateurs
+		} else { // Si le projet existe déjà, on fusionne les nouveaux et anciens donateurs
 			p.addDonateurs (projet.getDonateurs ());
 			return false;
 		}
@@ -98,12 +96,12 @@ public class ProjetUtil {
 	 * @return null si n'existe pas
 	 */
 	public Projet getProjet (long id) {
-		for (Iterator <Projet> it = this.projets.iterator() ; it.hasNext(); ) {
-			Projet p = it.next();
+		for (Iterator <Projet> it = this.projets.iterator () ; it.hasNext () ; ) {
+			Projet p = it.next ();
 			if (p.getId () == id)
 				return p;
 		}
-			return null;
+		return null;
 	}
 
 	/**
@@ -111,20 +109,20 @@ public class ProjetUtil {
 	 * @return null si n'existe pas
 	 */
 	public Projet getProjet (String projetName) {
-		for (Iterator <Projet> it = this.projets.iterator() ; it.hasNext(); ) {
-			Projet p = it.next();
+		for (Iterator <Projet> it = this.projets.iterator () ; it.hasNext () ; ) {
+			Projet p = it.next ();
 			if (p.getProjet ().equalsIgnoreCase (projetName))
 				return p;
 		}
 		return null;
 	}
 
-	public List<Projet> toList () {
+	public List <Projet> toList () {
 		return new LinkedList <> (this.projets);
 	}
 
-	public List<Donateur> allDonateurs () {
-		List<Donateur> donateurs = new LinkedList <> ();
+	public List <Donateur> allDonateurs () {
+		List <Donateur> donateurs = new LinkedList <> ();
 		for (Projet p : this.projets)
 			donateurs.addAll (p.getDonateurs ());
 		return donateurs;

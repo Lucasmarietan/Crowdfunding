@@ -14,14 +14,14 @@ public class ExportToExcel {
 	private static final Logger logger = Logger.getLogger (ExportToExcel.class.getName ());
 
 	/**
-	 * @param projets Pour exporter les stats de tous les projets
+	 * @param projets  Pour exporter les stats de tous les projets
 	 * @param fileName Dans un .xlsx
 	 */
-	public static void run (List<Projet> projets, String fileName) {
+	public static void run (List <Projet> projets, String fileName) {
 		XSSFWorkbook wb = miseEnPage ();
 		XSSFSheet sheet = wb.getSheetAt (0);
-		wb.setSheetName(wb.getSheetIndex(sheet), "Projets");
-		for (int i = 0; i < projets.size (); i++)
+		wb.setSheetName (wb.getSheetIndex (sheet), "Projets");
+		for (int i = 0 ; i < projets.size () ; i++)
 			wb = addProjet (wb, projets.get (i), i + 1);
 //          On appelle cette fonction pour chaque projet. Après un projet, on décale d'une colonne vers la droite
 
@@ -34,13 +34,13 @@ public class ExportToExcel {
 	}
 
 	/**
-	 * @param projet Pour exporter les stats d'un seul projet
+	 * @param projet   Pour exporter les stats d'un seul projet
 	 * @param fileName Dans un fichier .xslx
 	 */
 	public static void run (Projet projet, String fileName) {
 		XSSFWorkbook wb = miseEnPage ();
 		XSSFSheet sheet = wb.getSheetAt (0);
-		wb.setSheetName(wb.getSheetIndex(sheet), projet.getProjet ());
+		wb.setSheetName (wb.getSheetIndex (sheet), projet.getProjet ());
 
 		wb = addProjet (wb, projet, 1);
 
@@ -53,7 +53,7 @@ public class ExportToExcel {
 	}
 
 	/**
-	 * @param wb Pour travailler sur un fichier dans toute la classe
+	 * @param wb         Pour travailler sur un fichier dans toute la classe
 	 * @param projet
 	 * @param numColonne Pour décaler de colonne à chaque projet
 	 * @return Pour travailler sur un seul fichier dans toute la classe
@@ -73,7 +73,10 @@ public class ExportToExcel {
 		cell = row.createCell (numColonne);
 		cell.setCellValue (CollectionUtil.argentTotal (projet));
 //		Pour mettre la cellule en gras (Ligne TOTAL)
-		XSSFCellStyle styleBold = wb.createCellStyle(); XSSFFont font = wb.createFont(); font.setBold (true); styleBold.setFont (font);
+		XSSFCellStyle styleBold = wb.createCellStyle ();
+		XSSFFont font = wb.createFont ();
+		font.setBold (true);
+		styleBold.setFont (font);
 		cell.setCellStyle (styleBold);
 
 		row = sheet.getRow (5);
@@ -111,7 +114,10 @@ public class ExportToExcel {
 		XSSFCell cell4 = row4.createCell (0);
 		cell4.setCellValue ("Total");
 //		Pour mettre la cellule en gras (Ligne TOTAL)
-		XSSFCellStyle styleBold = wb.createCellStyle(); XSSFFont font = wb.createFont(); font.setBold (true); styleBold.setFont (font);
+		XSSFCellStyle styleBold = wb.createCellStyle ();
+		XSSFFont font = wb.createFont ();
+		font.setBold (true);
+		styleBold.setFont (font);
 		cell4.setCellStyle (styleBold);
 
 		XSSFRow row6 = sheet.createRow (5);

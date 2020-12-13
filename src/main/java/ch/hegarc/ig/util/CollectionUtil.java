@@ -3,13 +3,16 @@ package ch.hegarc.ig.util;
 import ch.hegarc.ig.business.Donateur;
 import ch.hegarc.ig.business.Projet;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 //  Cette classe a été créée pour les méthodes qui ne s'appliquent pas à tous les projets
 
 public class CollectionUtil {
-	/** (Méthode pas explicitement demandée mais nécessaire pour le fichier Excel)
+	/**
+	 * (Méthode pas explicitement demandée mais nécessaire pour le fichier Excel)
+	 *
 	 * @param projet
 	 * @return le nombre de dons pas annulé (payés ou non payés)
 	 */
@@ -23,7 +26,7 @@ public class CollectionUtil {
 	 * @return les plus gros donateurs du projet (dons exécutés ou pas, annulés ou pas)
 	 */
 	public static List <Donateur> plusGrosDonateur (Projet projet, int nb) { // Libre à l'utilisateur de choisir un autre nombre que 5
-		return projet.getDonateurs ().stream ().sorted(Comparator.comparing (Donateur::getSomme).reversed ()).limit (nb).collect(Collectors.toList());
+		return projet.getDonateurs ().stream ().sorted (Comparator.comparing (Donateur::getSomme).reversed ()).limit (nb).collect (Collectors.toList ());
 	}
 
 	/**
@@ -52,7 +55,7 @@ public class CollectionUtil {
 
 	public static String tousEmail (Projet projet) {
 		StringBuilder sb = new StringBuilder ();
-		List<Donateur> donateurs = projet.getDonateurs ();
+		List <Donateur> donateurs = projet.getDonateurs ();
 		for (Donateur d : donateurs) {
 			if (d.getEmail () != null) // Pour obtenir une liste sans éléments vide
 				sb.append (d.getEmail ()).append (";");
@@ -65,7 +68,7 @@ public class CollectionUtil {
 	 * @return la médiane de TOUS les dons du projet (exécutés ou pas, annulé ou pas)
 	 */
 	public static long medianeDons (Projet projet) { // Pas peu fier de moi sur celle là (:
-		return projet.getDonateurs ().stream ().sorted(Comparator.comparing (Donateur::getSomme).reversed ()).skip(projet.getDonateurs ().size () / 2).limit (1).collect(Collectors.toList()).get (0).getSomme ();
+		return projet.getDonateurs ().stream ().sorted (Comparator.comparing (Donateur::getSomme).reversed ()).skip (projet.getDonateurs ().size () / 2).limit (1).collect (Collectors.toList ()).get (0).getSomme ();
 	}
 
 	/**
@@ -73,7 +76,7 @@ public class CollectionUtil {
 	 * @return la moyenne de TOUS les dons du projet (exécutés ou pas, annulés ou pas)
 	 */
 	public static long moyenneDons (Projet projet) {
-		return (long) projet.getDonateurs ().stream ().mapToLong (Donateur::getSomme).average ().orElse (-100);
+		return (long) projet.getDonateurs ().stream ().mapToLong (Donateur::getSomme).average ().orElse (- 100);
 	}
 
 	/**
