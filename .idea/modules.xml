@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CrowdSourcingTool.iml" filepath="$PROJECT_DIR$/CrowdSourcingTool.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/crowdfunding.iml" filepath="$PROJECT_DIR$/.idea/crowdfunding.iml" />
     </modules>
   </component>
 </project>

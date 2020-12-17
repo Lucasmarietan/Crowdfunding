@@ -34,7 +34,7 @@ public class Console {
 //		this.projets.addProjets (Projet.newPopProjets ()); // Peuplement automatique en dur
 //		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
 
-		clrscr ();
+		clrscr (); // Efface la console
 		System.out.println ("Bienvenue dans notre système de gestion de projets ! (c) Lucas Mariétan & Tanguy Genier - 2020.");
 		System.out.println ("Saisissez une commande (import, export, help ou exit pour quitter)");
 
