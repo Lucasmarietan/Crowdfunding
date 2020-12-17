@@ -6,6 +6,7 @@ import ch.hegarc.ig.util.jackson.JacksonReader;
 import ch.hegarc.ig.util.jackson.JacksonWriter;
 import org.apache.commons.cli.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Console {
@@ -33,7 +34,8 @@ public class Console {
 //		this.projets.addProjets (Projet.newPopProjets ()); // Peuplement automatique en dur
 //		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
 
-		System.out.println ("Bienvenue dans notre système de gestion de projets ! (c) Lucas Mariétan & Tanguy Genier - 2020");
+		clrscr ();
+		System.out.println ("Bienvenue dans notre système de gestion de projets ! (c) Lucas Mariétan & Tanguy Genier - 2020.");
 		System.out.println ("Saisissez une commande (import, export, help ou exit pour quitter)");
 
 		Scanner command = new Scanner (System.in);
@@ -173,5 +175,19 @@ public class Console {
 		formatter.printHelp (CMD_ADD_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM).addOption (OPT_DON_SOMME), true);
 		formatter.printHelp (CMD_REMOVE_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM), true);
 		formatter.printHelp (CMD_EXIT, new Options ());
+	}
+
+	/**
+	 * Pour effacer la console
+	 */
+	public static void clrscr(){
+		try {
+			if (System.getProperty("os.name").contains("Windows"))
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			else
+				Runtime.getRuntime().exec("clear");
+		} catch (IOException | InterruptedException ex) {
+			System.out.println ("Clear screen n'a pas marché. Veuillez contacter le développeur");
+		}
 	}
 }
