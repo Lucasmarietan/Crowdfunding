@@ -187,7 +187,7 @@ public class Donateur {
 	@Override
 	public String toString () {
 		StringBuilder sb = new StringBuilder ();
-		sb.append ("Nom : ").append (this.nom).append (", ").append (this.prenom).append (" (id : ").append (this.id).append (")\n");
+		sb.append (this.nom).append (", ").append (this.prenom).append (" (id : ").append (this.id).append (")").append (". Montant : ").append (this.somme).append (" ").append (this.monnaie);
 		return sb.toString ();
 	}
 

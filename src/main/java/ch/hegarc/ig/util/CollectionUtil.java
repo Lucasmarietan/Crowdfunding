@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 //  Cette classe a été créée pour les méthodes qui ne s'appliquent pas à tous les projets
 
 public class CollectionUtil {
+	public static List<Donateur> pasEncorePaye (Projet projet) {
+		return projet.getDonateurs ().stream ().filter (donateur -> (! donateur.isPaye () && ! donateur.isAnnule ())).collect (Collectors.toList ());
+	}
+
 	/**
 	 * (Méthode pas explicitement demandée mais nécessaire pour le fichier Excel)
 	 *
@@ -57,7 +61,7 @@ public class CollectionUtil {
 		StringBuilder sb = new StringBuilder ();
 		List <Donateur> donateurs = projet.getDonateurs ();
 		for (Donateur d : donateurs) {
-			if (d.getEmail () != null) // Pour obtenir une liste sans éléments vide
+			if (d.getEmail () != null) // Pour obtenir une liste sans élément vide
 				sb.append (d.getEmail ()).append (";");
 		}
 		return sb.toString ();

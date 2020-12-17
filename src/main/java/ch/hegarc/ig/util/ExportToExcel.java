@@ -15,19 +15,17 @@ public class ExportToExcel {
 
 	/**
 	 * @param projets  Pour exporter les stats de tous les projets
-	 * @param fileName Dans un .xlsx
 	 */
-	public static void run (List <Projet> projets, String fileName) {
+	public static void run (List <Projet> projets) {
 		XSSFWorkbook wb = miseEnPage ();
 		XSSFSheet sheet = wb.getSheetAt (0);
 		wb.setSheetName (wb.getSheetIndex (sheet), "Projets");
 		for (int i = 0 ; i < projets.size () ; i++)
-			wb = addProjet (wb, projets.get (i), i + 1);
-//          On appelle cette fonction pour chaque projet. Après un projet, on décale d'une colonne vers la droite
+			wb = addProjet (wb, projets.get (i), i + 1); // On appelle cette fonction pour chaque projet. Après un projet, on décale d'une colonne vers la droite
 
-		try (OutputStream fileOut = new FileOutputStream (fileName)) {
+		try (OutputStream fileOut = new FileOutputStream ("stats.xlsx")) {
 			wb.write (fileOut);
-			logger.log (Level.INFO, "Fichier '" + fileName + "' crée avec succès !");
+			logger.log (Level.INFO, "Fichier 'stats.xlsx' créé avec succès !");
 		} catch (IOException e) {
 			e.printStackTrace ();
 		}
@@ -35,18 +33,17 @@ public class ExportToExcel {
 
 	/**
 	 * @param projet   Pour exporter les stats d'un seul projet
-	 * @param fileName Dans un fichier .xslx
 	 */
-	public static void run (Projet projet, String fileName) {
+	public static void run (Projet projet) {
 		XSSFWorkbook wb = miseEnPage ();
 		XSSFSheet sheet = wb.getSheetAt (0);
 		wb.setSheetName (wb.getSheetIndex (sheet), projet.getProjet ());
 
 		wb = addProjet (wb, projet, 1);
 
-		try (OutputStream fileOut = new FileOutputStream (fileName)) {
+		try (OutputStream fileOut = new FileOutputStream ("stats.xlsx")) {
 			wb.write (fileOut);
-			logger.log (Level.INFO, "Fichier '" + fileName + "' crée avec succès !");
+			logger.log (Level.INFO, "Fichier 'stats.xlsx' créé avec succès !");
 		} catch (IOException e) {
 			e.printStackTrace ();
 		}
@@ -129,7 +126,6 @@ public class ExportToExcel {
 		cell7.setCellValue ("Moyenne des dons");
 
 		sheet.autoSizeColumn (0);
-
 		return wb;
 	}
 }

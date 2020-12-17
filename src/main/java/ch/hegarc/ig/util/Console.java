@@ -16,6 +16,7 @@ public class Console {
 	//	Nouvelle commande
 	final private String CMD_ADD_DONATEUR = "don";
 	final private String CMD_REMOVE_DONATEUR = "del";
+	final private String CMD_HELP = "help";
 	final private Option OPT_FICHIER = new Option ("f", "fichier", true, "nom du fichier");
 	final private Option OPT_PROJET = new Option ("p", "projet", true, "nom du projet");
 	//	Nouvelles options
@@ -29,14 +30,16 @@ public class Console {
 	 */
 	public void runCommand () {
 		this.projets = new ProjetUtil (); // Pour stocker les projets à un endroit centralisé
-		this.projets.addProjets (Projet.newPopProjets ()); // Peuplement automatique en dur
-		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
+//		this.projets.addProjets (Projet.newPopProjets ()); // Peuplement automatique en dur
+//		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
+
+		System.out.println ("Bienvenue dans notre système de gestion de projets ! (c) Lucas Mariétan & Tanguy Genier - 2020");
+		System.out.println ("Saisissez une commande (import, export, help ou exit pour quitter)");
 
 		Scanner command = new Scanner (System.in);
-
 		boolean running = true;
 		while (running) {
-			System.out.println ("Entrez votre commande: ");
+			System.out.println ("Entrez votre commande : ");
 			String com = command.nextLine ();
 			String[] arguments = com.split (" ");
 			CommandLine cmdLine = parseArguments (arguments);
@@ -96,26 +99,27 @@ public class Console {
 					break;
 
 				case CMD_STATS:
-					if (cmdLine.hasOption (OPT_FICHIER.getOpt ()) || (cmdLine.hasOption (OPT_FICHIER.getOpt ()) && cmdLine.hasOption (OPT_PROJET.getOpt ()))) { // Soit il y a fichier ET projet, soit il y a Que fichier
-						if (cmdLine.getOptionValue (OPT_FICHIER.getOpt ()).split ("\\.")[1].equalsIgnoreCase ("XLSX")) { // On teste si le nom du fichier se termine par .xlsx
-							if (! cmdLine.hasOption (OPT_PROJET.getOpt ())) // Si pas d'argument projet, on sort TOUS les projets
-								ExportToExcel.run (this.projets.toList (), cmdLine.getOptionValue (OPT_FICHIER.getOpt ()));
-							else {
-								Projet excelProjet = this.projets.getProjet (cmdLine.getOptionValue (OPT_PROJET.getOpt ())); // Recherche du projet dans le programme
-								if (excelProjet != null)
-									ExportToExcel.run (excelProjet, cmdLine.getOptionValue (OPT_FICHIER.getOpt ()));
-								else
-									System.out.println ("Le projet désiré n'existe pas...");
-							}
-						} else
-							System.out.println ("Votre type de fichier n'est pas pris en charge...");
-					} else
-						printAppHelp ();
+					if (cmdLine.hasOption (OPT_PROJET.getOpt ())) {
+						Projet exportProjet = this.projets.getProjet (cmdLine.getOptionValue (OPT_PROJET.getOpt ())); // Recherche du projet dans le programme
+						if (exportProjet != null) {
+							ExportToExcel.run (exportProjet);
+							ExportToPDF.run (exportProjet);
+						}
+						else
+							System.out.println ("Le projet désiré n'existe pas...");
+					}
+					else {
+						ExportToExcel.run (this.projets.toList ());
+					}
 					break;
 
 				case CMD_EXIT:
 					System.out.println ("Fermeture !");
 					running = false;
+					break;
+
+				case CMD_HELP:
+					printAppHelp ();
 					break;
 
 				default:
@@ -166,7 +170,6 @@ public class Console {
 		HelpFormatter formatter = new HelpFormatter ();
 		formatter.printHelp (CMD_IMPORT, new Options ().addOption (OPT_FICHIER), true);
 		formatter.printHelp (CMD_EXPORT, new Options ().addOption (OPT_FICHIER).addOption (OPT_PROJET), true);
-		formatter.printHelp (CMD_STATS, new Options ().addOption (OPT_PROJET).addOption (OPT_FICHIER), true);
 		formatter.printHelp (CMD_ADD_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM).addOption (OPT_DON_SOMME), true);
 		formatter.printHelp (CMD_REMOVE_DONATEUR, new Options ().addOption (OPT_PROJET).addOption (OPT_DON_NOM).addOption (OPT_DON_PRENOM), true);
 		formatter.printHelp (CMD_EXIT, new Options ());

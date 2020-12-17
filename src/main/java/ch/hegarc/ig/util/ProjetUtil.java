@@ -66,14 +66,6 @@ public class ProjetUtil {
 			p.removeDonateur (new Donateur (prenom, nom));
 	}
 
-	/**
-	 * @return Les donateurs parmi TOUS les projets qui n'ont pas encore payé et qui n'ont pas annulé
-	 */
-	public List <Donateur> pasEncorePaye () {
-//		On récupère tous les donateurs puis on les filtre
-		return allDonateurs ().stream ().filter (donateur -> (! donateur.isPaye () && ! donateur.isAnnule ())).collect (Collectors.toList ());
-	}
-
 	public void addProjets (List <Projet> projets) {
 		for (Projet p : projets)
 			this.addProjet (p);
