@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: javax.xml.bind:2.3.0:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/2.3.0/unknown/2.3.0-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/2.3.0/unknown/2.3.0-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/2.3.0/unknown/2.3.0-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
