@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class JacksonReader {
-	private static final Logger logger = Logger.getLogger (JacksonReader.class.getName ());
+public class ImportFromJSON {
+	private static final Logger logger = Logger.getLogger (ImportFromJSON.class.getName ());
 
 	public static List <Projet> run (String filename) {
 		List <Projet> projets = null;

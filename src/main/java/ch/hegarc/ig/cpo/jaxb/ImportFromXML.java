@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MainUnmarshalling {
-	private static final Logger logger = Logger.getLogger (MainUnmarshalling.class.getName ());
+public class ImportFromXML {
+	private static final Logger logger = Logger.getLogger (ImportFromXML.class.getName ());
 
 	public static List <Projet> run (String fileName) {
 		List <Projet> projetList = new LinkedList <> ();
@@ -31,7 +31,7 @@ public class MainUnmarshalling {
 
 			logger.log (Level.INFO, "Fichier '" + fileName + "' importé dans le programme avec succès ! ");
 		} catch (Exception ex) {
-			Logger.getLogger (MainUnmarshalling.class.getName ()).log (Level.SEVERE, null, ex);
+			Logger.getLogger (ImportFromXML.class.getName ()).log (Level.SEVERE, null, ex);
 		}
 		return projetList;
 	}

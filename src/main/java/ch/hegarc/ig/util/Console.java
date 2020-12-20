@@ -1,9 +1,9 @@
 package ch.hegarc.ig.util;
 
 import ch.hegarc.ig.business.Projet;
-import ch.hegarc.ig.cpo.jaxb.MainUnmarshalling;
-import ch.hegarc.ig.util.jackson.JacksonReader;
-import ch.hegarc.ig.util.jackson.JacksonWriter;
+import ch.hegarc.ig.cpo.jaxb.ImportFromXML;
+import ch.hegarc.ig.util.jackson.ImportFromJSON;
+import ch.hegarc.ig.util.jackson.ExportToJSON;
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
@@ -24,15 +24,15 @@ public class Console {
 	final private Option OPT_DON_NOM = new Option ("n", "donateurNom", true, "nom du donateur");
 	final private Option OPT_DON_PRENOM = new Option ("r", "donateurPrenom", true, "prenom du donateur");
 	final private Option OPT_DON_SOMME = new Option ("s", "sommeDon", true, "Somme du don");
-	private ProjetUtil projets;
+	private ProjetsUtils projets;
 
 	/**
 	 * Démarre la commande
 	 */
 	public void runCommand () {
-		this.projets = new ProjetUtil (); // Pour stocker les projets à un endroit centralisé
+		this.projets = new ProjetsUtils (); // Pour stocker les projets à un endroit centralisé
 //		this.projets.addProjets (Projet.newPopProjets ()); // Peuplement automatique en dur
-//		this.projets.addProjets (JacksonReader.run ("donations.json")); // Peuplement automatique
+//		this.projets.addProjets (ImportFromJSON.run ("donations.json")); // Peuplement automatique
 
 		clrscr (); // Efface la console
 		System.out.println ("Bienvenue dans notre système de gestion de projets ! (c) Lucas Mariétan & Tanguy Genier - 2020.");
@@ -66,10 +66,10 @@ public class Console {
 						String fileName = cmdLine.getOptionValue (OPT_FICHIER.getOpt ());
 //						Traitement du fichier en .json (c'était compliqué de comprendre l'erreur "\\.")
 						if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
-							this.projets.addProjets (JacksonReader.run (fileName));
+							this.projets.addProjets (ImportFromJSON.run (fileName));
 //						Traitement du fichier en .XML
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML"))
-							this.projets.addProjets (MainUnmarshalling.run (fileName));
+							this.projets.addProjets (ImportFromXML.run (fileName));
 						else
 							System.out.println ("Ce type de fichier n'est pas encore pris en compte");
 					} else
@@ -83,14 +83,14 @@ public class Console {
 
 						if (projectName.equalsIgnoreCase ("ALL")) { // Exporter tous les projets dans un JSON
 							if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
-								JacksonWriter.run (this.projets.toList (), fileName);
+								ExportToJSON.run (this.projets.toList (), fileName);
 							else
 								System.out.println ("Votre type de fichier n'est pas pris en charge...");
 						} else {
 							Projet exportProjet = this.projets.getProjet (projectName); // Recherche du projet dans le programme
 							if (exportProjet != null) {
 								if (fileName.split ("\\.")[1].equalsIgnoreCase ("JSON")) // On teste si le nom du fichier se termine par .json
-									JacksonWriter.run (exportProjet, fileName);
+									ExportToJSON.run (exportProjet, fileName);
 								else
 									System.out.println ("Votre type de fichier n'est pas pris en charge...");
 							} else

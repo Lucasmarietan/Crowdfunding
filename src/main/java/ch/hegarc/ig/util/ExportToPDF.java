@@ -27,19 +27,19 @@ public class ExportToPDF {
 			cos.setLeading (17.5f); // Choix d'un seul paragraphe pour la 1ère page
 			cos.showText ("Bilan du projet : " + projet.getProjet ());
 			cos.setFont (PDType1Font.HELVETICA_BOLD, 12); cos.newLine (); cos.newLine ();
-			cos.showText ("  Argent total : " + (CollectionUtil.argentTotal (projet)) + " CHF"); cos.newLine (); // Choix de généraliser aux CHF
-			cos.showText ("  Commission : " + (CollectionUtil.commission (projet)) + " CHF"); cos.newLine (); cos.newLine (); // Légère indentation "en dur"
+			cos.showText ("  Argent total : " + (ProjetUtils.argentTotal (projet)) + " CHF"); cos.newLine (); // Choix de généraliser aux CHF
+			cos.showText ("  Commission : " + (ProjetUtils.commission (projet)) + " CHF"); cos.newLine (); cos.newLine (); // Légère indentation "en dur"
 
 			cos.setLeading (14.5f);
 			cos.showText ("  Les 5 plus gros donateurs :");
 			cos.setFont (PDType1Font.HELVETICA, 10); cos.newLine ();
-			for (Donateur d : CollectionUtil.plusGrosDonateur (projet, 5)) {
+			for (Donateur d : ProjetUtils.plusGrosDonateur (projet, 5)) {
 				cos.showText ("    " + d.toString ()); cos.newLine ();
 			}
 			cos.setFont (PDType1Font.HELVETICA_BOLD,12); cos.newLine (); cos.newLine ();
 			cos.showText ("  Les donateurs qui n'ont pas payé (ni annulé) :");
 			cos.setFont (PDType1Font.HELVETICA, 10);	cos.newLine ();
-			for (Donateur d : CollectionUtil.pasEncorePaye (projet)) {
+			for (Donateur d : ProjetUtils.pasEncorePaye (projet)) {
 				cos.showText ("    " + d.toString ()); cos.newLine ();
 			}
 			cos.endText ();
@@ -51,7 +51,7 @@ public class ExportToPDF {
 			cosMail.setFont (PDType1Font.HELVETICA_BOLD, 12); cosMail.beginText (); cosMail.newLineAtOffset (20, 750); cosMail.setLeading (14.5f);
 			cosMail.showText ("Tous les mails de ce projet :");
 			cosMail.setFont (PDType1Font.HELVETICA, 10); cosMail.newLine ();
-			String[] donateurs = CollectionUtil.tousEmail (projet).split (";");
+			String[] donateurs = ProjetUtils.tousEmail (projet).split (";");
 			for (int i = 0; i < donateurs.length; i++) {
 				if (i % 4 == 0) // Choix de passer à la ligne tous les 4 mails pour une meilleure lisibilité
 					cosMail.newLine ();

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 // Cette classe a été créée pour gérer le stockage des projets dans le programme
 // Également créée pour les méthodes qui s'appliquent à TOUS les projets
 
-public class ProjetUtil {
+public class ProjetsUtils {
 	private Set <Projet> projets;
 	// Choix du Set car il ne pouvait pas y avoir de doublons, même si finalement cela concernait surtout le nom du projet pour y fusionner les donateurs...
 
@@ -17,11 +17,11 @@ public class ProjetUtil {
 	 * Constructeurs *
 	 *****************/
 
-	public ProjetUtil () {
+	public ProjetsUtils () {
 		this.projets = new TreeSet <> ();
 	}
 
-	public ProjetUtil (Set <Projet> projets) {
+	public ProjetsUtils (Set <Projet> projets) {
 		this.projets = projets;
 	}
 

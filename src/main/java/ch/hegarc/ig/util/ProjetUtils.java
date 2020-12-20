@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 //  Cette classe a été créée pour les méthodes qui ne s'appliquent pas à tous les projets
 
-public class CollectionUtil {
+public class ProjetUtils {
 	public static List<Donateur> pasEncorePaye (Projet projet) {
 		return projet.getDonateurs ().stream ().filter (donateur -> (! donateur.isPaye () && ! donateur.isAnnule ())).collect (Collectors.toList ());
 	}
@@ -88,6 +88,6 @@ public class CollectionUtil {
 	 * @return le calcul de la commission sur TOUS les dons
 	 */
 	public static long commission (Projet projet) {
-		return (long) (CollectionUtil.argentTotal (projet) * 0.05);
+		return (long) (ProjetUtils.argentTotal (projet) * 0.05);
 	}
 }

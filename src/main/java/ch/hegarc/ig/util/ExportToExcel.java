@@ -62,13 +62,13 @@ public class ExportToExcel {
 		cell.setCellValue (projet.getProjet ());
 		row = sheet.getRow (1);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (CollectionUtil.argentDejaPaye (projet));
+		cell.setCellValue (ProjetUtils.argentDejaPaye (projet));
 		row = sheet.getRow (2);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (CollectionUtil.argentRestantAPaye (projet));
+		cell.setCellValue (ProjetUtils.argentRestantAPaye (projet));
 		row = sheet.getRow (3);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (CollectionUtil.argentTotal (projet));
+		cell.setCellValue (ProjetUtils.argentTotal (projet));
 //		Pour mettre la cellule en gras (Ligne TOTAL)
 		XSSFCellStyle styleBold = wb.createCellStyle ();
 		XSSFFont font = wb.createFont ();
@@ -78,10 +78,10 @@ public class ExportToExcel {
 
 		row = sheet.getRow (5);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (CollectionUtil.nombreDonsPasAnnule (projet));
+		cell.setCellValue (ProjetUtils.nombreDonsPasAnnule (projet));
 		row = sheet.getRow (6);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (CollectionUtil.moyenneDons (projet));
+		cell.setCellValue (ProjetUtils.moyenneDons (projet));
 
 		sheet.autoSizeColumn (numColonne); // Pour ajuster la largeur de la colonne au contenu
 

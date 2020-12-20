@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class JacksonWriter {
-	private static final Logger logger = Logger.getLogger (JacksonWriter.class.getName ());
+public class ExportToJSON {
+	private static final Logger logger = Logger.getLogger (ExportToJSON.class.getName ());
 
 	/**
 	 * @param projets  Pour exporter tous les projets
