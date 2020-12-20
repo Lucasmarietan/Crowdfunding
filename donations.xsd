@@ -20,11 +20,11 @@
 										<xs:element type="xs:string" name="adresse"/>
 										<xs:element type="xs:string" name="ville"/>
 										<xs:element type="xs:string" name="monnaie"/>
-										<xs:element type="xs:decimal" name="somme"/>
+										<xs:element type="xs:long" name="somme"/>
 										<xs:element type="xs:boolean" name="paye"/>
 										<xs:element type="xs:boolean" name="annule"/>
-										<xs:element type="xs:date" name="dateDon"/>
-										<xs:element type="xs:date" name="dateVersement"/>
+										<xs:element type="xs:string" name="dateDon"/>
+										<xs:element type="xs:string" name="dateVersement"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
