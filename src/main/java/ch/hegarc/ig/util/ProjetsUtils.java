@@ -55,15 +55,19 @@ public class ProjetsUtils {
 
 	public boolean addDonateur (String projetName, String nom, String prenom, long somme) {
 		Projet p = getProjet (projetName);
-		if (p != null) // Si le projet existe
+		if (p != null) { // Si le projet existe
+			System.out.println ("Donateur inclus sans erreur ! ");
 			return p.addDonateur (new Donateur (prenom, nom, somme));
+		}
 		return false;
 	}
 
 	public void removeDonateur (String projetName, String nom, String prenom) {
 		Projet p = getProjet (projetName);
-		if (p != null) // Si le projet existe
+		if (p != null) { // Si le projet existe
+			System.out.println ("Donateur exclu sans erreur !");
 			p.removeDonateur (new Donateur (prenom, nom));
+		}
 	}
 
 	public void addProjets (List <Projet> projets) {

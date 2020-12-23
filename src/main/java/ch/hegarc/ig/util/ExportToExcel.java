@@ -23,9 +23,9 @@ public class ExportToExcel {
 		for (int i = 0 ; i < projets.size () ; i++)
 			wb = addProjet (wb, projets.get (i), i + 1); // On appelle cette fonction pour chaque projet. Après un projet, on décale d'une colonne vers la droite
 
-		try (OutputStream fileOut = new FileOutputStream ("stats.xlsx")) {
+		try (OutputStream fileOut = new FileOutputStream ("Stats.xlsx")) {
 			wb.write (fileOut);
-			logger.log (Level.INFO, "Fichier 'stats.xlsx' créé avec succès !");
+			logger.log (Level.INFO, "Fichier 'Stats.xlsx' produit sans erreur !");
 		} catch (IOException e) {
 			e.printStackTrace ();
 		}
@@ -41,9 +41,9 @@ public class ExportToExcel {
 
 		wb = addProjet (wb, projet, 1);
 
-		try (OutputStream fileOut = new FileOutputStream ("stats.xlsx")) {
+		try (OutputStream fileOut = new FileOutputStream ("Stats " + projet.getProjet () + ".xlsx")) {
 			wb.write (fileOut);
-			logger.log (Level.INFO, "Fichier 'stats.xlsx' créé avec succès !");
+			logger.log (Level.INFO, "Fichier 'Stats " + projet.getProjet () + ".xlsx' produit sans erreur !");
 		} catch (IOException e) {
 			e.printStackTrace ();
 		}
@@ -62,13 +62,13 @@ public class ExportToExcel {
 		cell.setCellValue (projet.getProjet ());
 		row = sheet.getRow (1);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (ProjetUtils.argentDejaPaye (projet));
+		cell.setCellValue (projet.argentDejaPaye ());
 		row = sheet.getRow (2);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (ProjetUtils.argentRestantAPaye (projet));
+		cell.setCellValue (projet.argentRestantAPaye ());
 		row = sheet.getRow (3);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (ProjetUtils.argentTotal (projet));
+		cell.setCellValue (projet.argentTotal ());
 //		Pour mettre la cellule en gras (Ligne TOTAL)
 		XSSFCellStyle styleBold = wb.createCellStyle ();
 		XSSFFont font = wb.createFont ();
@@ -78,10 +78,10 @@ public class ExportToExcel {
 
 		row = sheet.getRow (5);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (ProjetUtils.nombreDonsPasAnnule (projet));
+		cell.setCellValue (projet.nombreDonsPasAnnule ());
 		row = sheet.getRow (6);
 		cell = row.createCell (numColonne);
-		cell.setCellValue (ProjetUtils.moyenneDons (projet));
+		cell.setCellValue (projet.moyenneDons ());
 
 		sheet.autoSizeColumn (numColonne); // Pour ajuster la largeur de la colonne au contenu
 

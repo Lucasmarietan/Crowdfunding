@@ -35,8 +35,8 @@ public class Console {
 //		this.projets.addProjets (ImportFromJSON.run ("donations.json")); // Peuplement automatique
 
 		clrscr (); // Efface la console
-		System.out.println ("Bienvenue dans notre système de gestion de projets ! (c) Lucas Mariétan & Tanguy Genier - 2020.");
-		System.out.println ("Saisissez une commande (import, export, help ou exit pour quitter)");
+		System.out.println ("Bienvenue dans notre système de gestion de projets ! (c) Lucas Mariétan & Tanguy Genier - 2020");
+		System.out.println ("Saisissez une commande (import, help ou exit pour quitter)");
 
 		Scanner command = new Scanner (System.in);
 		boolean running = true;
@@ -71,7 +71,7 @@ public class Console {
 						else if (fileName.split ("\\.")[1].equalsIgnoreCase ("XML"))
 							this.projets.addProjets (ImportFromXML.run (fileName));
 						else
-							System.out.println ("Ce type de fichier n'est pas encore pris en compte");
+							System.out.println ("Ce type de fichier n'est pas pris en charge...");
 					} else
 						printAppHelp ();
 					break;
@@ -94,7 +94,7 @@ public class Console {
 								else
 									System.out.println ("Votre type de fichier n'est pas pris en charge...");
 							} else
-								System.out.println ("Le projet désiré n'existe pas...");
+								System.out.println ("Le projet voulu n'existe pas...");
 						}
 					} else
 						printAppHelp ();
@@ -108,7 +108,7 @@ public class Console {
 							ExportToPDF.run (exportProjet);
 						}
 						else
-							System.out.println ("Le projet désiré n'existe pas...");
+							System.out.println ("Le projet voulu n'existe pas...");
 					}
 					else {
 						ExportToExcel.run (this.projets.toList ());
@@ -180,12 +180,12 @@ public class Console {
 	/**
 	 * Pour effacer la console
 	 */
-	public static void clrscr(){
+	public static void clrscr () {
 		try {
-			if (System.getProperty("os.name").contains("Windows"))
-				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			if (System.getProperty ("os.name").contains ("Windows"))
+				new ProcessBuilder ("cmd", "/c", "cls").inheritIO ().start ().waitFor ();
 			else
-				Runtime.getRuntime().exec("clear");
+				Runtime.getRuntime ().exec ("clear");
 		} catch (IOException | InterruptedException ex) {
 			System.out.println ("Clear screen n'a pas marché. Veuillez contacter le développeur");
 		}

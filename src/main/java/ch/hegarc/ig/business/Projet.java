@@ -88,6 +88,78 @@ public class Projet implements Comparable <Projet> {
 		this.donateurs = this.donateurs.stream ().filter (donateur1 -> ! (donateur1.getPrenom ().equalsIgnoreCase (donateur.getPrenom ()) && donateur1.getNom ().equalsIgnoreCase (donateur.getNom ()))).collect (Collectors.toList ());
 	}
 
+	public List<Donateur> pasEncorePaye () {
+		return this.donateurs.stream ().filter (donateur -> (! donateur.isPaye () && ! donateur.isAnnule ())).collect (Collectors.toList ());
+	}
+
+	/**
+	 * (Méthode pas explicitement demandée mais nécessaire pour le fichier Excel)
+	 *
+	 * @return le nombre de dons pas annulé (payés ou non payés)
+	 */
+	public int nombreDonsPasAnnule () {
+		return (int) this.donateurs.stream ().filter (donateur -> ! donateur.isAnnule ()).count ();
+	}
+
+	/**
+	 * @param nb
+	 * @return les plus gros donateurs du projet (dons exécutés ou pas, annulés ou pas)
+	 */
+	public List <Donateur> plusGrosDonateur (int nb) { // Libre à l'utilisateur de choisir un autre nombre que 5
+		return this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getSomme).reversed ()).limit (nb).collect (Collectors.toList ());
+	}
+
+	/**
+	 * @return les dons déjà payés
+	 */
+	public long argentDejaPaye () {
+		return this.donateurs.stream ().filter (Donateur::isPaye).mapToLong (Donateur::getSomme).sum ();
+	}
+
+	/**
+	 * @return les dons pas payé et pas annulé
+	 */
+	public long argentRestantAPaye () {
+		return this.donateurs.stream ().filter (donateur -> ! donateur.isPaye () && ! donateur.isAnnule ()).mapToLong (Donateur::getSomme).sum ();
+	}
+
+	/**
+	 * @return les dons pas encore annulé (déja payé ou pas)
+	 */
+	public long argentTotal () {
+		return this.donateurs.stream ().filter (donateur -> ! donateur.isAnnule ()).mapToLong (Donateur::getSomme).sum ();
+	}
+
+	public String tousEmail () {
+		StringBuilder sb = new StringBuilder ();
+		for (Donateur d : this.donateurs) {
+			if (d.getEmail () != null) // Pour obtenir une liste sans élément vide
+				sb.append (d.getEmail ()).append (";");
+		}
+		return sb.toString ();
+	}
+
+	/**
+	 * @return la médiane de TOUS les dons du projet (exécutés ou pas, annulé ou pas)
+	 */
+	public long medianeDons () {
+		return this.donateurs.stream ().sorted (Comparator.comparing (Donateur::getSomme).reversed ()).skip (this.donateurs.size () / 2).limit (1).collect (Collectors.toList ()).get (0).getSomme ();
+	}
+
+	/**
+	 * @return la moyenne de TOUS les dons du projet (exécutés ou pas, annulés ou pas)
+	 */
+	public long moyenneDons () {
+		return (long) this.donateurs.stream ().mapToLong (Donateur::getSomme).average ().orElse (- 100);
+	}
+
+	/**
+	 * @return le montant de la commission sur TOUS les dons
+	 */
+	public long commission () {
+		return (long) (argentTotal () * 0.05);
+	}
+
 	/**************************
 	 * Les getters et Setters *
 	 **************************/

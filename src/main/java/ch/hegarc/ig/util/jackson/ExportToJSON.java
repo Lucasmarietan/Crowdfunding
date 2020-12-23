@@ -21,7 +21,7 @@ public class ExportToJSON {
 			ObjectMapper om = new ObjectMapper ();
 			om.writerWithDefaultPrettyPrinter ().writeValue (new File (fileName), projets);
 
-			logger.log (Level.INFO, "Fichier '" + fileName + "' créé avec succès !");
+			logger.log (Level.INFO, "Fichier '" + fileName + "' produit sans erreur !");
 		} catch (IOException ex) {
 			logger.log (Level.SEVERE, null, ex);
 		}
@@ -36,7 +36,7 @@ public class ExportToJSON {
 			ObjectMapper om = new ObjectMapper ();
 			om.writerWithDefaultPrettyPrinter ().writeValue (new File (fileName), projet);
 
-			logger.log (Level.INFO, "Fichier '" + fileName + "' créé avec succès ! ");
+			logger.log (Level.INFO, "Fichier '" + fileName + "' produit sans erreur ! ");
 		} catch (IOException ex) {
 			logger.log (Level.SEVERE, null, ex);
 		}

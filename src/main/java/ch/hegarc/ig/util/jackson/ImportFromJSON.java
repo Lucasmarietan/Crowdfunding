@@ -4,6 +4,7 @@ import ch.hegarc.ig.business.Projet;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.xml.bind.v2.schemagen.xmlschema.Import;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class ImportFromJSON {
 			projets = om.readValue (new File (filename), new TypeReference <List <Projet>> () {
 			});
 
-			logger.log (Level.INFO, "Fichier '" + filename + "' importé dans le programme avec succès ! ");
+			logger.log (Level.INFO, "Fichier '" + filename + "' inclus dans le programme sans erreur ! ");
 		} catch (IOException ex) {
 			logger.log (Level.SEVERE, null, ex);
 		}

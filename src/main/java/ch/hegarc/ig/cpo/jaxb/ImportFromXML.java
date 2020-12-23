@@ -36,7 +36,7 @@ public class ImportFromXML {
 				Projet projet = new Projet (rec.getId (), rec.getProjet (), donateurs);
 				projetList.add(projet);
 			}
-			logger.log (Level.INFO, "Fichier '" + fileName + "' importé dans le programme avec succès ! ");
+			logger.log (Level.INFO, "Fichier '" + fileName + "' inclus dans le programme sans erreur ! ");
 		} catch (Exception ex) {
 			Logger.getLogger (ImportFromXML.class.getName ()).log (Level.SEVERE, null, ex);
 		}
